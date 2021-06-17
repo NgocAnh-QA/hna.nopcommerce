@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import PageUIs.User.AbstractPageUI;
+import PageUIs.User.RegisterPageUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pageObjects.User.HomePagePO;
 
 public class AbstractPage {
 	WebDriverWait explicitWait;
@@ -968,5 +970,11 @@ public class AbstractPage {
 	public void selectDropdownByName(WebDriver driver, String selectDropdownID, String value) {
 		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
 		selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+	}
+
+	public HomePagePO clickToLogoutLink(WebDriver driver) {
+		waitForElementClickable(driver, AbstractPageUI.LOGOUT_LINK);
+		clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
+		return PageGeneratorManager.getHomePageUser(driver);
 	}
 }

@@ -1,13 +1,30 @@
 {
-	"firstname": "Kaylee",
-	"lastname": "Huynh",
-	"email": "kayleevn",
-	"password": "123456",
-	"company": "Gleads",
-	"dateOfBirth": "18",
-	"monthOfBirth": "April",
-	"yearOfYear": "1999",
-	"register":{
-		"city" : "Ho Chi Minh"
-	}
+  "user_valid": {
+    "first_name": "Kaylee",
+    "last_name": "Huynh",
+    "email": "kayleevn",
+    "password": "123456",
+    "confirm_password": "123456",
+    "company": "Gleads",
+    "dateOfBirth": "18",
+    "monthOfBirth": "April",
+    "yearOfYear": "1999",
+    "register": {
+      "city": "Ho Chi Minh"
+    }
+  },
+  "user_invalid": {
+    "first_name": "Kaylee123",
+    "last_name": "Huynh",
+    "email": "kayleevn.edu.com.us",
+    "password": "123",
+    "confirm_password": "1234567",
+    "company": "Gleads",
+    "dateOfBirth": "18",
+    "monthOfBirth": "April",
+    "yearOfYear": "1999"
+  }
 }
+
+
+

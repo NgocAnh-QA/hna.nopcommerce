@@ -18,71 +18,154 @@ public class UserData {
 		}
 	}
 
-	@JsonProperty("firstname")
-	private String firstName;
+//	static class Register{
+//		@JsonProperty("city")
+//		private String city;
+//	}
+//
+//	@JsonProperty("register")
+//	private Register register;
+//
+//	public String getCity() {
+//		return register.city;
+//	}
 
-	@JsonProperty("lastname")
-	private String lastName;
+	@JsonProperty("user_valid")
+	private User_valid user_valid;
 
-	@JsonProperty("email")
-	private String emailAddress;
+	static class User_valid{
+		@JsonProperty("first_name")
+		private String firstName;
 
-	@JsonProperty("password")
-	private String password;
+		@JsonProperty("last_name")
+		private String lastName;
 
-	@JsonProperty("company")
-	private String companyName;
+		@JsonProperty("email")
+		private String emailAddress;
 
-	@JsonProperty("dateOfBirth")
-	private String dateOfBirth;
+		@JsonProperty("password")
+		private String password;
 
-	@JsonProperty("monthOfBirth")
-	private String monthOfBirth;
+		@JsonProperty("confirm_password")
+		private String confirmPassword;
 
-	@JsonProperty("yearOfYear")
-	private String yearOfYear;
+		@JsonProperty("company")
+		private String companyName;
 
-	public String getFirstName() {
-		return firstName;
+		@JsonProperty("dateOfBirth")
+		private String dateOfBirth;
+
+		@JsonProperty("monthOfBirth")
+		private String monthOfBirth;
+
+		@JsonProperty("yearOfYear")
+		private String yearOfYear;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
- 
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getFirstNameValid() {
+		return user_valid.firstName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getLastNameValid() {
+		return user_valid.lastName;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public String getEmailAddressValid() {
+		return user_valid.emailAddress;
 	}
 
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	public String getPasswordValid() {
+		return user_valid.password;
 	}
 
-	public String getMonthOfBirth() {
-		return monthOfBirth;
+	public String getConfirmPasswordValid() {
+		return user_valid.confirmPassword;
 	}
 
-	public String getYearOfYear() {
-		return yearOfYear;
+	public String getCompanyNameValid() {
+		return user_valid.companyName;
 	}
 
-	static class Register{
-		@JsonProperty("city")
-		private String city;
+	public String getDateOfBirthValid() {
+		return user_valid.dateOfBirth;
 	}
-	
-	@JsonProperty("register")
-	private Register register;
-	
-	public String getCity() {
-		return register.city;
+
+	public String getMonthOfBirthValid() {
+		return user_valid.monthOfBirth;
 	}
+
+	public String getYearOfYearValid() {
+		return user_valid.yearOfYear;
+	}
+
+	@JsonProperty("user_invalid")
+	private User_invalid user_invalid;
+
+	static class User_invalid{
+		@JsonProperty("first_name")
+		private String firstName;
+
+		@JsonProperty("last_name")
+		private String lastName;
+
+		@JsonProperty("email")
+		private String emailAddress;
+
+		@JsonProperty("password")
+		private String password;
+
+		@JsonProperty("confirm_password")
+		private String confirmPassword;
+
+		@JsonProperty("company")
+		private String companyName;
+
+		@JsonProperty("dateOfBirth")
+		private String dateOfBirth;
+
+		@JsonProperty("monthOfBirth")
+		private String monthOfBirth;
+
+		@JsonProperty("yearOfYear")
+		private String yearOfYear;
+	}
+	public String getFirstNameInvalid() {
+		return user_invalid.firstName;
+	}
+
+	public String getLastNameInvalid() {
+		return user_valid.lastName;
+	}
+
+	public String getEmailAddressInvalid() {
+		return user_valid.emailAddress;
+	}
+
+	public String getPasswordInvalid() {
+		return user_valid.password;
+	}
+
+	public String getConfirmPasswordInvalid() {
+		return user_valid.confirmPassword;
+	}
+
+	public String getCompanyNameInvalid() {
+		return user_valid.companyName;
+	}
+
+	public String getDateOfBirthInvalid() {
+		return user_valid.dateOfBirth;
+	}
+
+	public String getMonthOfBirthInvalid() {
+		return user_valid.monthOfBirth;
+	}
+
+	public String getYearOfYearInvalid() {
+		return user_valid.yearOfYear;
+	}
+
+
+
+
 }

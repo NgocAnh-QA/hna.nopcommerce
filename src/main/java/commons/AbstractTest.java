@@ -103,7 +103,7 @@ public class AbstractTest {
 //			chromePrefs.put("download.default_directory", projectFolder + File.separator + "src" + File.separator + "main" + File.separator + "resources"  + File.separator + "downloadFiles");
 //			chromeOptions.setExperimentalOption("prefs", chromePrefs);
 //
-//			driver = new ChromeDriver(chromeOptions);
+			driver = new ChromeDriver();
 
 		} else if (browser == BrowserName.FIREFOX_HEADLESS) {
 			WebDriverManager.firefoxdriver().setup();

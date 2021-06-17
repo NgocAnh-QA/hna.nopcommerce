@@ -26,4 +26,15 @@ public class RegisterPO extends AbstractPage {
         waitForElementVisible(driver, RegisterPageUI.VALIDATION_ERROR_MESSAGE);
         return getElementText(driver, RegisterPageUI.VALIDATION_ERROR_MESSAGE);
     }
+
+    public String getRegisterSuccessMessage() {
+        waitForElementVisible(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
+        return getElementText(driver, RegisterPageUI.REGISTER_SUCCESS_MESSAGE);
+    }
+
+
+    public String getEmailExistsErrorMessage() {
+        waitForElementVisible(driver, RegisterPageUI.EMAIL_EXISTS_ERROR_MESSAGE);
+        return getElementText(driver, RegisterPageUI.EMAIL_EXISTS_ERROR_MESSAGE);
+    }
 }
