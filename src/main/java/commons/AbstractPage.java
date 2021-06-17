@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import PageUIs.User.AbstractPageUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -952,5 +953,20 @@ public class AbstractPage {
 			e.printStackTrace();
 		}
 		return date;
+	}
+
+	public void clickToRadioButtonByID(WebDriver driver, String radioButtonID) {
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+	}
+
+	public void inputToTextboxByID(WebDriver driver, String textboxID, String value) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+		sendKeyToElement(driver, value, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+	}
+
+	public void selectDropdownByName(WebDriver driver, String selectDropdownID, String value) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+		selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
 	}
 }

@@ -1,0 +1,13 @@
+{
+	"firstname": "Kaylee",
+	"lastname": "Huynh",
+	"email": "kayleevn",
+	"password": "123456",
+	"company": "Gleads",
+	"dateOfBirth": "18",
+	"monthOfBirth": "April",
+	"yearOfYear": "1999",
+	"register":{
+		"city" : "Ho Chi Minh"
+	}
+}
