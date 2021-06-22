@@ -12,21 +12,21 @@ import testdata.UserData;
 import java.io.File;
 
 public class Register extends AbstractTest {
-    WebDriver driver;
-    int randomNumber = getRandomNumber();
-    UserData userData;
-    HomePagePO homePage;
-    RegisterPO registerPage;
+    private WebDriver driver;
+    private int randomNumber = getRandomNumber();
+    private UserData userData;
+    private HomePagePO homePage;
+    private RegisterPO registerPage;
 
     @Parameters({"browser", "url"})
     @BeforeClass
-    public void beforeClass(String browserName, String urlValue) {
+    private void beforeClass(String browserName, String urlValue) {
         driver = getBrowser(browserName, urlValue);
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
     }
 
     @Test
-    public void TC_01_Register_Empty_Data() {
+    private void TC_01_Register_Empty_Data() {
         log.info("Validate - Step 01: Open Home Page");
         homePage = PageGeneratorManager.getHomePageUser(driver);
 
@@ -57,7 +57,7 @@ public class Register extends AbstractTest {
     }
 
     @Test
-    public void TC_02_Register_Invalid_Email() {
+    private void TC_02_Register_Invalid_Email() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
@@ -100,7 +100,7 @@ public class Register extends AbstractTest {
     }
 
     @Test
-    public void TC_03_Register_Account_Exists() {
+    private void TC_03_Register_Account_Exists() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
@@ -186,7 +186,7 @@ public class Register extends AbstractTest {
     }
 
 
-    public void TC_04_Register_Password_Less_6_Characters() {
+    private void TC_04_Register_Password_Less_6_Characters() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
@@ -235,7 +235,7 @@ public class Register extends AbstractTest {
     }
 
     @Test
-    public void TC_05_Register_Password_Not_Match() {
+    private void TC_05_Register_Password_Not_Match() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
@@ -278,7 +278,7 @@ public class Register extends AbstractTest {
     }
 
     @Test
-    public void TC_06_Register_Valid_Data() {
+    private void TC_06_Register_Valid_Data() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
@@ -318,7 +318,7 @@ public class Register extends AbstractTest {
     }
 
     @AfterClass
-    public void afterClass() {
+    private void afterClass() {
         closeBrowserAndDriver(driver);
     }
 
