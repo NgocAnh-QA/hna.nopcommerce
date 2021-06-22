@@ -11,9 +11,9 @@
 
     <test name="Run on CHROME UI">
         <parameter name="browser" value="chrome"/>
-        <parameter name="url" value="https://demo.nopcommerce.com/"/>
+        <parameter name="url" value="https://google.com/"/>
         <classes>
-            <class name="nopcommerce.user.Register"/>
+            <class name="nopcommerce.user.Demo1"/>
         </classes>
     </test>
 

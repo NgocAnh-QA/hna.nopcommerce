@@ -1,4 +1,4 @@
-package PageUIs.User;
+package pageUIs.User;
 
 public class RegisterPageUI {
     public static final String REGISTER_BUTTON = "//button[@id='register-button']";

@@ -1,4 +1,4 @@
-package PageUIs.User;
+package pageUIs.User;
 
 public class AbstractPageUI {
     public static final String LOGIN_LINK = "";

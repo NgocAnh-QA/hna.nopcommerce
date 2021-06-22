@@ -1,6 +1,6 @@
 package pageObjects.User;
 
-import PageUIs.User.RegisterPageUI;
+import pageUIs.User.RegisterPageUI;
 import commons.AbstractPage;
 import org.openqa.selenium.WebDriver;
 

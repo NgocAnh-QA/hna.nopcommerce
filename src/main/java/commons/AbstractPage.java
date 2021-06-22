@@ -5,8 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import PageUIs.User.AbstractPageUI;
-import PageUIs.User.RegisterPageUI;
+import pageUIs.User.AbstractPageUI;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -467,76 +466,150 @@ public class AbstractPage {
     }
 
     public boolean isElementDisplayed(WebDriver driver, String locator) {
-        boolean status = true;
+        boolean check = true;
         try {
             if (getElement(driver, locator).isDisplayed()) {
-                return status;
+                return check;
             }
         } catch (Exception e) {
-            status = false;
+            check = false;
+            log.error("Element is displayed error: " + e.getMessage());
         }
-        return status;
+        return check;
 
     }
 
     public boolean isElementDisplayed(WebDriver driver, String locator, String... values) {
-        return getElement(driver, castToParameter(locator, values)).isDisplayed();
+        boolean check = true;
+        try {
+            if (getElement(driver, castToParameter(locator, values)).isDisplayed()) {
+                return check;
+            }
+        } catch (Exception e) {
+            check = false;
+            log.error("Element is enabled error: " + e.getMessage());
+        }
+        return check;
     }
 
     public boolean isElementEnabled(WebDriver driver, String locator) {
-        return getElement(driver, locator).isEnabled();
+        boolean check = true;
+        try {
+            if (getElement(driver, locator).isEnabled()) {
+                return check;
+            }
+        } catch (Exception e) {
+            check = false;
+            log.error("Element is enabled error: " + e.getMessage());
+        }
+        return check;
     }
 
     public boolean isElementSelected(WebDriver driver, String locator) {
-        return getElement(driver, locator).isSelected();
+        boolean check = true;
+        try {
+            if (getElement(driver, locator).isSelected()) {
+                return check;
+            }
+            ;
+        } catch (Exception e) {
+            check = false;
+            log.error("Element is selected error: " + e.getMessage());
+        }
+        return check;
     }
 
     public boolean isElementSelected(WebDriver driver, String locator, String... values) {
-        return getElement(driver, castToParameter(locator, values)).isSelected();
+        boolean check = true;
+        try {
+            if (getElement(driver, castToParameter(locator, values)).isSelected()) {
+                return check;
+            }
+        } catch (Exception e) {
+            check = false;
+            log.error("Element is selected error: " + e.getMessage());
+        }
+        return check;
     }
 
     public void switchToFrame(WebDriver driver, String locator) {
-        element = getElement(driver, locator);
-        driver.switchTo().frame(element);
+        try {
+            element = getElement(driver, locator);
+            driver.switchTo().frame(element);
+        } catch (Exception e) {
+            log.error("Cannot switch to frame: " + e.getMessage());
+        }
     }
 
     public void switchToDefaultContent(WebDriver driver) {
-        driver.switchTo().defaultContent();
+        try {
+            driver.switchTo().defaultContent();
+        } catch (Exception e) {
+            log.error("Cannot switch to default content: " + e.getMessage());
+        }
     }
 
     public void doubleClickToElement(WebDriver driver, String locator) {
-        action = new Actions(driver);
-        action.doubleClick(getElement(driver, locator)).perform();
+        try {
+            action = new Actions(driver);
+            action.doubleClick(getElement(driver, locator)).perform();
+        } catch (Exception e) {
+            log.error("Cannot double click to element: " + e.getMessage());
+        }
     }
 
     public void rightClickToElement(WebDriver driver, String locator) {
-        action = new Actions(driver);
-        action.contextClick(getElement(driver, locator)).perform();
+        try {
+            action = new Actions(driver);
+            action.contextClick(getElement(driver, locator)).perform();
+        } catch (Exception e) {
+            log.error("Cannot right click to element: " + e.getMessage());
+        }
     }
 
     public void hoverMouseToElement(WebDriver driver, String locator) {
-        action = new Actions(driver);
-        action.moveToElement(getElement(driver, locator)).perform();
+        try {
+            action = new Actions(driver);
+            action.moveToElement(getElement(driver, locator)).perform();
+        } catch (Exception e) {
+            log.error("Cannot hover mouse to element: " + e.getMessage());
+        }
     }
 
     public void hoverMouseToElement(WebDriver driver, String locator, String... value) {
-        action = new Actions(driver);
-        action.moveToElement(getElement(driver, String.format(locator, (Object[]) value))).perform();
+        try {
+            action = new Actions(driver);
+            action.moveToElement(getElement(driver, String.format(locator, (Object[]) value))).perform();
+        } catch (Exception e) {
+            log.error("Cannot hover mouse to element: " + e.getMessage());
+        }
     }
 
-    public void clickAndHoleToElement(WebDriver driver, String locator) {
-        action = new Actions(driver);
-        action.clickAndHold(getElement(driver, locator)).perform();
+    public void clickAndHoldToElement(WebDriver driver, String locator) {
+        try {
+            action = new Actions(driver);
+            action.clickAndHold(getElement(driver, locator)).perform();
+        } catch (Exception e) {
+            log.error("Cannot click and hold to element: " + e.getMessage());
+        }
     }
 
     public void dragAnđropElement(WebDriver driver, String sourceLocator, String targetLocator) {
-        action = new Actions(driver);
-        action.dragAndDrop(getElement(driver, sourceLocator), getElement(driver, targetLocator)).perform();
+        try {
+            action = new Actions(driver);
+            action.dragAndDrop(getElement(driver, sourceLocator), getElement(driver, targetLocator)).perform();
+        } catch (Exception e) {
+            log.error("Cannot drag and drop element: " + e.getMessage());
+        }
     }
 
     public void sendKeyBoardToElement(WebDriver driver, String locator, Keys key) {
-        action = new Actions(driver);
-        action.sendKeys(getElement(driver, locator), key).perform();
+        try {
+            action = new Actions(driver);
+            action.sendKeys(getElement(driver, locator), key).perform();
+        } catch (Exception e) {
+            log.error("Cannot send key board to element: " + e.getMessage());
+        }
     }
 
     // Custom dropdown
@@ -1147,18 +1220,30 @@ public class AbstractPage {
     }
 
     public void clickToRadioButtonByID(WebDriver driver, String radioButtonID) {
-        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
-        clickToElement(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+        try {
+            waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+            clickToElement(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+        } catch (Exception e) {
+            log.error("Can not click to radio button by ID: " + e.getMessage());
+        }
     }
 
     public void inputToTextboxByID(WebDriver driver, String textboxID, String value) {
-        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
-        sendKeyToElement(driver, value, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+        try {
+            waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+            sendKeyToElement(driver, value, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+        } catch (Exception e) {
+            log.error("Can not input to text box by ID: " + e.getMessage());
+        }
     }
 
     public void selectDropdownByName(WebDriver driver, String selectDropdownID, String value) {
-        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
-        selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+        try {
+            waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+            selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+        } catch (Exception e) {
+            log.error("Can not select dropdown by name: " + e.getMessage());
+        }
     }
 
     public HomePagePO clickToLogoutLink(WebDriver driver) {

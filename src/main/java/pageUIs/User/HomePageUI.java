@@ -1,4 +1,4 @@
-package PageUIs.User;
+package pageUIs.User;
 
 public class HomePageUI {
 }
