@@ -21,7 +21,7 @@ public class Register extends AbstractTest {
     @Parameters({"browser", "url"})
     @BeforeClass
     private void beforeClass(String browserName, String urlValue) {
-        driver = getBrowser(browserName, urlValue);
+      //  driver = getBrowser(browserName, urlValue);
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
     }
 

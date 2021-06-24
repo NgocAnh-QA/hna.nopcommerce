@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Bank Guru" parallel="false">
+	<parameter name="environment" value="test" />
+
+	<test name="Run on FIREFOX">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<class name="User_03_Register_And_Login" />
+		</classes>
+	</test>
+</suite> 
