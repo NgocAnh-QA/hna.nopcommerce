@@ -145,7 +145,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <file>src/test/resources/runTestcasesOn${environment}.xml</file>
+                        <file>src/test/resources/runTestcases.xml</file>
                     </suiteXmlFiles>
 
                     <argLine>
