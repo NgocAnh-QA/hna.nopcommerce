@@ -17,8 +17,8 @@ public class RegisterPO extends AbstractPage {
     }
 
     public boolean isMandantoryFieldErrorDisplayed(String textField) {
-        waitForElementVisible(driver, RegisterPageUI.MANDANTORY_FIELD_ERROR_MESSAGE, textField);
-        return isElementDisplayed(driver, RegisterPageUI.MANDANTORY_FIELD_ERROR_MESSAGE, textField);
+        waitForElementVisible(driver, RegisterPageUI.MANDATORY_FIELD_ERROR_MESSAGE, textField);
+        return isElementDisplayed(driver, RegisterPageUI.MANDATORY_FIELD_ERROR_MESSAGE, textField);
     }
 
 
@@ -36,5 +36,15 @@ public class RegisterPO extends AbstractPage {
     public String getEmailExistsErrorMessage() {
         waitForElementVisible(driver, RegisterPageUI.EMAIL_EXISTS_ERROR_MESSAGE);
         return getElementText(driver, RegisterPageUI.EMAIL_EXISTS_ERROR_MESSAGE);
+    }
+
+    public String getValidationPasswordMessage() {
+        waitForElementVisible(driver, RegisterPageUI.VALIDATION_ERROR_MESSAGE);
+        return concatTextInElement(driver, RegisterPageUI.PASSWORD_ERROR1_MESSAGE, RegisterPageUI.PASSWORD_ERROR2_MESSAGE);
+    }
+
+    public String concatTextInElement(WebDriver driver, String locator1, String locator2){
+        return getElementText(driver, locator1).trim() + " " + getElementText(driver, locator2).trim();
+
     }
 }

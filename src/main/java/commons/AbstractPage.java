@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import pageObjects.User.RegisterPO;
 import pageUIs.User.AbstractPageUI;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -377,7 +378,7 @@ public class AbstractPage {
         String elementText = "";
         try {
             element = getElement(driver, locator);
-            elementText = element.getText();
+            elementText = element.getText().trim();
         } catch (Exception e) {
             log.error("Cannot get element text: " + e.getMessage());
         }
@@ -1250,5 +1251,11 @@ public class AbstractPage {
         waitForElementClickable(driver, AbstractPageUI.LOGOUT_LINK);
         clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
         return PageGeneratorManager.getHomePageUser(driver);
+    }
+
+    public RegisterPO clickToRegisterLink(WebDriver driver) {
+        waitForElementClickable(driver, AbstractPageUI.REGISTER_LINK);
+        clickToElement(driver, AbstractPageUI.REGISTER_LINK);
+        return PageGeneratorManager.getRegisterPage(driver);
     }
 }

@@ -1,8 +1,7 @@
 package nopcommerce.user;
 
-import commons.AbstractTest;
-import commons.GlobalConstants;
-import commons.PageGeneratorManager;
+import commons.*;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import pageObjects.User.HomePagePO;
@@ -17,11 +16,17 @@ public class Register extends AbstractTest {
     private UserData userData;
     private HomePagePO homePage;
     private RegisterPO registerPage;
+    RoleAccess roleAccess;
 
-    @Parameters({"browser", "url"})
+    @Parameters({"browser"})
     @BeforeClass
-    private void beforeClass(String browserName, String urlValue) {
-      //  driver = getBrowser(browserName, urlValue);
+    private void beforeClass(String browserName) {
+
+        String role = System.getProperty("role");
+        ConfigFactory.setProperty("role", role);
+        roleAccess = ConfigFactory.create(RoleAccess.class);
+        driver = getBrowserDriver(browserName, roleAccess.url());
+
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
     }
 
@@ -35,7 +40,6 @@ public class Register extends AbstractTest {
 
         log.info("Register - Step 03: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
-        registerPage.sleepInSecond(5);
 
         log.info("Register - Step 04: Verify error message displayed at FirstName textbox");
         verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("FirstName"));
@@ -180,12 +184,11 @@ public class Register extends AbstractTest {
         log.info("Register - Step 27: Verify Email already exists message");
         verifyEquals(registerPage.getEmailExistsErrorMessage(), "The specified email already exists");
 
-        log.info("Register - Step 28: Refresh Register Page");
-        registerPage.refreshCurrentPage(driver);
-        registerPage.sleepInSecond(5);
+        log.info("Register - Step 28: Click to Register link");
+        registerPage.clickToRegisterLink(driver);
     }
 
-
+    @Test
     private void TC_04_Register_Password_Less_6_Characters() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
@@ -214,24 +217,14 @@ public class Register extends AbstractTest {
         log.info("Register - Step 10: Input to Password textbox with value: " + userData.getPasswordInvalid());
         registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordInvalid());
 
-        log.info("Register - Step 11: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
-
-        log.info("Register - Step 12: Click to Register button at Register Page");
+        log.info("Register - Step 11: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
 
-        log.info("Register - Step 13: Verify error messsage displayed");
-        verifyEquals(registerPage.getValidationErrorMessage(), "Password must meet the following rules: must have at least 6 characters");
+        log.info("Register - Step 12: Verify error messsage displayed");
+        verifyEquals(registerPage.getValidationPasswordMessage(), "Password must meet the following rules: must have at least 6 characters");
 
-        log.info("Register - Step 14: Refresh Register Page");
+        log.info("Register - Step 13: Refresh Register Page");
         registerPage.refreshCurrentPage(driver);
-
-
-        /*********** Chỗ này chưa xử lí được xpath nè *************/
-//        Assert.assertEquals(registerPage.getElementText(driver, UserRegisterPageUI.ACCOUNT_EXISTS_ERROR),
-//                "Password must meet the following rules: must have at least 6 characters");
-//        registerPage.clickToRegisterLink(driver);
-
     }
 
     @Test
@@ -297,8 +290,8 @@ public class Register extends AbstractTest {
         log.info("Register - Step 06: Select Year Dropdown with value: " + userData.getYearOfYearValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
-        log.info("Register - Step 07: Input to Email textbox with value: " + userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
-        registerPage.inputToTextboxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
+        log.info("Register - Step 07: Input to Email textbox with value: " + userData.getEmailAddressValid() + randomNumber+1 + "@edu.vn.com");
+        registerPage.inputToTextboxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber+1 + "@edu.vn.com");
 
         log.info("Register - Step 08: Input to Company textbox with value: " + userData.getCompanyNameValid());
         registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());

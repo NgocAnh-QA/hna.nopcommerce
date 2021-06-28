@@ -134,35 +134,35 @@ public class UserData {
 	}
 
 	public String getLastNameInvalid() {
-		return user_valid.lastName;
+		return user_invalid.lastName;
 	}
 
 	public String getEmailAddressInvalid() {
-		return user_valid.emailAddress;
+		return user_invalid.emailAddress;
 	}
 
 	public String getPasswordInvalid() {
-		return user_valid.password;
+		return user_invalid.password;
 	}
 
 	public String getConfirmPasswordInvalid() {
-		return user_valid.confirmPassword;
+		return user_invalid.confirmPassword;
 	}
 
 	public String getCompanyNameInvalid() {
-		return user_valid.companyName;
+		return user_invalid.companyName;
 	}
 
 	public String getDateOfBirthInvalid() {
-		return user_valid.dateOfBirth;
+		return user_invalid.dateOfBirth;
 	}
 
 	public String getMonthOfBirthInvalid() {
-		return user_valid.monthOfBirth;
+		return user_invalid.monthOfBirth;
 	}
 
 	public String getYearOfYearInvalid() {
-		return user_valid.yearOfYear;
+		return user_invalid.yearOfYear;
 	}
 
 
