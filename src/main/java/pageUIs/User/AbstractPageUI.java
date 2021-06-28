@@ -9,4 +9,5 @@ public class AbstractPageUI {
     public static final String DYNAMIC_DROPDOWN_BY_NAME = "//select[@name='%s']";
     public static final String LOGOUT_LINK = "//a[@class='ico-logout']";
 
+    public static final String DYNAMIC_LINK_NAV = "//div[@class='listbox']//a[text()='%s']";
 }

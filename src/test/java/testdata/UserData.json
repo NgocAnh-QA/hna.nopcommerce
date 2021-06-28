@@ -23,6 +23,17 @@
     "dateOfBirth": "18",
     "monthOfBirth": "April",
     "yearOfYear": "1999"
+  },
+  "user_01": {
+    "first_name": "Kaylee Update Infor",
+    "last_name": "Huynh",
+    "email": "kayleevn",
+    "password": "admin123",
+    "confirm_password": "admin123",
+    "company": "FPT",
+    "dateOfBirth": "26",
+    "monthOfBirth": "May",
+    "yearOfYear": "1992"
   }
 }
 

@@ -39,7 +39,7 @@ public class Login extends AbstractTest {
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
 
         log.info("Login - Precondition - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePageUser(driver);
+        homePage = PageGeneratorManager.getHomePage(driver);
 
         log.info("Login - Precondition - Step 02: Click to Register link at Home Page");
         registerPage = homePage.clickToRegisterLink(driver);

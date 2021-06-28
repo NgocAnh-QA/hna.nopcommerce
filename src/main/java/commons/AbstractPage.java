@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import pageObjects.User.CustomerInfoPO;
 import pageObjects.User.RegisterPO;
 import pageUIs.User.AbstractPageUI;
 import org.apache.commons.logging.Log;
@@ -367,6 +368,17 @@ public class AbstractPage {
         String elementAttribute = "";
         try {
             element = getElement(driver, locator);
+            elementAttribute = element.getAttribute(attributeName);
+        } catch (Exception e) {
+            log.error("Cannot get element attribute: " + e.getMessage());
+        }
+        return elementAttribute;
+    }
+
+    public String getElementAttribute(WebDriver driver, String locator, String attributeName, String... values) {
+        String elementAttribute = "";
+        try {
+            element = getElement(driver, castToParameter(locator, values));
             elementAttribute = element.getAttribute(attributeName);
         } catch (Exception e) {
             log.error("Cannot get element attribute: " + e.getMessage());
@@ -1239,23 +1251,53 @@ public class AbstractPage {
     }
 
     public void selectDropdownByName(WebDriver driver, String selectDropdownID, String value) {
-        try {
-            waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
-            selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
-        } catch (Exception e) {
-            log.error("Can not select dropdown by name: " + e.getMessage());
-        }
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+        selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
     }
 
     public HomePagePO clickToLogoutLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.LOGOUT_LINK);
         clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
-        return PageGeneratorManager.getHomePageUser(driver);
+        return PageGeneratorManager.getHomePage(driver);
     }
 
     public RegisterPO clickToRegisterLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.REGISTER_LINK);
         clickToElement(driver, AbstractPageUI.REGISTER_LINK);
         return PageGeneratorManager.getRegisterPage(driver);
+    }
+
+    public CustomerInfoPO clickToMyAccountLink(WebDriver driver) {
+        waitForElementClickable(driver, AbstractPageUI.MY_ACCOUNT_LINK);
+        clickToElement(driver, AbstractPageUI.MY_ACCOUNT_LINK);
+        return PageGeneratorManager.getCustomerInfoPage(driver);
+    }
+
+    public String getAttributeTextboxByID(WebDriver driver, String textboxID, String attributeName) {
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+        return getElementAttribute(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, attributeName, textboxID);
+
+    }
+
+    public String getFirstSelectedInDropdownByName(WebDriver driver, String selectDropdownName) {
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName);
+        return getFirstSelectedTextInDropdown(driver, castToParameter(AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName));
+
+    }
+
+    public boolean isRadioButtonSelectedByID(WebDriver driver, String radioButtonID) {
+        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+        return isElementSelected(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
+    }
+
+    public AbstractPage openLinkByPageNameAtMyAccount(WebDriver driver, String pageName){
+        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_NAV, pageName);
+        clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_NAV, pageName);
+        switch (pageName) {
+            case "Change password":
+                return PageGeneratorManager.getChangePassword(driver);
+            default:
+                return PageGeneratorManager.getCustomerInfoPage(driver);
+        }
     }
 }
