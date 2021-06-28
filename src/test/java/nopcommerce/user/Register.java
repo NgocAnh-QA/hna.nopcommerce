@@ -28,35 +28,35 @@ public class Register extends AbstractTest {
         driver = getBrowserDriver(browserName, roleAccess.url());
 
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
+
+        log.info("Register - Precondition - Step 01: Open Home Page");
+        homePage = PageGeneratorManager.getHomePageUser(driver);
+
+        log.info("Register - Precondition - Step 02: Click to Register link at Home Page");
+        registerPage = homePage.clickToRegisterLink();
     }
 
     @Test
     private void TC_01_Register_Empty_Data() {
-        log.info("Validate - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePageUser(driver);
-
-        log.info("Validate - Step 02: Click to Register link at Home Page");
-        registerPage = homePage.clickToRegisterLink();
-
-        log.info("Register - Step 03: Click to Register button at Register Page");
+        log.info("Register - Step 01: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
 
-        log.info("Register - Step 04: Verify error message displayed at FirstName textbox");
+        log.info("Register - Step 02: Verify error message displayed at FirstName textbox");
         verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("FirstName"));
 
-        log.info("Register - Step 05: Verify error message displayed at LastName textbox");
+        log.info("Register - Step 03: Verify error message displayed at LastName textbox");
         verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("LastName"));
 
-        log.info("Register - Step 06: Verify error message displayed at Email textbox");
+        log.info("Register - Step 04: Verify error message displayed at Email textbox");
         verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("Email"));
 
-        log.info("Register - Step 07: Verify error message displayed at Password textbox");
+        log.info("Register - Step 05: Verify error message displayed at Password textbox");
         verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("Password"));
 
-        log.info("Register - Step 08: Verify error message displayed at ConfirmPassword textbox");
+        log.info("Register - Step 06: Verify error message displayed at ConfirmPassword textbox");
         verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("ConfirmPassword"));
 
-        log.info("Register - Step 09: Refresh Register Page");
+        log.info("Register - Step 07: Refresh Register Page");
         registerPage.refreshCurrentPage(driver);
     }
 
