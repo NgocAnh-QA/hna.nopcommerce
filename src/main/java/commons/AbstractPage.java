@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import pageObjects.User.CustomerInfoPO;
+import pageObjects.User.ProductDetailPO;
 import pageObjects.User.RegisterPO;
 import pageUIs.User.AbstractPageUI;
 import org.apache.commons.logging.Log;
@@ -1250,9 +1251,9 @@ public class AbstractPage {
         }
     }
 
-    public void selectDropdownByName(WebDriver driver, String selectDropdownID, String value) {
-        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
-        selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownID);
+    public void selectDropdownByName(WebDriver driver, String selectDropdownName, String value) {
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName);
+        selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName);
     }
 
     public HomePagePO clickToLogoutLink(WebDriver driver) {
@@ -1290,14 +1291,35 @@ public class AbstractPage {
         return isElementSelected(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
     }
 
-    public AbstractPage openLinkByPageNameAtMyAccount(WebDriver driver, String pageName){
+    public AbstractPage openLinkByPageNameAtMyAccount(WebDriver driver, String pageName) {
         waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_NAV, pageName);
         clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_NAV, pageName);
         switch (pageName) {
             case "Change password":
-                return PageGeneratorManager.getChangePassword(driver);
+                return PageGeneratorManager.getChangePasswordPage(driver);
+            case "Addresses":
+                return PageGeneratorManager.getAddressesPage(driver);
+            case "My product reviews":
+                return PageGeneratorManager.getMyProductReviewPage(driver);
             default:
                 return PageGeneratorManager.getCustomerInfoPage(driver);
         }
+    }
+
+    public String getTextByClass(WebDriver driver, String className) {
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXT_BY_CLASS, className);
+        return getElementText(driver, AbstractPageUI.DYNAMIC_TEXT_BY_CLASS, className);
+    }
+
+    public HomePagePO openHomePage(WebDriver driver) {
+        waitForElementVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
+        clickToElement(driver, AbstractPageUI.HOME_PAGE_LINK);
+        return PageGeneratorManager.getHomePage(driver);
+    }
+
+    public ProductDetailPO clickToProductByNameOfProduct(WebDriver driver, String productName) {
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
+        clickToElement(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
+        return PageGeneratorManager.getProductDetailPage(driver);
     }
 }

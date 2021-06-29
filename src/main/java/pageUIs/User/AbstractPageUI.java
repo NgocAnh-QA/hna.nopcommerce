@@ -10,4 +10,9 @@ public class AbstractPageUI {
     public static final String LOGOUT_LINK = "//a[@class='ico-logout']";
 
     public static final String DYNAMIC_LINK_NAV = "//div[@class='listbox']//a[text()='%s']";
+    public static final String DYNAMIC_TEXT_BY_CLASS = "//li[@class='%s']";
+
+    public static final String HOME_PAGE_LINK = "//div[@class='header-logo']//a";
+
+    public static final String DYNAMIC_PRODUCT_DETAIL_LINK = "//h2[@class='product-title']/a[text()='%s']";
 }

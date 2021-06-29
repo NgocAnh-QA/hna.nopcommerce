@@ -199,32 +199,113 @@ public class UserData {
 
         @JsonProperty("yearOfYear")
         private String yearOfYear;
+
+        @JsonProperty("country")
+        private String country;
+
+        @JsonProperty("state_province")
+        private String state_province;
+
+        @JsonProperty("city")
+        private String city;
+
+        @JsonProperty("address1")
+        private String address1;
+
+        @JsonProperty("address2")
+        private String address2;
+
+        @JsonProperty("zip_postal")
+        private String zip_postal;
+
+        @JsonProperty("phone_number")
+        private String phone_number;
+
+        @JsonProperty("fax_number")
+        private String fax_number;
+
+        @JsonProperty("review_title")
+        private String review_title;
+
+        @JsonProperty("review_content")
+        private String review_content;
     }
+
     public String getFirstName_01() {
         return user_01.firstName;
     }
+
     public String getLastName_01() {
         return user_01.lastName;
     }
+
     public String getEmailAddress_01() {
         return user_01.emailAddress;
     }
+
     public String getCompanyName_01() {
         return user_01.companyName;
     }
+
     public String getPassword_01() {
         return user_01.password;
     }
+
     public String getConfirmPassword_01() {
         return user_01.confirmPassword;
     }
+
     public String getDateOfBirth_01() {
         return user_01.dateOfBirth;
     }
+
     public String getMonthOfBirth_01() {
         return user_01.monthOfBirth;
     }
+
     public String getYearOfYear_01() {
         return user_01.yearOfYear;
     }
+
+    public String getCountry_01() {
+        return user_01.country;
+    }
+
+    public String getStateProvince_01() {
+        return user_01.state_province;
+    }
+
+    public String getCity_01() {
+        return user_01.city;
+    }
+
+    public String getAddress1_01() {
+        return user_01.address1;
+    }
+
+    public String getAddress2_01() {
+        return user_01.address2;
+    }
+
+    public String getZipPostal_01() {
+        return user_01.zip_postal;
+    }
+
+    public String getPhoneNumber_01() {
+        return user_01.phone_number;
+    }
+
+    public String getFaxNumber_01() {
+        return user_01.fax_number;
+    }
+
+    public String getReviewTitle_01() {
+        return user_01.review_title;
+    }
+
+    public String getReviewContent_01() {
+        return user_01.review_content;
+    }
+
+
 }

@@ -33,7 +33,17 @@
     "company": "FPT",
     "dateOfBirth": "26",
     "monthOfBirth": "May",
-    "yearOfYear": "1992"
+    "yearOfYear": "1992",
+    "country": "Viet Nam",
+    "state_province": "Other",
+    "city": "Ho Chi Minh",
+    "address1": "100 Nguyen Trai",
+    "address2": "200 Tran Hung Dao",
+    "zip_postal": "700000",
+    "phone_number": "012345678",
+    "fax_number": "987654321",
+    "review_title": "Testing Review Product",
+    "review_content": "This is text area to write review your product"
   }
 }
 
