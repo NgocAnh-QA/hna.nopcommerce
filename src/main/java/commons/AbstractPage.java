@@ -914,22 +914,6 @@ public class AbstractPage {
         driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
     }
 
-//	// 10 => 15 pages
-//	public AbstractPage openLinkByPageName(WebDriver driver, String pageName) {
-//		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
-//		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
-//		switch (pageName) {
-//		case "Addresses":
-//			return PageGeneratorManager.getUserAddressesPage(driver);
-//		case "My product reviews":
-//			return PageGeneratorManager.getUserMyProductReviewPage(driver);
-//		case "Customer info":
-//			return PageGeneratorManager.getUserCustomerInfoPage(driver);
-//		default:
-//			return PageGeneratorManager.getUserOrdersPage(driver);
-//		}
-//	}
-
     public List<String> getElementsText(WebDriver driver, String parentLocator) {
         List<WebElement> items = getElements(driver, parentLocator);
         ArrayList<String> listItems = new ArrayList<String>();
@@ -937,6 +921,20 @@ public class AbstractPage {
             listItems.add(webElement.getText().trim());
         }
         return listItems;
+    }
+    public boolean isResultEqualsKeyword(WebDriver driver, String keyword, String resultLocator) {
+        int check = 0;
+        List<String> listItems = getElementsText(driver, resultLocator);
+        for (String p : listItems) {
+            if (p.trim().equals(keyword)) {
+                check++;
+            }
+        }
+        if (listItems.size() == check) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isResultContainsKeyword(WebDriver driver, String keyword, String resultLocator) {
@@ -1322,4 +1320,16 @@ public class AbstractPage {
         clickToElement(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
         return PageGeneratorManager.getProductDetailPage(driver);
     }
+
+    public AbstractPage openLinkByTextAtFooter(WebDriver driver, String linkText) {
+        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_TEXT_AT_FOOTER, linkText);
+        clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_TEXT_AT_FOOTER, linkText);
+        switch (linkText) {
+            case "Search":
+                return PageGeneratorManager.getSearchPage(driver);
+            default:
+                return PageGeneratorManager.getHomePage(driver);
+        }
+    }
+
 }

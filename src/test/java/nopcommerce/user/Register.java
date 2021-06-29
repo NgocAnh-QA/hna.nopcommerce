@@ -21,7 +21,6 @@ public class Register extends AbstractTest {
     @Parameters({"browser"})
     @BeforeClass
     private void beforeClass(String browserName) {
-
         String role = System.getProperty("role");
         ConfigFactory.setProperty("role", role);
         roleAccess = ConfigFactory.create(RoleAccess.class);

@@ -21,7 +21,6 @@ public class MyAccount extends AbstractTest {
     private int randomNumber = getRandomNumber();
     private UserData userData;
     private HomePagePO homePage;
-    private RegisterPO registerPage;
     private LoginPO loginPage;
     private CustomerInfoPO customerInfoPage;
     private ChangePasswordPO changePasswordPage;
@@ -30,7 +29,7 @@ public class MyAccount extends AbstractTest {
     private ProductReviewPO productReview;
     private MyProductReviewPO myProductReviewPage;
     RoleAccess roleAccess;
-    private String email, password, emailUpdate;
+    private String  emailUpdate;
 
     @Parameters({"browser"})
     @BeforeClass
@@ -42,67 +41,22 @@ public class MyAccount extends AbstractTest {
 
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
 
-        log.info("Register - Precondition - Step 01: Open Home Page");
+        log.info("My Account - Precondition - Step 01: Open Home Page");
         homePage = PageGeneratorManager.getHomePage(driver);
 
-        log.info("Register - Precondition - Step 02: Click to Register link at Home Page");
-        registerPage = homePage.clickToRegisterLink();
-
-        log.info("Register - Precondition - Step 03: Click to Gender radio button with value: Male");
-        registerPage.clickToRadioButtonByID(driver, "gender-male");
-
-        log.info("Register - Precondition - Step 04: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
-
-        log.info("Register - Precondition - Step 05: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
-
-        log.info("Register - Precondition - Step 06: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
-        registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
-
-        log.info("Register - Precondition - Step 07: Select Month Dropdown with value: " + userData.getMonthOfBirthValid());
-        registerPage.selectDropdownByName(driver, "DateOfBirthMonth", userData.getMonthOfBirthValid());
-
-        log.info("Register - Precondition - Step 08: Select Year Dropdown with value: " + userData.getYearOfYearValid());
-        registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
-
-        email = userData.getEmailAddressValid() + randomNumber + "@edu.vn.com";
-        log.info("Register - Precondition - Step 09: Input to Email textbox with value: " + email);
-        registerPage.inputToTextboxByID(driver, "Email", email);
-
-        log.info("Register - Precondition - Step 10: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
-
-        password = userData.getPasswordValid();
-        log.info("Register - Precondition - Step 11: Input to Password textbox with value: " + password);
-        registerPage.inputToTextboxByID(driver, "Password", password);
-
-        log.info("Register - Precondition - Step 12: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
-
-        log.info("Register - Precondition - Step 13: Click to Register button at Register Page");
-        registerPage.clickToRegisterButton();
-
-        registerPage.sleepInSecond(5);
-        log.info("Register - Precondition - Step 14: Verify register successfully");
-        verifyEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-
-        log.info("Register - Precondition - Step 15: Click to logout link");
-        homePage = registerPage.clickToLogoutLink(driver);
-
-        log.info("Register - Precondition - Step 16: Click to Login link");
+        log.info("My Account - Precondition - Step 02: Click to Login link");
         loginPage = homePage.clickToLoginLink();
 
-        log.info("Register - Precondition - Step 17: Input to Email with value: " + email);
-        loginPage.inputToEmailTextbox(email);
+        log.info("My Account - Precondition - Step 03: Input to Email with value: " + RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
 
-        log.info("Register - Precondition - Step 18: Input to Password with value: " + password);
-        loginPage.inputToPasswordTextbox(password);
+        log.info("My Account - Precondition - Step 04: Input to Password with value: " + RegisterToSystem.PASSWORD);
+        loginPage.inputToPasswordTextbox(RegisterToSystem.PASSWORD);
 
-        log.info("Register - Precondition - Step 19: Click to Login button");
+        log.info("My Account - Precondition - Step 05: Click to Login button");
         homePage = loginPage.clickToLoginButton();
 
-        log.info("Register - Precondition - Step 20: Click to My Account link");
+        log.info("My Account - Precondition - Step 06: Click to My Account link");
         customerInfoPage = homePage.clickToMyAccountLink(driver);
     }
 
@@ -241,8 +195,8 @@ public class MyAccount extends AbstractTest {
         log.info("My Account - Change Password - Step 01: Open Change Password link");
         changePasswordPage = (ChangePasswordPO) addressPage.openLinkByPageNameAtMyAccount(driver, "Change password");
 
-        log.info("My Account - Change Password - Step 02: Input to old password with value: " + password);
-        changePasswordPage.inputToTextboxByID(driver, "OldPassword", password);
+        log.info("My Account - Change Password - Step 02: Input to old password with value: " + RegisterToSystem.PASSWORD);
+        changePasswordPage.inputToTextboxByID(driver, "OldPassword", RegisterToSystem.PASSWORD);
 
         log.info("My Account - Change Password - Step 03: Input to new password with value: " + userData.getPassword_01());
         changePasswordPage.inputToTextboxByID(driver, "NewPassword", userData.getPassword_01());

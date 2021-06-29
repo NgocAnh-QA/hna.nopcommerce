@@ -25,9 +25,7 @@ public class Login extends AbstractTest {
     private UserData userData;
     private LoginPO loginPage;
     private HomePagePO homePage;
-    private RegisterPO registerPage;
     RoleAccess roleAccess;
-    private String email, password;
 
     @Parameters({"browser"})
     @BeforeClass
@@ -40,70 +38,26 @@ public class Login extends AbstractTest {
 
         log.info("Login - Precondition - Step 01: Open Home Page");
         homePage = PageGeneratorManager.getHomePage(driver);
-
-        log.info("Login - Precondition - Step 02: Click to Register link at Home Page");
-        registerPage = homePage.clickToRegisterLink(driver);
-
-        log.info("Login - Precondition - Step 03: Click to Gender radio button with value: Male");
-        registerPage.clickToRadioButtonByID(driver, "gender-male");
-
-        log.info("Login - Precondition - Step 04: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
-
-        log.info("Login - Precondition - Step 05: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
-
-        log.info("Login - Precondition - Step 06: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
-        registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
-
-        log.info("Login - Precondition - Step 07: Select Month Dropdown with value: " + userData.getMonthOfBirthValid());
-        registerPage.selectDropdownByName(driver, "DateOfBirthMonth", userData.getMonthOfBirthValid());
-
-        log.info("Login - Precondition - Step 08: Select Year Dropdown with value: " + userData.getYearOfYearValid());
-        registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
-
-        email = userData.getEmailAddressValid() + randomNumber + "@hotmail.com";
-        log.info("Login - Precondition - Step 09: Input to Email textbox with value: " + email);
-        registerPage.inputToTextboxByID(driver, "Email", email);
-
-        log.info("Login - Precondition - Step 10: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
-
-        password = userData.getPasswordValid();
-        log.info("Login - Precondition - Step 11: Input to Password textbox with value: " + password);
-        registerPage.inputToTextboxByID(driver, "Password", password);
-
-        log.info("Login - Precondition - Step 12: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
-
-        log.info("Login - Precondition - Step 13: Click to Register button at Register Page");
-        registerPage.clickToRegisterButton();
-
-        log.info("Login - Precondition - Step 14: Verify register successfully");
-        verifyEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-
-        log.info("Login - Precondition - Step 15: Click to Logout link");
-        homePage = registerPage.clickToLogoutLink(driver);
-
-        log.info("Login - Precondition - Step 16: Click to Login link at Home Page");
-        loginPage = homePage.clickToLoginLink();
     }
 
     @Test
     public void TC_01_Login_Empty_Data() {
-        log.info("Login - Step 01: Input to Email without data");
+        log.info("Login - Step 01: Click to Login link at Home Page");
+        loginPage = homePage.clickToLoginLink();
+
+        log.info("Login - Step 02: Input to Email without data");
         loginPage.inputToEmailTextbox("");
 
-        log.info("Login - Step 02: Input to Password without data");
+        log.info("Login - Step 03: Input to Password without data");
         loginPage.inputToPasswordTextbox("");
 
-        log.info("Login - Step 03: Click to Login button");
+        log.info("Login - Step 04: Click to Login button");
         loginPage.clickToLoginButton();
 
-        log.info("Login - Step 04: Verify empty data login message is correctly displayed");
+        log.info("Login - Step 05: Verify empty data login message is correctly displayed");
         verifyEquals(loginPage.getEmptyInvalidDataLoginMessage(), "Please enter your email");
 
-        log.info("Login - Step 05: Refresh login page");
+        log.info("Login - Step 06: Refresh login page");
         loginPage.refreshCurrentPage(driver);
     }
 
@@ -142,8 +96,8 @@ public class Login extends AbstractTest {
 
     @Test
     public void TC_04_Registered_Login_Empty_Password() {
-        log.info("Login - Step 01: Input to Email with value: " + email);
-        loginPage.inputToEmailTextbox(email);
+        log.info("Login - Step 01: Input to Email with value: " + RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
 
         log.info("Login - Step 02: Leave empty password");
         loginPage.inputToPasswordTextbox("");
@@ -160,8 +114,8 @@ public class Login extends AbstractTest {
 
     @Test
     public void TC_05_Registered_Login_Incorrect_Password() {
-        log.info("Login - Step 01: Input to Email with value: " + email);
-        loginPage.inputToEmailTextbox(email);
+        log.info("Login - Step 01: Input to Email with value: " + RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
 
         log.info("Login - Step 02: Input to password with value: " + userData.getConfirmPasswordInvalid());
         loginPage.inputToPasswordTextbox(userData.getConfirmPasswordInvalid());
@@ -178,11 +132,11 @@ public class Login extends AbstractTest {
 
     @Test
     public void TC_06_Registered_Login_Correct_Password() {
-        log.info("Login - Step 01: Input to Email with value: " + email);
-        loginPage.inputToEmailTextbox(email);
+        log.info("Login - Step 01: Input to Email with value: " + RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
 
-        log.info("Login - Step 02: Input to Password with value: " + password);
-        loginPage.inputToPasswordTextbox(password);
+        log.info("Login - Step 02: Input to Password with value: " + RegisterToSystem.PASSWORD);
+        loginPage.inputToPasswordTextbox(RegisterToSystem.PASSWORD);
 
         log.info("Login - Step 03: Click to Login button");
         homePage = loginPage.clickToLoginButton();

@@ -15,4 +15,5 @@ public class AbstractPageUI {
     public static final String HOME_PAGE_LINK = "//div[@class='header-logo']//a";
 
     public static final String DYNAMIC_PRODUCT_DETAIL_LINK = "//h2[@class='product-title']/a[text()='%s']";
+    public static final String DYNAMIC_LINK_TEXT_AT_FOOTER = "//div[@class='footer-upper']//a[text()='%s']";
 }
