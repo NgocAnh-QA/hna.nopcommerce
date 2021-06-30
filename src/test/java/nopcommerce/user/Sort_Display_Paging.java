@@ -41,7 +41,7 @@ public class Sort_Display_Paging extends AbstractTest {
         productPage = homePage.openSubMenu(driver,"Computers", "Notebooks");
     }
 
-    @Test
+
     public void TC_01_Sort_Name_A_Z() {
         log.info("Sort_Display_Paging - Sort name AZ - Step 01: Select sort by: Name: A-Z");
         productPage.selectSortByNameAToZ();
@@ -53,7 +53,7 @@ public class Sort_Display_Paging extends AbstractTest {
         productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
     }
 
-    @Test
+
     public void TC_02_Sort_Name_Z_A() {
         log.info("Sort_Display_Paging - Sort name ZA - Step 01: Select sort by: Name: Z-A");
         productPage.selectSortByNameZToA();
@@ -65,7 +65,7 @@ public class Sort_Display_Paging extends AbstractTest {
         productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
     }
 
-    @Test
+
     public void TC_03_Sort_Price_Low_To_High() {
         log.info("Sort_Display_Paging - Sort price low to high - Step 01: Select sort by: Price: Low to High");
         productPage.selectSortByPriceLowToHigh();
@@ -77,7 +77,7 @@ public class Sort_Display_Paging extends AbstractTest {
         productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
     }
 
-    @Test
+
     public void TC_04_Sort_Price_High_To_Low() {
         log.info("Sort_Display_Paging - Sort price high to low - Step 01: Select sort by: Price: High to Low");
         productPage.selectSortByPriceHighToLow();
@@ -89,6 +89,57 @@ public class Sort_Display_Paging extends AbstractTest {
         productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
     }
 
+
+    @Test
+    public void TC_05_Display_3_Items() {
+        log.info("Sort_Display_Paging - Display 3 items - Step 01: Select display 3 items");
+        productPage.selectDisplayPerpage("3");
+
+        log.info("Sort_Display_Paging - Display 3 items - Step 02: Verify displays maximum 3 items at per page");
+        verifyTrue(productPage.areProductsDisplayedPerPage(3));
+
+        log.info("Sort_Display_Paging - Display 3 items - Step 03: Verify next icon displays");
+        verifyTrue(productPage.isNextIconDisplayed());
+
+        log.info("Sort_Display_Paging - Display 3 items - Step 04: Move to page 2");
+        productPage.clickMoveToPage("2");
+
+        log.info("Sort_Display_Paging - Display 3 items - Step 05: Verify previous icon displays");
+        verifyTrue(productPage.isPreviousIconDisplay());
+
+        log.info("Sort_Display_Paging - Display 3 items - Step 06: Refresh page and open again");
+        productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
+    }
+
+    @Test
+    public void TC_06_Display_6_Items() {
+        log.info("Sort_Display_Paging - Display 6 items - Step 01: Select display 6 items");
+        productPage.selectDisplayPerpage("6");
+
+        log.info("Sort_Display_Paging - Display 6 items - Step 02: Verify displays maximum 6 items at per page");
+        verifyTrue(productPage.areProductsDisplayedPerPage(6));
+
+        log.info("Sort_Display_Paging - Display 6 items - Step 03: Verify paging undisplays");
+        verifyTrue(productPage.isPagingUnDisplayed());
+
+        log.info("Sort_Display_Paging - Display 6 items - Step 04: Refresh page and open again");
+        productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
+    }
+
+    @Test
+    public void TC_07_Display_9_Items() {
+        log.info("Sort_Display_Paging - Display 9 items - Step 01: Select display 9 items");
+        productPage.selectDisplayPerpage("9");
+
+        log.info("Sort_Display_Paging - Display 9 items - Step 02: Verify displays maximum 9 items at per page");
+        verifyTrue(productPage.areProductsDisplayedPerPage(9));
+
+        log.info("Sort_Display_Paging - Display 9 items - Step 03: Verify paging undisplays");
+        verifyTrue(productPage.isPagingUnDisplayed());
+
+        log.info("Sort_Display_Paging - Display 9 items - Step 04: Refresh page and open again");
+        productPage = productPage.openSubMenu(driver,"Computers", "Notebooks");
+    }
 
     @AfterClass
     public void afterClass() {
