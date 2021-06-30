@@ -46,4 +46,8 @@ public class PageGeneratorManager {
         return new SearchPO(driver);
     }
 
+    public static ProductPO getProductPage(WebDriver driver) {
+        return new ProductPO(driver);
+    }
+
 }

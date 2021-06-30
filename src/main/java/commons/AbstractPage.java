@@ -5,9 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import pageObjects.User.CustomerInfoPO;
-import pageObjects.User.ProductDetailPO;
-import pageObjects.User.RegisterPO;
+import pageObjects.User.*;
 import pageUIs.User.AbstractPageUI;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pageObjects.User.HomePagePO;
 
 public class AbstractPage {
     WebDriverWait explicitWait;
@@ -1036,160 +1033,62 @@ public class AbstractPage {
 
 
     public boolean isDataStringSortedAscending(WebDriver driver, String locator) {
-        // Khai bao 1 Array LIst
         ArrayList<String> arrayList = new ArrayList<String>();
-
-        // Tim tat ca Elements matching voi dieu kien (Name/Price/Type)
         List<WebElement> elementList = driver.findElements(By.xpath(locator));
-
-        // Lay text cua tung Element add vao Array List
         for (WebElement element : elementList) {
             arrayList.add(element.getText());
         }
-
-        System.out.println("----- Du lieu tren UI ----------");
-        for (String name : arrayList) {
-            System.out.println(name);
-        }
-
-        // Copy qua 1 array list moi de sort trong CODE
         ArrayList<String> sortedList = new ArrayList<>();
         for (String child : arrayList) {
             sortedList.add(child);
         }
-
-        // Thuc hien SORT ASC
         Collections.sort(sortedList);
-
-        System.out.println("-------- Du lieu da sort asc trong code ---------");
-        for (String name : sortedList) {
-            System.out.println(name);
-        }
-
-        // verify 2 array bang nhau - neu du lieu sort tren UI khong chinh xac thi tra
-        // ve false
         return sortedList.equals(arrayList);
 
     }
 
     public boolean isDataStringSortedDescending(WebDriver driver, String locator) {
-        // Khai bao 1 Array LIst
         ArrayList<String> arrayList = new ArrayList<String>();
-
-        // Tim tat ca Elements matching voi dieu kien (Name/Price/Type)
         List<WebElement> elementList = driver.findElements(By.xpath(locator));
-
-        // Lay text cua tung Element add vao Array List
         for (WebElement element : elementList) {
             arrayList.add(element.getText());
         }
-
-        System.out.println("----- Du lieu tren UI ----------");
-        for (String name : arrayList) {
-            System.out.println(name);
-        }
-
-        // Copy qua 1 array list moi de sort trong CODE
         ArrayList<String> sortedList = new ArrayList<>();
         for (String child : arrayList) {
             sortedList.add(child);
         }
-
-        // Thuc hien SORT ASC
         Collections.sort(sortedList);
-
-        System.out.println("-------- Du lieu da sort asc trong code ---------");
-        for (String name : sortedList) {
-            System.out.println(name);
-        }
-
-        // Reverse data de sort desc
         Collections.reverse(sortedList);
-
-        System.out.println("-------- Du lieu da sort desc trong code --------- ");
-        for (String name : sortedList) {
-            System.out.println(name);
-        }
-
-        // verify 2 array bang nhau - neu du lieu sort tren UI khong chinh xac thi tra
-        // ve false
         return sortedList.equals(arrayList);
 
     }
 
     public boolean isDataFloatSortedAscending(WebDriver driver, String locator) {
-        // Khai bao 1 Array LIst
         ArrayList<Float> arrayList = new ArrayList<Float>();
-
-        // Tim tat ca Elements matching voi dieu kien (Name/Price/Type)
         List<WebElement> elementList = driver.findElements(By.xpath(locator));
-
-        // Lay text cua tung Element add vao Array List
         for (WebElement element : elementList) {
-            arrayList.add(Float.parseFloat(element.getText().replace("$", "").trim()));
+            arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
         }
-        System.out.println("----- Du lieu tren UI ----------");
-        for (Float name : arrayList) {
-            System.out.println(name);
-        }
-        // Copy qua 1 array list moi de sort trong CODE
         ArrayList<Float> sortedList = new ArrayList<Float>();
         for (Float child : arrayList) {
             sortedList.add(child);
         }
-
-        // Thuc hien SORT ASC
         Collections.sort(sortedList);
-
-        System.out.println("-------- Du lieu da sort asc trong code ---------");
-        for (Float name : sortedList) {
-            System.out.println(name);
-        }
-
-        // verify 2 array bang nhau - neu du lieu sort tren UI khong chinh xac thi tra
-        // ve false
         return sortedList.equals(arrayList);
     }
 
     public boolean isDataFloatSortedDescending(WebDriver driver, String locator) {
-        // Khai bao 1 Array LIst
         ArrayList<Float> arrayList = new ArrayList<Float>();
-
-        // Tim tat ca Elements matching voi dieu kien (Name/Price/Type)
         List<WebElement> elementList = driver.findElements(By.xpath(locator));
-
-        // Lay text cua tung Element add vao Array List
         for (WebElement element : elementList) {
-            arrayList.add(Float.parseFloat(element.getText().replace("$", "").trim()));
+            arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
         }
-        System.out.println("----- Du lieu tren UI ----------");
-        for (Float name : arrayList) {
-            System.out.println(name);
-        }
-        // Copy qua 1 array list moi de sort trong CODE
         ArrayList<Float> sortedList = new ArrayList<Float>();
         for (Float child : arrayList) {
             sortedList.add(child);
         }
-
-        // Thuc hien SORT ASC
         Collections.sort(sortedList);
-
-        System.out.println("-------- Du lieu da sort asc trong code ---------");
-        for (Float name : sortedList) {
-            System.out.println(name);
-        }
-
-        // Reverse data de sort desc
         Collections.reverse(sortedList);
-
-        System.out.println("-------- Du lieu da sort desc trong code --------- ");
-        for (Float name : sortedList) {
-            System.out.println(name);
-        }
-
-        // verify 2 array bang nhau - neu du lieu sort tren UI khong chinh xac thi tra
-        // ve false
         return sortedList.equals(arrayList);
     }
 
@@ -1199,22 +1098,11 @@ public class AbstractPage {
         for (WebElement element : elementList) {
             arrayList.add(convertStringToDate(element.getText()));
         }
-
-        System.out.println("--------- Du lieu tren UI ------------");
-        for (Date name : arrayList) {
-            System.out.println(name);
-        }
-
         ArrayList<Date> sortedList = new ArrayList<Date>();
         for (Date child : arrayList) {
             sortedList.add(child);
         }
-
         Collections.sort(sortedList);
-        System.out.println("------ Du lieu da sort ASC trong code ----------");
-        for (Date name : sortedList) {
-            System.out.println(name);
-        }
         return sortedList.equals(arrayList);
     }
 
@@ -1290,8 +1178,8 @@ public class AbstractPage {
     }
 
     public AbstractPage openLinkByPageNameAtMyAccount(WebDriver driver, String pageName) {
-        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_NAV, pageName);
-        clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_NAV, pageName);
+        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_ASIDE, pageName);
+        clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_ASIDE, pageName);
         switch (pageName) {
             case "Change password":
                 return PageGeneratorManager.getChangePasswordPage(driver);
@@ -1330,6 +1218,13 @@ public class AbstractPage {
             default:
                 return PageGeneratorManager.getHomePage(driver);
         }
+    }
+
+    public ProductPO openSubMenu(WebDriver driver, String menu, String subMenu){
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
+        hoverMouseToElement(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
+        clickToElement(driver, AbstractPageUI.DYNAMIC_SUBMENU_NAVIGATION, menu, subMenu);
+        return PageGeneratorManager.getProductPage(driver);
     }
 
 }
