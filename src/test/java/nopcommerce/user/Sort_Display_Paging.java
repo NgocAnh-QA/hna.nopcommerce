@@ -143,6 +143,7 @@ public class Sort_Display_Paging extends AbstractTest {
 
     @AfterClass
     public void afterClass() {
+        closeBrowserAndDriver();
     }
 
 
