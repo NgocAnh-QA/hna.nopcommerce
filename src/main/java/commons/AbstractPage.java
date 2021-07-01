@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pageUIs.User.CartPageUI;
 
 public class AbstractPage {
     WebDriverWait explicitWait;
@@ -410,6 +411,16 @@ public class AbstractPage {
         int elementSize = 0;
         try {
             elementSize = getElements(driver, locator).size();
+        } catch (Exception e) {
+            log.error("Cannot get elements size: " + e.getMessage());
+        }
+        return elementSize;
+    }
+
+    public int countElementSize(WebDriver driver, String locator, String... values) {
+        int elementSize = 0;
+        try {
+            elementSize = getElements(driver, castToParameter(locator, values)).size();
         } catch (Exception e) {
             log.error("Cannot get elements size: " + e.getMessage());
         }
@@ -1215,6 +1226,10 @@ public class AbstractPage {
         switch (linkText) {
             case "Search":
                 return PageGeneratorManager.getSearchPage(driver);
+            case "Compare products list":
+                return PageGeneratorManager.getCompareProductPage(driver);
+            case "Recently viewed products":
+                return PageGeneratorManager.getRecentlyViewedProductsPage(driver);
             default:
                 return PageGeneratorManager.getHomePage(driver);
         }
@@ -1226,5 +1241,28 @@ public class AbstractPage {
         clickToElement(driver, AbstractPageUI.DYNAMIC_SUBMENU_NAVIGATION, menu, subMenu);
         return PageGeneratorManager.getProductPage(driver);
     }
+
+    public WishlistPO clickToWishlistLink(WebDriver driver) {
+        waitForElementClickable(driver,AbstractPageUI.WISHLIST_LINK);
+        clickToElement(driver,AbstractPageUI.WISHLIST_LINK);
+        return PageGeneratorManager.getWishlistPage(driver);
+    }
+
+    public String getQualityProductsInWishlistIcon(WebDriver driver) {
+        waitForElementVisible(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON);
+        return getElementText(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON).replace("(","").replace(")", "");
+    }
+
+    public void clickOnAddToCompareByNameOfProduct(WebDriver driver, String productName) {
+        waitForElementClickable(driver, AbstractPageUI.DYNAMIC_COMPARE_PRODUCT_NAME, productName);
+        clickToElement(driver, AbstractPageUI.DYNAMIC_COMPARE_PRODUCT_NAME, productName);
+        sleepInSecond(2);
+    }
+
+    public Object getCompareSuccessMessage(WebDriver driver) {
+        waitForElementVisible(driver, AbstractPageUI.ADD_COMPARE_SUCCESS_MESSAGE);
+        return getElementText(driver, AbstractPageUI.ADD_COMPARE_SUCCESS_MESSAGE);
+    }
+
 
 }

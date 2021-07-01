@@ -50,4 +50,19 @@ public class PageGeneratorManager {
         return new ProductPO(driver);
     }
 
+    public static WishlistPO getWishlistPage(WebDriver driver) {
+        return new WishlistPO(driver);
+    }
+
+    public static CartPO getCartPage(WebDriver driver) {
+        return new CartPO(driver);
+    }
+
+    public static CompareProductPO getCompareProductPage(WebDriver driver) {
+        return new CompareProductPO(driver);
+    }
+
+    public static RecentlyViewedProductsPO getRecentlyViewedProductsPage(WebDriver driver) {
+        return new RecentlyViewedProductsPO(driver);
+    }
 }

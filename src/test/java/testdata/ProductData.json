@@ -4,6 +4,28 @@
     "incorrect_name": "abc test",
     "relative_name": "Lenovo",
     "search_keyword": "Apple MacBook Pro"
+  },
+
+  "product_02": {
+    "name": "Apple MacBook Pro 13-inch",
+    "price": "1800.00",
+    "quantity": "2",
+    "processor": "",
+    "ram": "",
+    "hdd": "",
+    "os": "",
+    "software": ""
+  },
+
+  "product_03": {
+    "name": "Build your own computer",
+    "price": "1200.00",
+    "quantity": "1",
+    "processor": "2.5 GHz Intel Pentium Dual-Core E2200 [+$15.00]",
+    "ram": "8GB [+$60.00]",
+    "hdd": "400 GB [+$100.00]",
+    "os": "Vista Premium [+$60.00]",
+    "software": "Acrobat Reader [+$10.00]"
   }
 }
 

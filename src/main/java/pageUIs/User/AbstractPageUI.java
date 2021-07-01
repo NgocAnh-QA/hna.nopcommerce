@@ -19,4 +19,12 @@ public class AbstractPageUI {
 
     public static final String DYNAMIC_MENU_NAVIGATION = "//ul[@class='top-menu notmobile']//a[text()='%s ']";
     public static final String DYNAMIC_SUBMENU_NAVIGATION = "//ul[@class='top-menu notmobile']//a[text()='%s ']/parent::li//li/a[text()='%s ']";
+    public static final String WISHLIST_LINK = "//a[@class='ico-wishlist']";
+
+    public static final String QUALITY_IN_WISHLIST_ICON = "//a[@class='ico-wishlist']//span[@class='wishlist-qty']";
+
+    public static final String DYNAMIC_COMPARE_PRODUCT_NAME = "//a[text()='%s']/parent::h2/following-sibling::div[@class='add-info']//button[@title='Add to compare list']";
+
+    public static final String ADD_COMPARE_SUCCESS_MESSAGE = "//p[@class='content']";
+    public static final String CLOSE_ADD_COMPARE_SUCCESS_BUTTON = "//div[@class='bar-notification success']/span";
 }

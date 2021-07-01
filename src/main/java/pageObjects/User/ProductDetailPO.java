@@ -18,4 +18,23 @@ public class ProductDetailPO extends AbstractPage {
         return PageGeneratorManager.getProductReviewPage(driver);
     }
 
+    public void clickToAddToWishlist() {
+        waitForElementVisible(driver, ProductDetailPageUI.ADD_TO_WISHLIST_BUTTON);
+        clickToElement(driver, ProductDetailPageUI.ADD_TO_WISHLIST_BUTTON);
+    }
+
+    public String getAddToWishlistSuccessMessage() {
+        waitForElementVisible(driver, ProductDetailPageUI.ADD_WISHLIST_SUCCESS_MESSAGE);
+        return getElementText(driver, ProductDetailPageUI.ADD_WISHLIST_SUCCESS_MESSAGE);
+    }
+
+    public void clickToCloseWishListNotiButton() {
+        waitForElementVisible(driver, ProductDetailPageUI.CLOSE_SUCCESS_IN_BAR_BUTTON);
+        clickToElement(driver, ProductDetailPageUI.CLOSE_SUCCESS_IN_BAR_BUTTON);
+    }
+
+    public ProductPO backToProductsPage() {
+        backToPage(driver);
+        return PageGeneratorManager.getProductPage(driver);
+    }
 }
