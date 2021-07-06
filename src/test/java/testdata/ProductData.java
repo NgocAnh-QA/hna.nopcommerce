@@ -142,8 +142,14 @@ public class ProductData {
         @JsonProperty("os")
         private String os;
 
-        @JsonProperty("software")
-        private String software;
+        @JsonProperty("software_reader")
+        private String software_reader;
+
+        @JsonProperty("software_ms_office")
+        private String software_ms_office;
+
+        @JsonProperty("software_commander")
+        private String software_commander;
     }
 
     public String getProduct_03_name() {
@@ -174,8 +180,89 @@ public class ProductData {
         return product_03.os;
     }
 
-    public String getProduct_03_software() {
-        return product_03.software;
+    public String getProduct_03_software_ms_office() {
+        return product_03.software_ms_office;
+    }
+    public String getProduct_03_software_commander() {
+        return product_03.software_commander;
+    }
+    public String getProduct_03_software_reader() {
+        return product_03.software_reader;
+    }
+
+    /*=============================================*/
+
+    @JsonProperty("product_04")
+    private Product_04 product_04;
+
+    static class Product_04 {
+        @JsonProperty("name")
+        private String name;
+
+        @JsonProperty("price")
+        private String price;
+
+        @JsonProperty("quantity")
+        private String quantity;
+
+        @JsonProperty("processor")
+        private String processor;
+
+        @JsonProperty("ram")
+        private String ram;
+
+        @JsonProperty("hdd")
+        private String hdd;
+
+        @JsonProperty("os")
+        private String os;
+
+        @JsonProperty("software_reader")
+        private String software_reader;
+
+        @JsonProperty("software_ms_office")
+        private String software_ms_office;
+
+        @JsonProperty("software_commander")
+        private String software_commander;
+    }
+
+    public String getProduct_04_name() {
+        return product_04.name;
+    }
+
+    public String getProduct_04_price() {
+        return product_04.price;
+    }
+
+    public String getProduct_04_quantity() {
+        return product_04.quantity;
+    }
+
+    public String getProduct_04_processor() {
+        return product_04.processor;
+    }
+
+    public String getProduct_04_ram() {
+        return product_04.ram;
+    }
+
+    public String getProduct_04_hdd() {
+        return product_04.hdd;
+    }
+
+    public String getProduct_04_os() {
+        return product_04.os;
+    }
+
+    public String getProduct_04_software_ms_office() {
+        return product_04.software_ms_office;
+    }
+    public String getProduct_04_software_commander() {
+        return product_04.software_commander;
+    }
+    public String getProduct_04_software_reader() {
+        return product_04.software_reader;
     }
 
 }

@@ -15,7 +15,7 @@
             <class name="nopcommerce.user.RegisterToSystem"/>
 <!--            <class name="nopcommerce.user.Login"/>-->
 <!--            <class name="nopcommerce.user.Search"/>-->
-            <class name="nopcommerce.user.Wishlist_Compare_RecentView"/>
+            <class name="nopcommerce.user.Order"/>
         </classes>
     </test>
 

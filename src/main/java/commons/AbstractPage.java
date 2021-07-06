@@ -806,6 +806,11 @@ public class AbstractPage {
         return jsExecutor.executeScript("arguments[0].scrollIntoView(true)", getElement(driver, castToParameter(locator, values)));
     }
 
+    public Object scrollToElementByJS(WebDriver driver, String locator) {
+        jsExecutor = (JavascriptExecutor) driver;
+        return jsExecutor.executeScript("arguments[0].scrollIntoView(true)", getElement(driver, locator));
+    }
+
     public Object scrollToBottomPageByJS(WebDriver driver) {
         jsExecutor = (JavascriptExecutor) driver;
         return jsExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)");
@@ -930,6 +935,7 @@ public class AbstractPage {
         }
         return listItems;
     }
+
     public boolean isResultEqualsKeyword(WebDriver driver, String keyword, String resultLocator) {
         int check = 0;
         List<String> listItems = getElementsText(driver, resultLocator);
@@ -1130,6 +1136,15 @@ public class AbstractPage {
         return date;
     }
 
+    public void clickToCheckboxByID(WebDriver driver, String checkboxID) {
+        try {
+            waitForElementClickable(driver, AbstractPageUI.DYNAMIC_CHECKBOX_BY_ID, checkboxID);
+            clickToElement(driver, AbstractPageUI.DYNAMIC_CHECKBOX_BY_ID, checkboxID);
+        } catch (Exception e) {
+            log.error("Can not click to checkbox by ID: " + e.getMessage());
+        }
+    }
+
     public void clickToRadioButtonByID(WebDriver driver, String radioButtonID) {
         try {
             waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
@@ -1169,6 +1184,18 @@ public class AbstractPage {
         waitForElementClickable(driver, AbstractPageUI.MY_ACCOUNT_LINK);
         clickToElement(driver, AbstractPageUI.MY_ACCOUNT_LINK);
         return PageGeneratorManager.getCustomerInfoPage(driver);
+    }
+
+    public CartPO clickToShoppingCartLink(WebDriver driver) {
+        waitForElementClickable(driver, AbstractPageUI.SHOPPING_CART_LINK);
+        clickToElement(driver, AbstractPageUI.SHOPPING_CART_LINK);
+        return PageGeneratorManager.getCartPage(driver);
+    }
+
+    public void hoverOnShoppingCartIconInHeader(WebDriver driver) {
+        scrollToElementByJS(driver, AbstractPageUI.SHOPPING_CART_LINK);
+        waitForElementVisible(driver, AbstractPageUI.SHOPPING_CART_LINK);
+        hoverMouseToElement(driver, AbstractPageUI.SHOPPING_CART_LINK);
     }
 
     public String getAttributeTextboxByID(WebDriver driver, String textboxID, String attributeName) {
@@ -1235,7 +1262,7 @@ public class AbstractPage {
         }
     }
 
-    public ProductPO openSubMenu(WebDriver driver, String menu, String subMenu){
+    public ProductPO openSubMenu(WebDriver driver, String menu, String subMenu) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
         hoverMouseToElement(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
         clickToElement(driver, AbstractPageUI.DYNAMIC_SUBMENU_NAVIGATION, menu, subMenu);
@@ -1243,14 +1270,14 @@ public class AbstractPage {
     }
 
     public WishlistPO clickToWishlistLink(WebDriver driver) {
-        waitForElementClickable(driver,AbstractPageUI.WISHLIST_LINK);
-        clickToElement(driver,AbstractPageUI.WISHLIST_LINK);
+        waitForElementClickable(driver, AbstractPageUI.WISHLIST_LINK);
+        clickToElement(driver, AbstractPageUI.WISHLIST_LINK);
         return PageGeneratorManager.getWishlistPage(driver);
     }
 
     public String getQualityProductsInWishlistIcon(WebDriver driver) {
         waitForElementVisible(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON);
-        return getElementText(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON).replace("(","").replace(")", "");
+        return getElementText(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON).replace("(", "").replace(")", "");
     }
 
     public void clickOnAddToCompareByNameOfProduct(WebDriver driver, String productName) {
@@ -1265,4 +1292,38 @@ public class AbstractPage {
     }
 
 
+    public String getNumberOfItemsInCart(WebDriver driver) {
+        waitForElementVisible(driver, AbstractPageUI.NUMBER_ITEMS_IN_CART_TEXT);
+        return getElementText(driver, AbstractPageUI.NUMBER_ITEMS_IN_CART_TEXT).trim();
+
+    }
+
+    public boolean isProductExistedInCartIconInHeader(WebDriver driver, String productName, String processor, String ram, String hdd, String os, String software_ms_office, String software_reader, String software_commander) {
+        boolean check = true;
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_PRODUCT_NAME_IN_CART_ICON_IN_HEADER, productName);
+        ArrayList<String> listOption = new ArrayList<>();
+        listOption.add(processor);
+        listOption.add(ram);
+        listOption.add(hdd);
+        listOption.add(os);
+        listOption.add(software_ms_office);
+        listOption.add(software_reader);
+        listOption.add(software_commander);
+        String infoProduct = getElementText(driver, AbstractPageUI.PRODUCT_INFORMATION_IN_CART_ICON_IN_HEADER);
+        for (String info : listOption) {
+            if (infoProduct.contains(info)){
+                check = true;
+            }else {
+                check = false;
+            }
+        }
+        return check;
+
+    }
+
+    public String getSubTotalInCart(WebDriver driver) {
+        waitForElementVisible(driver, AbstractPageUI.SUB_TOTAL_IN_CART_TEXT);
+        return getElementText(driver, AbstractPageUI.SUB_TOTAL_IN_CART_TEXT).replace("$", "").replace(",", "");
+
+    }
 }
