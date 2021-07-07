@@ -33,7 +33,7 @@ public class CartPO extends AbstractPage {
         return PageGeneratorManager.getProductDetailPage(driver);
     }
 
-    public boolean isProductExistedInCartPage(String productName, String processor, String ram, String hdd, String os, String...software) {
+    public boolean isProductExistedInCartPage(String productName, String processor, String ram, String hdd, String os, String... software) {
         boolean check = true;
         waitForElementVisible(driver, CartPageUI.DYNAMIC_PRODUCT_NAME_IN_CART_PAGE, productName);
         ArrayList<String> listOption = new ArrayList<>();
@@ -41,15 +41,15 @@ public class CartPO extends AbstractPage {
         listOption.add(ram);
         listOption.add(hdd);
         listOption.add(os);
-        for (int i = 0; i < software.length; i++){
+        for (int i = 0; i < software.length; i++) {
             listOption.add(software[i]);
             System.out.println(software[i]);
         }
-        String infoProduct = getElementText(driver, CartPageUI.PRODUCT_INFORMATION_IN_CART_PAGE,productName);
+        String infoProduct = getElementText(driver, CartPageUI.PRODUCT_INFORMATION_IN_CART_PAGE, productName);
         for (String info : listOption) {
-            if (infoProduct.contains(info)){
+            if (infoProduct.contains(info)) {
                 check = true;
-            }else {
+            } else {
                 check = false;
             }
         }
@@ -60,5 +60,42 @@ public class CartPO extends AbstractPage {
     public String getTotalPriceInCart() {
         waitForElementVisible(driver, CartPageUI.TOTAL_ORDER);
         return getElementText(driver, CartPageUI.TOTAL_ORDER).replace("$", "").replace(",", "");
+    }
+
+    public boolean isCartEmptyMessageDisplayed() {
+        waitForElementVisible(driver, CartPageUI.CART_EMPTY_MESSAGE);
+        return isElementDisplayed(driver, CartPageUI.CART_EMPTY_MESSAGE);
+    }
+
+    public void clickToRemoveProductFromCart(String productName) {
+        waitForElementClickable(driver, CartPageUI.DYNAMIC_REMOVE_BY_PRODUCT_NAME_IN_CART_PAGE, productName);
+        clickToElement(driver, CartPageUI.DYNAMIC_REMOVE_BY_PRODUCT_NAME_IN_CART_PAGE, productName);
+    }
+
+    public void inputToQuantity(String quantity) {
+        waitForElementVisible(driver, CartPageUI.QUANTITY_TEXT_BOX);
+        sendKeyToElement(driver, CartPageUI.QUANTITY_TEXT_BOX,quantity);
+    }
+
+    public void clickToUpdateShoppingCart() {
+        waitForElementVisible(driver, CartPageUI.UPDATE_SHOPPING_CART_BUTTON);
+        clickToElement(driver, CartPageUI.UPDATE_SHOPPING_CART_BUTTON);
+
+    }
+
+    public void checktoTermOfService() {
+        waitForElementVisible(driver, CartPageUI.TERM_OF_SERVICE_CHECKBOX);
+        clickToElement(driver, CartPageUI.TERM_OF_SERVICE_CHECKBOX);
+    }
+
+    public CheckoutPO clickToCheckoutButton() {
+        waitForElementVisible(driver, CartPageUI.CHECKOUT_BUTTON);
+        clickToElement(driver, CartPageUI.CHECKOUT_BUTTON);
+        return PageGeneratorManager.getCheckoutPage(driver);
+    }
+
+    public void selectToGiftWrappingDropdown(String giftWrappingValue) {
+        waitForElementVisible(driver, CartPageUI.GIFT_WRAPPING_DROPDOWN);
+        selectItemByVisible(driver, giftWrappingValue, CartPageUI.GIFT_WRAPPING_DROPDOWN);
     }
 }

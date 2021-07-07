@@ -270,21 +270,21 @@ public class AbstractPage {
         }
     }
 
-    public void sendKeyToElement(WebDriver driver, String locator, String value) {
+    public void sendKeyToElement(WebDriver driver, String locator, String textValue) {
         try {
             element = getElement(driver, locator);
             element.clear();
-            element.sendKeys(value);
+            element.sendKeys(textValue);
         } catch (Exception e) {
             log.error("Cannot senkey to element: " + e.getMessage());
         }
     }
 
-    public void sendKeyToElement(WebDriver driver, String value, String locator, String... values) {
+    public void sendKeyToElement(WebDriver driver, String textValue, String locator, String... values) {
         try {
             element = getElement(driver, castToParameter(locator, values));
             element.clear();
-            element.sendKeys(value);
+            element.sendKeys(textValue);
         } catch (Exception e) {
             log.error("Cannot senkey to element: " + e.getMessage());
         }
@@ -1257,6 +1257,8 @@ public class AbstractPage {
                 return PageGeneratorManager.getCompareProductPage(driver);
             case "Recently viewed products":
                 return PageGeneratorManager.getRecentlyViewedProductsPage(driver);
+            case "Shopping cart":
+                return PageGeneratorManager.getCartPage(driver);
             default:
                 return PageGeneratorManager.getHomePage(driver);
         }
@@ -1278,6 +1280,11 @@ public class AbstractPage {
     public String getQualityProductsInWishlistIcon(WebDriver driver) {
         waitForElementVisible(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON);
         return getElementText(driver, AbstractPageUI.QUALITY_IN_WISHLIST_ICON).replace("(", "").replace(")", "");
+    }
+
+    public String getQualityProductsInShoppingCartIcon(WebDriver driver) {
+        waitForElementVisible(driver, AbstractPageUI.QUALITY_IN_CART_ICON);
+        return getElementText(driver, AbstractPageUI.QUALITY_IN_CART_ICON).replace("(", "").replace(")", "");
     }
 
     public void clickOnAddToCompareByNameOfProduct(WebDriver driver, String productName) {
@@ -1324,6 +1331,14 @@ public class AbstractPage {
     public String getSubTotalInCart(WebDriver driver) {
         waitForElementVisible(driver, AbstractPageUI.SUB_TOTAL_IN_CART_TEXT);
         return getElementText(driver, AbstractPageUI.SUB_TOTAL_IN_CART_TEXT).replace("$", "").replace(",", "");
+    }
 
+    public String customTotalPrice(String quantity, String price){
+        float total = Float.parseFloat(quantity) * Float.parseFloat(price);
+        return String.valueOf(total).substring(0, String.valueOf(total).lastIndexOf("."));
+    }
+
+    public String customPrice(String price){
+        return price.replace("$", "").substring(0, price.lastIndexOf("."));
     }
 }

@@ -65,4 +65,12 @@ public class PageGeneratorManager {
     public static RecentlyViewedProductsPO getRecentlyViewedProductsPage(WebDriver driver) {
         return new RecentlyViewedProductsPO(driver);
     }
+
+    public static CheckoutPO getCheckoutPage(WebDriver driver) {
+        return new CheckoutPO(driver);
+    }
+
+    public static OrderInformationPO getOrderInformationPage(WebDriver driver) {
+        return new OrderInformationPO(driver);
+    }
 }

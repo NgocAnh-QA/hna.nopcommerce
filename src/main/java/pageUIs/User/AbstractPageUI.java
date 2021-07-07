@@ -19,11 +19,12 @@ public class AbstractPageUI {
     public static final String DYNAMIC_PRODUCT_DETAIL_LINK = "//h2[@class='product-title']/a[text()='%s']";
     public static final String DYNAMIC_LINK_TEXT_AT_FOOTER = "//div[@class='footer-upper']//a[text()='%s']";
 
-    public static final String DYNAMIC_MENU_NAVIGATION = "//ul[@class='top-menu notmobile']//a[text()='%s ']";
-    public static final String DYNAMIC_SUBMENU_NAVIGATION = "//ul[@class='top-menu notmobile']//a[text()='%s ']/parent::li//li/a[text()='%s ']";
+    public static final String DYNAMIC_MENU_NAVIGATION = "//ul[@class='top-menu notmobile']/li/a[contains(.,'%s')]";
+    public static final String DYNAMIC_SUBMENU_NAVIGATION = "//ul[@class='top-menu notmobile']/li/a[contains(.,'%s')]/parent::li//li/a[contains(.,'%s')]";
     public static final String WISHLIST_LINK = "//a[@class='ico-wishlist']";
 
     public static final String QUALITY_IN_WISHLIST_ICON = "//a[@class='ico-wishlist']//span[@class='wishlist-qty']";
+    public static final String QUALITY_IN_CART_ICON = "//a[@class='ico-cart']//span[@class='cart-qty']";
 
     public static final String DYNAMIC_COMPARE_PRODUCT_NAME = "//a[text()='%s']/parent::h2/following-sibling::div[@class='add-info']//button[@title='Add to compare list']";
 

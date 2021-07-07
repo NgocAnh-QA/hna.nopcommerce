@@ -16,7 +16,7 @@ public class ProductDetailPageUI {
     public static final String DYNAMIC_HDD_RADIO_BUTTON = "//label[text()='%s']/preceding-sibling::input";
     public static final String DYNAMIC_OS_RADIO_BUTTON = "//label[text()='%s']/preceding-sibling::input";
 
-    public static final String ADD_TO_CART_BUTTON = "//button[@id='add-to-cart-button-1']";
+    public static final String ADD_TO_CART_BUTTON = "//div[@class='overview']//button[text()='Add to cart']";
     public static final String ADD_TO_CART_SUCCESS_MESSAGE = "//div[@class='bar-notification success']//p";
     public static final String CLOSE_ADD_TO_CART_SUCCESS_MESSAGE_BUTTON = "//div[@class='bar-notification success']//span";
 

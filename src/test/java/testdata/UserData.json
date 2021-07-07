@@ -34,8 +34,8 @@
     "dateOfBirth": "26",
     "monthOfBirth": "May",
     "yearOfYear": "1992",
-    "country": "Viet Nam",
-    "state_province": "Other",
+    "country": "United States",
+    "state_province": "Alaska",
     "city": "Ho Chi Minh",
     "address1": "100 Nguyen Trai",
     "address2": "200 Tran Hung Dao",
@@ -44,6 +44,25 @@
     "fax_number": "987654321",
     "review_title": "Testing Review Product",
     "review_content": "This is text area to write review your product"
+  },
+  "user_02": {
+    "first_name": "Alpaca",
+    "last_name": "Animal",
+    "email": "alpaca",
+    "password": "admin123",
+    "confirm_password": "admin123",
+    "company": "Apple",
+    "dateOfBirth": "01",
+    "monthOfBirth": "August",
+    "yearOfYear": "1999",
+    "country": "Canada",
+    "state_province": "Ontario",
+    "city": "Ontario",
+    "address1": "100 Stress 01",
+    "address2": "200 Stress 01",
+    "zip_postal": "500000",
+    "phone_number": "0987654321",
+    "fax_number": "12345678"
   }
 }
 

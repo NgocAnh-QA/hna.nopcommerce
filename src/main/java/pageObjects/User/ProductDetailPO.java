@@ -51,7 +51,6 @@ public class ProductDetailPO extends AbstractPage {
         for (int i = 0; i < softwareName.length; i++){
             checkToCheckBox(driver, ProductDetailPageUI.DYNAMIC_SOFTWARE_CHECKBOX, softwareName[i]);
         }
-        sleepInSecond(3);
     }
 
     public void selectProcessorInDropdown(String processorName) {
@@ -82,6 +81,7 @@ public class ProductDetailPO extends AbstractPage {
     public void clickToAddToCartButton() {
         waitForElementVisible(driver, ProductDetailPageUI.ADD_TO_CART_BUTTON);
         clickToElement(driver, ProductDetailPageUI.ADD_TO_CART_BUTTON);
+        sleepInSecond(3);
     }
 
     public boolean isAddToCartSuccessMessageDisplayed() {
@@ -101,6 +101,7 @@ public class ProductDetailPO extends AbstractPage {
 
     public void clickToUpdateCartButton() {
         waitForElementVisible(driver, ProductDetailPageUI.UPDATE_BUTTON);
+        sleepInSecond(3);
         clickToElement(driver, ProductDetailPageUI.UPDATE_BUTTON);
     }
 

@@ -265,4 +265,32 @@ public class ProductData {
         return product_04.software_reader;
     }
 
+
+    /*=============================================*/
+
+    @JsonProperty("product_05")
+    private Product_05 product_05;
+
+    static class Product_05 {
+        @JsonProperty("name")
+        private String name;
+
+        @JsonProperty("price")
+        private String price;
+
+        @JsonProperty("quantity")
+        private String quantity;
+    }
+
+    public String getProduct_05_name() {
+        return product_05.name;
+    }
+
+    public String getProduct_05_price() {
+        return product_05.price;
+    }
+
+    public String getProduct_05_quantity() {
+        return product_05.quantity;
+    }
 }

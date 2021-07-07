@@ -308,4 +308,131 @@ public class UserData {
     }
 
     /*==========================*/
+
+    /*==================================================*/
+    @JsonProperty("user_02")
+    private User_02 user_02;
+
+    static class User_02 {
+        @JsonProperty("first_name")
+        private String firstName;
+
+        @JsonProperty("last_name")
+        private String lastName;
+
+        @JsonProperty("email")
+        private String emailAddress;
+
+        @JsonProperty("password")
+        private String password;
+
+        @JsonProperty("confirm_password")
+        private String confirmPassword;
+
+        @JsonProperty("company")
+        private String companyName;
+
+        @JsonProperty("dateOfBirth")
+        private String dateOfBirth;
+
+        @JsonProperty("monthOfBirth")
+        private String monthOfBirth;
+
+        @JsonProperty("yearOfYear")
+        private String yearOfYear;
+
+        @JsonProperty("country")
+        private String country;
+
+        @JsonProperty("state_province")
+        private String state_province;
+
+        @JsonProperty("city")
+        private String city;
+
+        @JsonProperty("address1")
+        private String address1;
+
+        @JsonProperty("address2")
+        private String address2;
+
+        @JsonProperty("zip_postal")
+        private String zip_postal;
+
+        @JsonProperty("phone_number")
+        private String phone_number;
+
+        @JsonProperty("fax_number")
+        private String fax_number;
+    }
+
+    public String getFirstName_02() {
+        return user_02.firstName;
+    }
+
+    public String getLastName_02() {
+        return user_02.lastName;
+    }
+
+    public String getEmailAddress_02() {
+        return user_02.emailAddress;
+    }
+
+    public String getCompanyName_02() {
+        return user_02.companyName;
+    }
+
+    public String getPassword_02() {
+        return user_02.password;
+    }
+
+    public String getConfirmPassword_02() {
+        return user_02.confirmPassword;
+    }
+
+    public String getDateOfBirth_02() {
+        return user_02.dateOfBirth;
+    }
+
+    public String getMonthOfBirth_02() {
+        return user_02.monthOfBirth;
+    }
+
+    public String getYearOfYear_02() {
+        return user_02.yearOfYear;
+    }
+
+    public String getCountry_02() {
+        return user_02.country;
+    }
+
+    public String getStateProvince_02() {
+        return user_02.state_province;
+    }
+
+    public String getCity_02() {
+        return user_02.city;
+    }
+
+    public String getAddress1_02() {
+        return user_02.address1;
+    }
+
+    public String getAddress2_02() {
+        return user_02.address2;
+    }
+
+    public String getZipPostal_02() {
+        return user_02.zip_postal;
+    }
+
+    public String getPhoneNumber_02() {
+        return user_02.phone_number;
+    }
+
+    public String getFaxNumber_02() {
+        return user_02.fax_number;
+    }
+
+    /*==========================*/
 }

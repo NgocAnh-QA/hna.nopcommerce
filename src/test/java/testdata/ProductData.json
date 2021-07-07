@@ -5,7 +5,6 @@
     "relative_name": "Lenovo",
     "search_keyword": "Apple MacBook Pro"
   },
-
   "product_02": {
     "name": "Apple MacBook Pro 13-inch",
     "price": "1800.00",
@@ -16,7 +15,6 @@
     "os": "",
     "software": ""
   },
-
   "product_03": {
     "name": "Build your own computer",
     "price": "1200.00",
@@ -29,7 +27,6 @@
     "software_ms_office": "Microsoft Office [+$50.00]",
     "software_commander": "Total Commander [+$5.00]"
   },
-
   "product_04": {
     "name": "Build your own computer",
     "price": "1200.00",
@@ -41,6 +38,11 @@
     "software_reader": "",
     "software_ms_office": "Microsoft Office [+$50.00]",
     "software_commander": ""
+  },
+  "product_05": {
+    "name": "Lenovo IdeaCentre 600 All-in-One PC",
+    "price": "500.00",
+    "quantity": "5"
   }
 }
 
