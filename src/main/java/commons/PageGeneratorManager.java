@@ -73,4 +73,8 @@ public class PageGeneratorManager {
     public static OrderInformationPO getOrderInformationPage(WebDriver driver) {
         return new OrderInformationPO(driver);
     }
+
+    public static OrderHistoryPO getOrderHistoryPage(WebDriver driver) {
+        return new OrderHistoryPO(driver);
+    }
 }

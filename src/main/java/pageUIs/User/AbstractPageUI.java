@@ -37,5 +37,7 @@ public class AbstractPageUI {
     public static final String DYNAMIC_PRODUCT_NAME_IN_CART_ICON_IN_HEADER = "//div[@class='flyout-cart active']//div[@class='product']/div[@class='name']/a[text()='%s']";
     public static final String PRODUCT_INFORMATION_IN_CART_ICON_IN_HEADER = "//div[@class='flyout-cart active']//div[@class='product']/div[@class='name']/a[text()='Build your own computer']/parent::div/following-sibling::div[@class='attributes']";
 
+    public static final String ORDER_NUMBER_TEXT = "//div[@class='page-body checkout-data']//div[@class='order-number']/strong";
+
 
 }

@@ -30,9 +30,12 @@ public class Order extends AbstractTest {
     private LoginPO loginPage;
     private CartPO cartPage;
     private CheckoutPO checkoutPage;
+    private CustomerInfoPO customerPage;
     private OrderInformationPO orderInformationPage;
+    private OrderHistoryPO orderHistoryPage;
 
     RoleAccess roleAccess;
+    String orderNumber = "";
 
     @Parameters({"browser"})
     @BeforeClass
@@ -290,11 +293,10 @@ public class Order extends AbstractTest {
         log.info("Order - Check out order payment by cheque - Step 01: Input to phone number on Shipping address with value: " + userData.getFaxNumber_02());
         checkoutPage.inputToTextboxByIdAtShippingAddress("FaxNumber", userData.getFaxNumber_02());
 
-
         log.info("Order - Check out order payment by cheque - Step 01: Click to Continue button on Shipping address");
         checkoutPage.clickToContinueButtonAtShippingAddress();
 
-        /* BILLING METHOD  */
+        /* SHIPPING METHOD  */
         log.info("Order - Check out order payment by cheque - Step 01: Click to Shipping method with value: Ground ($0.00)");
         checkoutPage.clickToRadioButtonAtShippingMethod("Ground ($0.00)");
 
@@ -342,48 +344,335 @@ public class Order extends AbstractTest {
         verifyEquals(checkoutPage.getShippingOfConfirmOrderByClass(), "Ground");
 
         log.info("Order - Check out order payment by cheque - Step 01: Verify Product(s) displays correctly with value " + productData.getProduct_02_name());
-        //  verifyEquals(checkoutPage.getProductNameAtConfirmOrder(), productData.getProduct_02_name());
+        verifyTrue(checkoutPage.isProductNameDisplayedAtRowNumber(productData.getProduct_02_name()));
 
         log.info("Order - Check out order payment by cheque - Step 01: Verify Price displays correctly with value " + productData.getProduct_02_price());
-        //    verifyEquals(checkoutPage.getProductNameAtConfirmOrder(), productData.getProduct_02_price());
+        verifyTrue(checkoutPage.isProductInfoDisplayedAtRowNumber("Price", productData.getProduct_02_price()));
 
         log.info("Order - Check out order payment by cheque - Step 01: Verify Quantity displays correctly with value " + productData.getProduct_02_quantity());
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Total displays correctly with value " + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Sub total displays correctly with value" + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
+        verifyTrue(checkoutPage.isProductInfoDisplayedAtRowNumber("Qty", productData.getProduct_02_quantity()));
 
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total displays correctly with value $3,600.00");
+        verifyTrue(checkoutPage.isProductInfoDisplayedAtRowNumber("Total", "3600.00"));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Sub total displays correctly with value: ");
+        verifyEquals(checkoutPage.getSubTotal(), "3600.00");
 
         log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly with value: 0");
+        verifyEquals(checkoutPage.getShippingCost(), "0.00");
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Tax displays correctly with value: 0");
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Total order displays correctly with value: " + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
+        verifyEquals(checkoutPage.getTax(), "0.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total order displays correctly with value: ");
+        verifyEquals(checkoutPage.getTotalOrder(), "3600.00");
+
         log.info("Order - Check out order payment by cheque - Step 01: Click to Confirm button on Confirm order");
+        checkoutPage.clickToConfirmButtonAtConfirmOrder();
 
         log.info("Order - Check out order payment by cheque - Step 01: Verify Thank you displays");
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Order successfully message displays");
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Order number displays");
+        verifyTrue(checkoutPage.isThankYouMessageDisplayed());
 
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order successfully message displays");
+        verifyTrue(checkoutPage.isOrderSuccessMessageDisplayed());
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order number displays");
+        verifyTrue(checkoutPage.isOrderNumberisplayed());
+        orderNumber = checkoutPage.getOrderNumberAtOrder(driver);
 
         log.info("Order - Check out order payment by cheque - Step 01: Click to My Account link in header");
+        customerPage = checkoutPage.clickToMyAccountLink(driver);
+
         log.info("Order - Check out order payment by cheque - Step 01: Open Orders Page in my account");
+        orderHistoryPage = (OrderHistoryPO) customerPage.openLinkByPageNameAtMyAccount(driver, "Orders");
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Order number");
+        verifyEquals(orderHistoryPage.getOrderNumber(), orderNumber);
+
+
         log.info("Order - Check out order payment by cheque - Step 01: Click to Detail tab");
+        orderInformationPage = orderHistoryPage.clickToDetailButton(orderNumber);
+
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Order number displays");
+        verifyEquals(orderInformationPage.getOrderNumber(), orderNumber);
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Order status displays with value Pending");
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Order Total displays with value: " + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
+        verifyEquals(orderInformationPage.getOrderStatus(), "Pending");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order Total displays with value: 3,600");
+        verifyEquals(orderInformationPage.getOrderTotal(), "3600.00");
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Billing address displays correctly");
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("name"), userData.getFirstName_01() + " " + userData.getLastName_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("email"), "Email: " + userData.getEmailAddress_01() + randomNumber + "@hotmail.com.vn");
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("phone"), "Phone: " + userData.getPhoneNumber_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("fax"), "Fax: " + userData.getFaxNumber_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("address1"), userData.getAddress1_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("city-state-zip"), userData.getCity_01() + "," + userData.getStateProvince_01() + "," + userData.getZipPostal_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("country"), userData.getCountry_01());
+
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Payment displays correctly");
+        verifyEquals(orderInformationPage.getPaymentMethod(), "Check / Money Order");
+        verifyEquals(orderInformationPage.getPaymentStatus(), "Pending");
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping address displays correctly");
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("name"), userData.getFirstName_02() + " " + userData.getLastName_02());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("email"), "Email: " + userData.getEmailAddress_02() + randomNumber + 1 + "@hotmail.com.vn");
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("phone"), "Phone: " + userData.getPhoneNumber_02());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("fax"), "Fax: " + userData.getFaxNumber_02());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("address1"), userData.getAddress1_02());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("city-state-zip"), userData.getCity_02() + "," + userData.getStateProvince_02() + "," + userData.getZipPostal_02());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("country"), userData.getCountry_02());
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly");
+        verifyEquals(orderInformationPage.getShippingMethod(), "Ground");
+        verifyEquals(orderInformationPage.getShippingStatus(), "Not yet shipped");
+
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Product(s) displays correctly with value " + productData.getProduct_02_name());
+        verifyTrue(orderInformationPage.isProductNameDisplayedAtRowNumber(productData.getProduct_02_name()));
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Price displays correctly with value " + productData.getProduct_02_price());
+        verifyTrue(orderInformationPage.isProductInfoDisplayedAtRowNumber("Price", productData.getProduct_02_price()));
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Quantity displays correctly with value " + productData.getProduct_02_quantity());
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Total displays correctly with value " + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
+        verifyTrue(orderInformationPage.isProductInfoDisplayedAtRowNumber("Quantity", productData.getProduct_02_quantity()));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total displays correctly with value ");
+        verifyTrue(orderInformationPage.isProductInfoDisplayedAtRowNumber("Total", "3600.00"));
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Gift wrapping: No");
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Sub total displays correctly with value" + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
+        verifyEquals(orderInformationPage.getGiftWrapping(), "No");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Sub total displays correctly with value");
+        verifyEquals(orderInformationPage.getSubTotal(), "3600.00");
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly with value: 0");
+        verifyEquals(orderInformationPage.getShippingCost(), "0.00");
+
         log.info("Order - Check out order payment by cheque - Step 01: Verify Tax displays correctly with value: 0");
-        log.info("Order - Check out order payment by cheque - Step 01: Verify Total order displays correctly with value: " + cartPage.customTotalPrice(productData.getProduct_02_quantity(), productData.getProduct_02_price()));
+        verifyEquals(orderInformationPage.getTax(), "0.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total order displays correctly with value: ");
+        verifyEquals(orderInformationPage.getTotalOrder(), "3600.00");
+    }
+
+    @Test
+    public void TC_06_Re_Order() {
+        log.info("Order - Re Order: Step 01: Click to Re-order button");
+        cartPage = orderInformationPage.clickToReOrderButton();
+
+        log.info("Order - Re Order: Step 01: Input to quantity text box");
+        cartPage.inputToQuantity("10");
+
+        log.info("Order - Re Order: Step 01: Click to Update shopping cart button");
+        cartPage.clickToUpdateShoppingCart();
+
+        log.info("Order - Re Order: Step 01: Check to agree the term of services");
+        cartPage.checktoTermOfService();
+
+        log.info("Order - Re Order: Step 01: Click to Check out button");
+        checkoutPage = cartPage.clickToCheckoutButton();
+
+        log.info("Order - Re Order: Step 01: Select new address at Billing address");
+        checkoutPage.selectBillingAddressFrom("New Address");
 
 
+        log.info("Order - Re Order - Step 01: Input to first name on Billing address with value: " + userData.getFirstName_01());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("FirstName", userData.getFirstName_01());
+
+        log.info("Order - Re order - Step 01: Input to last name on Billing address with value: " + userData.getLastName_01());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("LastName", userData.getLastName_01());
+
+        log.info("Order - Re order - Step 01: Input to email on Billing address with value: " + userData.getEmailAddress_01() + randomNumber + 3 + "@hotmail.com.vn");
+        checkoutPage.inputToTextboxByIdAtBillingAddress("Email", userData.getEmailAddress_01() + randomNumber + "@hotmail.com.vn");
+
+        log.info("Order - Re order - Step 01: Select to country on Billing address with value: " + userData.getCountry_01());
+        checkoutPage.selectDropdownByIdAtBillingAddress("CountryId", userData.getCountry_01());
+
+        log.info("Order - Re order - Step 01: Select to state/province on Billing address with value: " + userData.getStateProvince_01());
+        checkoutPage.selectDropdownByIdAtBillingAddress("StateProvinceId", userData.getStateProvince_01());
+
+        log.info("Order - Re order - Step 01: Input to city on Billing address with value: " + userData.getCity_01());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("City", userData.getCity_01());
+
+        log.info("Order - Re order - Step 01: Input to address1 on Billing address with value: " + userData.getAddress1_01());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("Address1", userData.getAddress1_01());
+
+        log.info("Order - Re order - Step 01: Input to zip code on Billing address with value: " + userData.getZipPostal_01());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("ZipPostalCode", userData.getZipPostal_01());
+
+        log.info("Order - Re order - Step 01: Input to phone number on Billing address with value: " + userData.getPhoneNumber_01());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("PhoneNumber", userData.getPhoneNumber_01());
+
+        log.info("Order - Re order - Step 01: Input to phone number on Billing address with value: " + userData.getFaxNumber_02());
+        checkoutPage.inputToTextboxByIdAtBillingAddress("FaxNumber", userData.getFaxNumber_01());
+
+        log.info("Order - Re order - Step 01: Click to Continue button on Shipping address");
+        checkoutPage.clickToContinueButtonOfNewAddressAtShippingAddress();
+
+        /* SHIPPING METHOD*/
+        log.info("Order - Re order - Step 01: Click to Shipping method with value: Next Day Air ($0.00)");
+        checkoutPage.clickToRadioButtonAtShippingMethod("Next Day Air ($0.00)");
+
+        log.info("Order - Re order - Step 01: Click to Continue button on Shipping method");
+        checkoutPage.clickToContinueButtonAtShippingMethod();
+
+        /* PAYMENT METHOD  */
+        log.info("Order - Re order - Step 01: Click to Payment method with value: Credit Card");
+        checkoutPage.clickToRadioButtonAtPaymentMethod("Credit Card");
+        checkoutPage.clickToContinueButtonAtPaymentMethod();
+
+        checkoutPage.selectDropdownByIdAtCardPayment("CreditCardType", "Master card");
+        checkoutPage.inputToTextboxByIdAtCardPayment("CardholderName", "Testing Automation");
+        checkoutPage.inputToTextboxByIdAtCardPayment("CardNumber", "372301601726625");
+        checkoutPage.selectDropdownByIdAtCardPayment("ExpireMonth", "08");
+        checkoutPage.selectDropdownByIdAtCardPayment("ExpireYear", "2021");
+        checkoutPage.inputToTextboxByIdAtCardPayment("CardCode", "2468");
+        checkoutPage.clickToContinueButtonAtCardPayment();
+
+
+        /* CONFIRM ORDER  */
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Billing address displays correctly");
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("name"), userData.getFirstName_01() + " " + userData.getLastName_01());
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("email"), "Email: " + userData.getEmailAddress_01() + randomNumber+3 + "@hotmail.com.vn");
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("phone"), "Phone: " + userData.getPhoneNumber_01());
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("fax"), "Fax: " + userData.getFaxNumber_01());
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("address1"), userData.getAddress1_01());
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("city-state-zip"), userData.getCity_01() + "," + userData.getStateProvince_01() + "," + userData.getZipPostal_01());
+        verifyEquals(checkoutPage.getBillingAddressOfConfirmOrderByClass("country"), userData.getCountry_01());
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Payment displays correctly");
+        verifyEquals(checkoutPage.getPaymentOfConfirmOrderByClass(), "Credit Card");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping address displays correctly");
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("name"), userData.getFirstName_01() + " " + userData.getLastName_01());
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("email"), "Email: " + userData.getEmailAddress_01() + randomNumber+3 + "@hotmail.com.vn");
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("phone"), "Phone: " + userData.getPhoneNumber_01());
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("fax"), "Fax: " + userData.getFaxNumber_01());
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("address1"), userData.getAddress1_01());
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("city-state-zip"), userData.getCity_01() + "," + userData.getStateProvince_01() + "," + userData.getZipPostal_01());
+        verifyEquals(checkoutPage.getShippingAddressOfConfirmOrderByClass("country"), userData.getCountry_01());
+
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly");
+        verifyEquals(checkoutPage.getShippingOfConfirmOrderByClass(), "Next Day Air");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Product(s) displays correctly with value " + productData.getProduct_02_name());
+        verifyTrue(checkoutPage.isProductNameDisplayedAtRowNumber(productData.getProduct_02_name()));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Price displays correctly with value " + productData.getProduct_02_price());
+        verifyTrue(checkoutPage.isProductInfoDisplayedAtRowNumber("Price", productData.getProduct_02_price()));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Quantity displays correctly with value 10");
+        verifyTrue(checkoutPage.isProductInfoDisplayedAtRowNumber("Qty", "10"));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total displays correctly with value $3,600.00");
+        verifyTrue(checkoutPage.isProductInfoDisplayedAtRowNumber("Total", "18000.00"));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Sub total displays correctly with value: ");
+        verifyEquals(checkoutPage.getSubTotal(), "18000.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly with value: 0");
+        verifyEquals(checkoutPage.getShippingCost(), "0.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Tax displays correctly with value: 0");
+        verifyEquals(checkoutPage.getTax(), "0.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total order displays correctly with value: ");
+        verifyEquals(checkoutPage.getTotalOrder(), "18000.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Click to Confirm button on Confirm order");
+        checkoutPage.clickToConfirmButtonAtConfirmOrder();
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Thank you displays");
+        verifyTrue(checkoutPage.isThankYouMessageDisplayed());
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order successfully message displays");
+        verifyTrue(checkoutPage.isOrderSuccessMessageDisplayed());
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order number displays");
+        verifyTrue(checkoutPage.isOrderNumberisplayed());
+        orderNumber = checkoutPage.getOrderNumberAtOrder(driver);
+
+        log.info("Order - Check out order payment by cheque - Step 01: Click to My Account link in header");
+        customerPage = checkoutPage.clickToMyAccountLink(driver);
+
+        log.info("Order - Check out order payment by cheque - Step 01: Open Orders Page in my account");
+        orderHistoryPage = (OrderHistoryPO) customerPage.openLinkByPageNameAtMyAccount(driver, "Orders");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order number");
+        verifyEquals(orderHistoryPage.getOrderNumber(), orderNumber);
+
+
+        log.info("Order - Check out order payment by cheque - Step 01: Click to Detail tab");
+        orderInformationPage = orderHistoryPage.clickToDetailButton(orderNumber);
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order number displays");
+        verifyEquals(orderInformationPage.getOrderNumber(), orderNumber);
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order status displays with value Pending");
+        verifyEquals(orderInformationPage.getOrderStatus(), "Pending");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Order Total displays with value: 3,600");
+        verifyEquals(orderInformationPage.getOrderTotal(), "3600.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Billing address displays correctly");
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("name"), userData.getFirstName_01() + " " + userData.getLastName_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("email"), "Email: " + userData.getEmailAddress_01() + randomNumber+3 + "@hotmail.com.vn");
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("phone"), "Phone: " + userData.getPhoneNumber_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("fax"), "Fax: " + userData.getFaxNumber_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("address1"), userData.getAddress1_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("city-state-zip"), userData.getCity_01() + "," + userData.getStateProvince_01() + "," + userData.getZipPostal_01());
+        verifyEquals(orderInformationPage.getBillingAddressOfConfirmOrderByClass("country"), userData.getCountry_01());
+
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Payment displays correctly");
+        verifyEquals(orderInformationPage.getPaymentMethod(), "Credit Card");
+        verifyEquals(orderInformationPage.getPaymentStatus(), "Pending");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping address displays correctly");
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("name"), userData.getFirstName_01() + " " + userData.getLastName_01());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("email"), "Email: " + userData.getEmailAddress_01() + randomNumber + 3 + "@hotmail.com.vn");
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("phone"), "Phone: " + userData.getPhoneNumber_01());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("fax"), "Fax: " + userData.getFaxNumber_01());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("address1"), userData.getAddress1_01());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("city-state-zip"), userData.getCity_01() + "," + userData.getStateProvince_01() + "," + userData.getZipPostal_01());
+        verifyEquals(orderInformationPage.getShippingAddressOfConfirmOrderByClass("country"), userData.getCountry_01());
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly");
+        verifyEquals(orderInformationPage.getShippingMethod(), "Next Day Air");
+        verifyEquals(orderInformationPage.getShippingStatus(), "Not yet shipped");
+
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Product(s) displays correctly with value " + productData.getProduct_02_name());
+        verifyTrue(orderInformationPage.isProductNameDisplayedAtRowNumber(productData.getProduct_02_name()));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Price displays correctly with value " + productData.getProduct_02_price());
+        verifyTrue(orderInformationPage.isProductInfoDisplayedAtRowNumber("Price", productData.getProduct_02_price()));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Quantity displays correctly with value 10");
+        verifyTrue(orderInformationPage.isProductInfoDisplayedAtRowNumber("Quantity", "10"));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total displays correctly with value ");
+        verifyTrue(orderInformationPage.isProductInfoDisplayedAtRowNumber("Total", "18000.00"));
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Gift wrapping: No");
+        verifyEquals(orderInformationPage.getGiftWrapping(), "No");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Sub total displays correctly with value 18000");
+        verifyEquals(orderInformationPage.getSubTotal(), "18000.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Shipping displays correctly with value: 0");
+        verifyEquals(orderInformationPage.getShippingCost(), "0.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Tax displays correctly with value: 0");
+        verifyEquals(orderInformationPage.getTax(), "0.00");
+
+        log.info("Order - Check out order payment by cheque - Step 01: Verify Total order displays correctly with value: 18000");
+        verifyEquals(orderInformationPage.getTotalOrder(), "18000.00");
     }
 
     @AfterClass

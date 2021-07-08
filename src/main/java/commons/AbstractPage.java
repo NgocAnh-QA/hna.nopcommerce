@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageUIs.User.CartPageUI;
+import pageUIs.User.CheckoutPageUI;
 
 public class AbstractPage {
     WebDriverWait explicitWait;
@@ -1225,6 +1226,8 @@ public class AbstractPage {
                 return PageGeneratorManager.getAddressesPage(driver);
             case "My product reviews":
                 return PageGeneratorManager.getMyProductReviewPage(driver);
+            case "Orders":
+                return PageGeneratorManager.getOrderHistoryPage(driver);
             default:
                 return PageGeneratorManager.getCustomerInfoPage(driver);
         }
@@ -1333,12 +1336,14 @@ public class AbstractPage {
         return getElementText(driver, AbstractPageUI.SUB_TOTAL_IN_CART_TEXT).replace("$", "").replace(",", "");
     }
 
-    public String customTotalPrice(String quantity, String price){
-        float total = Float.parseFloat(quantity) * Float.parseFloat(price);
-        return String.valueOf(total).substring(0, String.valueOf(total).lastIndexOf("."));
+    public String formatPrice(String priceValue){
+        return priceValue.replace("$", "").replace(",", "");
     }
 
-    public String customPrice(String price){
-        return price.replace("$", "").substring(0, price.lastIndexOf("."));
+    public String getOrderNumberAtOrder(WebDriver driver) {
+        String orderNumber = getElementText(driver, AbstractPageUI.ORDER_NUMBER_TEXT);
+        return orderNumber.substring(orderNumber.lastIndexOf(" ")+1);
     }
+
+
 }

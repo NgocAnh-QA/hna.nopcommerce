@@ -8,6 +8,7 @@ import pageUIs.User.LoginPageUI;
 
 public class CheckoutPO extends AbstractPage {
     WebDriver driver;
+
     public CheckoutPO(WebDriver driver) {
         this.driver = driver;
     }
@@ -45,6 +46,7 @@ public class CheckoutPO extends AbstractPage {
     public void selectByIdAtShippingAddress(String selectID, String textValue) {
         waitForElementVisible(driver, CheckoutPageUI.DROPDOWN_BY_ID_AT_SHIPPING_ADDRESS, selectID);
         selectItemByVisible(driver, textValue, CheckoutPageUI.DROPDOWN_BY_ID_AT_SHIPPING_ADDRESS, selectID);
+        sleepInSecond(2);
     }
 
     public void clickToContinueButtonAtShippingAddress() {
@@ -102,5 +104,88 @@ public class CheckoutPO extends AbstractPage {
     public String getShippingOfConfirmOrderByClass() {
         waitForElementVisible(driver, CheckoutPageUI.TEXT_SHIPPING_AT_CONFIRM_ORDER);
         return getElementText(driver, CheckoutPageUI.TEXT_SHIPPING_AT_CONFIRM_ORDER).trim();
+    }
+
+    public boolean isProductNameDisplayedAtRowNumber(String productName) {
+        String actualValue = getElementText(driver, CheckoutPageUI.DYNAMIC_PRODUCT_NAME_AT_TABLE_ROW_INDEX);
+        return actualValue.equals(productName);
+
+    }
+
+    public boolean isProductInfoDisplayedAtRowNumber(String columnName, String expectedValue) {
+        String actualValue = getElementText(driver, CheckoutPageUI.DYNAMIC_PRODUCT_INFO_AT_TABLE_ROW_INDEX, columnName);
+        if (columnName.equals("Price") || columnName.equals("Total")){
+            actualValue = formatPrice(actualValue);
+        }
+        return actualValue.equals(expectedValue);
+
+    }
+
+    public String getSubTotal() {
+        waitForElementVisible(driver, CheckoutPageUI.SUB_TOTAL);
+        return formatPrice(getElementText(driver, CheckoutPageUI.SUB_TOTAL));
+    }
+
+    public String getShippingCost() {
+        waitForElementVisible(driver, CheckoutPageUI.SHIPPING_COST);
+        return formatPrice(getElementText(driver, CheckoutPageUI.SHIPPING_COST));
+    }
+
+    public String getTax() {
+        waitForElementVisible(driver, CheckoutPageUI.TAX);
+        return formatPrice(getElementText(driver, CheckoutPageUI.TAX));
+    }
+
+    public String getTotalOrder() {
+        waitForElementVisible(driver, CheckoutPageUI.TOTAL_ORDER);
+        return formatPrice(getElementText(driver, CheckoutPageUI.TOTAL_ORDER));
+    }
+
+    public void clickToConfirmButtonAtConfirmOrder() {
+        waitForElementVisible(driver, CheckoutPageUI.CONFIRM_BUTTON_AT_CONFIRM_ORDER);
+        clickToElement(driver, CheckoutPageUI.CONFIRM_BUTTON_AT_CONFIRM_ORDER);
+    }
+
+    public boolean isThankYouMessageDisplayed() {
+        waitForElementVisible(driver, CheckoutPageUI.THANK_YOU_TEXT);
+        return isElementDisplayed(driver, CheckoutPageUI.THANK_YOU_TEXT);
+    }
+
+    public boolean isOrderSuccessMessageDisplayed() {
+        waitForElementVisible(driver, CheckoutPageUI.ORDER_SUCCESS_MESSAGE);
+        return isElementDisplayed(driver, CheckoutPageUI.ORDER_SUCCESS_MESSAGE);
+    }
+
+
+    public boolean isOrderNumberisplayed() {
+        waitForElementVisible(driver, CheckoutPageUI.ORDER_NUMBER_TEXT);
+        return isElementDisplayed(driver, CheckoutPageUI.ORDER_NUMBER_TEXT);
+    }
+
+
+    public void selectDropdownByIdAtCardPayment(String selectId, String textValue) {
+        waitForElementVisible(driver, CheckoutPageUI.CARD_PAYMENT_DROPDOWN, selectId);
+        selectItemByVisible(driver, textValue, CheckoutPageUI.CARD_PAYMENT_DROPDOWN, selectId);
+    }
+
+    public void inputToTextboxByIdAtCardPayment(String textboxId, String textValue) {
+        waitForElementVisible(driver, CheckoutPageUI.CARD_PAYMENT_TEXTBOX, textboxId);
+        sendKeyToElement(driver, textValue, CheckoutPageUI.CARD_PAYMENT_TEXTBOX, textboxId);
+    }
+
+    public void clickToContinueButtonAtCardPayment() {
+        waitForElementVisible(driver, CheckoutPageUI.CONTINUE_BUTTON_AT_CARD_PAYMENT);
+        clickToElement(driver, CheckoutPageUI.CONTINUE_BUTTON_AT_CARD_PAYMENT);
+
+    }
+
+    public void selectBillingAddressFrom(String optionValue) {
+        waitForElementVisible(driver, CheckoutPageUI.ADDRESS_FROM_DROPDOWM);
+        selectItemByVisible(driver, optionValue, CheckoutPageUI.ADDRESS_FROM_DROPDOWM);
+    }
+
+    public void clickToContinueButtonOfNewAddressAtShippingAddress() {
+        waitForElementVisible(driver, CheckoutPageUI.CONTINUE_BUTTON_OF_NEW_ADDRESS_SHIPPING_ADDRESS);
+        clickToElement(driver, CheckoutPageUI.CONTINUE_BUTTON_OF_NEW_ADDRESS_SHIPPING_ADDRESS);
     }
 }
