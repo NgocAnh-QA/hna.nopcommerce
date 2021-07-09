@@ -97,11 +97,11 @@ public class ProductDetailPO extends AbstractPage {
     public void inputToQuantityTextbox(String quantity) {
         waitForElementVisible(driver, ProductDetailPageUI.QUANTITY_TEXT_BOX);
         sendKeyToElement(driver, ProductDetailPageUI.QUANTITY_TEXT_BOX, quantity);
+        sleepInSecond(5);
     }
 
     public void clickToUpdateCartButton() {
         waitForElementVisible(driver, ProductDetailPageUI.UPDATE_BUTTON);
-        sleepInSecond(3);
         clickToElement(driver, ProductDetailPageUI.UPDATE_BUTTON);
     }
 

@@ -78,7 +78,6 @@ public class OrderInformationPO extends AbstractPage {
         if (columnName.equals("Price") || columnName.equals("Total")){
             actualValue = formatPrice(actualValue);
         }
-        System.out.println(actualValue);
         return actualValue.equals(expectedValue);
 
     }

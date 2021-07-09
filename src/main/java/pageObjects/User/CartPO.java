@@ -59,7 +59,7 @@ public class CartPO extends AbstractPage {
 
     public String getTotalPriceInCart() {
         waitForElementVisible(driver, CartPageUI.TOTAL_ORDER);
-        return getElementText(driver, CartPageUI.TOTAL_ORDER).replace("$", "").replace(",", "");
+        return formatPrice(getElementText(driver, CartPageUI.TOTAL_ORDER));
     }
 
     public boolean isCartEmptyMessageDisplayed() {
