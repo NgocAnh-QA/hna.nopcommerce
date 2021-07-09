@@ -5,7 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import pageObjects.Admin.DashboardPO;
+import pageObjects.Admin.ProductsPO;
 import pageObjects.User.*;
+import pageUIs.Admin.ProductsPageUI;
 import pageUIs.User.AbstractPageUI;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,8 +22,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pageUIs.User.CartPageUI;
-import pageUIs.User.CheckoutPageUI;
 
 public class AbstractPage {
     WebDriverWait explicitWait;
@@ -1172,25 +1173,25 @@ public class AbstractPage {
     public HomePagePO clickToLogoutLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.LOGOUT_LINK);
         clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
-        return PageGeneratorManager.getHomePage(driver);
+        return PageGeneratorManagerUser.getHomePage(driver);
     }
 
     public RegisterPO clickToRegisterLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.REGISTER_LINK);
         clickToElement(driver, AbstractPageUI.REGISTER_LINK);
-        return PageGeneratorManager.getRegisterPage(driver);
+        return PageGeneratorManagerUser.getRegisterPage(driver);
     }
 
     public CustomerInfoPO clickToMyAccountLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.MY_ACCOUNT_LINK);
         clickToElement(driver, AbstractPageUI.MY_ACCOUNT_LINK);
-        return PageGeneratorManager.getCustomerInfoPage(driver);
+        return PageGeneratorManagerUser.getCustomerInfoPage(driver);
     }
 
     public CartPO clickToShoppingCartLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.SHOPPING_CART_LINK);
         clickToElement(driver, AbstractPageUI.SHOPPING_CART_LINK);
-        return PageGeneratorManager.getCartPage(driver);
+        return PageGeneratorManagerUser.getCartPage(driver);
     }
 
     public void hoverOnShoppingCartIconInHeader(WebDriver driver) {
@@ -1221,15 +1222,15 @@ public class AbstractPage {
         clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_ASIDE, pageName);
         switch (pageName) {
             case "Change password":
-                return PageGeneratorManager.getChangePasswordPage(driver);
+                return PageGeneratorManagerUser.getChangePasswordPage(driver);
             case "Addresses":
-                return PageGeneratorManager.getAddressesPage(driver);
+                return PageGeneratorManagerUser.getAddressesPage(driver);
             case "My product reviews":
-                return PageGeneratorManager.getMyProductReviewPage(driver);
+                return PageGeneratorManagerUser.getMyProductReviewPage(driver);
             case "Orders":
-                return PageGeneratorManager.getOrderHistoryPage(driver);
+                return PageGeneratorManagerUser.getOrderHistoryPage(driver);
             default:
-                return PageGeneratorManager.getCustomerInfoPage(driver);
+                return PageGeneratorManagerUser.getCustomerInfoPage(driver);
         }
     }
 
@@ -1241,13 +1242,13 @@ public class AbstractPage {
     public HomePagePO openHomePage(WebDriver driver) {
         waitForElementVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
         clickToElement(driver, AbstractPageUI.HOME_PAGE_LINK);
-        return PageGeneratorManager.getHomePage(driver);
+        return PageGeneratorManagerUser.getHomePage(driver);
     }
 
     public ProductDetailPO clickToProductByNameOfProduct(WebDriver driver, String productName) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
         clickToElement(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
-        return PageGeneratorManager.getProductDetailPage(driver);
+        return PageGeneratorManagerUser.getProductDetailPage(driver);
     }
 
     public AbstractPage openLinkByTextAtFooter(WebDriver driver, String linkText) {
@@ -1255,15 +1256,15 @@ public class AbstractPage {
         clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_TEXT_AT_FOOTER, linkText);
         switch (linkText) {
             case "Search":
-                return PageGeneratorManager.getSearchPage(driver);
+                return PageGeneratorManagerUser.getSearchPage(driver);
             case "Compare products list":
-                return PageGeneratorManager.getCompareProductPage(driver);
+                return PageGeneratorManagerUser.getCompareProductPage(driver);
             case "Recently viewed products":
-                return PageGeneratorManager.getRecentlyViewedProductsPage(driver);
+                return PageGeneratorManagerUser.getRecentlyViewedProductsPage(driver);
             case "Shopping cart":
-                return PageGeneratorManager.getCartPage(driver);
+                return PageGeneratorManagerUser.getCartPage(driver);
             default:
-                return PageGeneratorManager.getHomePage(driver);
+                return PageGeneratorManagerUser.getHomePage(driver);
         }
     }
 
@@ -1271,13 +1272,13 @@ public class AbstractPage {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
         hoverMouseToElement(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
         clickToElement(driver, AbstractPageUI.DYNAMIC_SUBMENU_NAVIGATION, menu, subMenu);
-        return PageGeneratorManager.getProductPage(driver);
+        return PageGeneratorManagerUser.getProductPage(driver);
     }
 
     public WishlistPO clickToWishlistLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.WISHLIST_LINK);
         clickToElement(driver, AbstractPageUI.WISHLIST_LINK);
-        return PageGeneratorManager.getWishlistPage(driver);
+        return PageGeneratorManagerUser.getWishlistPage(driver);
     }
 
     public String getQualityProductsInWishlistIcon(WebDriver driver) {
@@ -1321,9 +1322,9 @@ public class AbstractPage {
         listOption.add(software_commander);
         String infoProduct = getElementText(driver, AbstractPageUI.PRODUCT_INFORMATION_IN_CART_ICON_IN_HEADER);
         for (String info : listOption) {
-            if (infoProduct.contains(info)){
+            if (infoProduct.contains(info)) {
                 check = true;
-            }else {
+            } else {
                 check = false;
             }
         }
@@ -1336,14 +1337,33 @@ public class AbstractPage {
         return getElementText(driver, AbstractPageUI.SUB_TOTAL_IN_CART_TEXT).replace("$", "").replace(",", "");
     }
 
-    public String formatPrice(String priceValue){
+    public String formatPrice(String priceValue) {
         return priceValue.replace("$", "").replace(",", "");
     }
 
     public String getOrderNumberAtOrder(WebDriver driver) {
         String orderNumber = getElementText(driver, AbstractPageUI.ORDER_NUMBER_TEXT);
-        return orderNumber.substring(orderNumber.lastIndexOf(" ")+1);
+        return orderNumber.substring(orderNumber.lastIndexOf(" ") + 1);
     }
 
 
+    public ProductsPO openSubMenuAtNav(WebDriver driver, String menu, String subMenu) {
+        waitForElementVisible(driver, AbstractPageUI.MENU_AT_NAV, menu);
+        clickToElement(driver, AbstractPageUI.MENU_AT_NAV, menu);
+        clickToElement(driver, AbstractPageUI.SUB_MENU_AT_NAV, menu, subMenu);
+        waitAjaxLoadingInvisible(driver);
+        return PageGeneratorManagerAdmin.getProductsPage(driver);
+    }
+
+    public DashboardPO openDashboardPage(WebDriver driver) {
+        waitForElementClickable(driver, AbstractPageUI.DASHBOARD_LINK_AT_NAV);
+        clickToElement(driver, AbstractPageUI.DASHBOARD_LINK_AT_NAV);
+        return PageGeneratorManagerAdmin.getDashboardPage(driver);
+
+    }
+
+    public void waitAjaxLoadingInvisible(WebDriver driver){
+        waitForElementInvisible(driver, AbstractPageUI.AJAX_LOADING);
+
+    }
 }

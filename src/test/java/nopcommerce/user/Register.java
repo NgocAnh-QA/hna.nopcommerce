@@ -29,7 +29,7 @@ public class Register extends AbstractTest {
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
 
         log.info("Register - Precondition - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePage(driver);
+        homePage = PageGeneratorManagerUser.getHomePage(driver);
 
         log.info("Register - Precondition - Step 02: Click to Register link at Home Page");
         registerPage = homePage.clickToRegisterLink();

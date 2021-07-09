@@ -3,7 +3,7 @@ package nopcommerce.user;
 
 import commons.AbstractTest;
 import commons.GlobalConstants;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.User.*;
 import testdata.ProductData;
-import testdata.UserData;
 
 import java.io.File;
 
@@ -40,7 +39,7 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
         productData = ProductData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "ProductData.json");
 
         log.info("Wishlist_Compare_RecentView - Precondition - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePage(driver);
+        homePage = PageGeneratorManagerUser.getHomePage(driver);
 
         log.info("Wishlist_Compare_RecentView - Precondition - Step 02: Login to system");
         loginPage = homePage.clickToLoginLink();

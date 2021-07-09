@@ -1,10 +1,8 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
-import pageUIs.User.CheckoutPageUI;
-import pageUIs.User.LoginPageUI;
 import pageUIs.User.OrderInformationPageUI;
 
 public class OrderInformationPO extends AbstractPage {
@@ -111,6 +109,6 @@ public class OrderInformationPO extends AbstractPage {
     public CartPO clickToReOrderButton() {
         waitForElementVisible(driver, OrderInformationPageUI.RE_ORDER_BUTTON);
         clickToElement(driver, OrderInformationPageUI.RE_ORDER_BUTTON);
-        return PageGeneratorManager.getCartPage(driver);
+        return PageGeneratorManagerUser.getCartPage(driver);
     }
 }

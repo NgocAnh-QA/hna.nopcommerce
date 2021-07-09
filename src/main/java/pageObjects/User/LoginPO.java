@@ -1,7 +1,7 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
 import pageUIs.User.LoginPageUI;
 
@@ -25,7 +25,7 @@ public class LoginPO extends AbstractPage {
     public HomePagePO clickToLoginButton() {
         waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
         clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
-        return PageGeneratorManager.getHomePage(driver);
+        return PageGeneratorManagerUser.getHomePage(driver);
 
     }
 

@@ -2,9 +2,8 @@ package pageObjects.User;
 
 import pageUIs.User.AbstractPageUI;
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
-import pageUIs.User.HomePageUI;
 
 public class HomePagePO extends AbstractPage {
     WebDriver driver;
@@ -14,13 +13,13 @@ public class HomePagePO extends AbstractPage {
 
     public LoginPO clickToLoginLink() {
         clickToElement(driver, AbstractPageUI.LOGIN_LINK);
-        return PageGeneratorManager.getLoginPage(driver);
+        return PageGeneratorManagerUser.getLoginPage(driver);
     }
 
     public RegisterPO clickToRegisterLink() {
         waitForElementClickable(driver, AbstractPageUI.REGISTER_LINK);
         clickToElement(driver, AbstractPageUI.REGISTER_LINK);
-        return PageGeneratorManager.getRegisterPage(driver);
+        return PageGeneratorManagerUser.getRegisterPage(driver);
     }
 
     public boolean isMyAccountLinkDisplayed() {

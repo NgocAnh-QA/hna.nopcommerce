@@ -1,7 +1,7 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pageUIs.User.ProductDetailPageUI;
@@ -17,7 +17,7 @@ public class ProductDetailPO extends AbstractPage {
     public ProductReviewPO clickToAddYourReview() {
         waitForElementClickable(driver, ProductDetailPageUI.ADD_YOUR_REVIEW_LINK);
         clickToElement(driver, ProductDetailPageUI.ADD_YOUR_REVIEW_LINK);
-        return PageGeneratorManager.getProductReviewPage(driver);
+        return PageGeneratorManagerUser.getProductReviewPage(driver);
     }
 
     public void clickToAddToWishlist() {
@@ -37,7 +37,7 @@ public class ProductDetailPO extends AbstractPage {
 
     public ProductPO backToProductsPage() {
         backToPage(driver);
-        return PageGeneratorManager.getProductPage(driver);
+        return PageGeneratorManagerUser.getProductPage(driver);
     }
 
     public void clickToCheckboxSoftwareOption(String...softwareName) {

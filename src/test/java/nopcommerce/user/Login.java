@@ -3,7 +3,7 @@ package nopcommerce.user;
 
 import commons.AbstractTest;
 import commons.GlobalConstants;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.User.HomePagePO;
 import pageObjects.User.LoginPO;
-import pageObjects.User.RegisterPO;
 import testdata.UserData;
 
 import java.io.File;
@@ -37,7 +36,7 @@ public class Login extends AbstractTest {
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
 
         log.info("Login - Precondition - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePage(driver);
+        homePage = PageGeneratorManagerUser.getHomePage(driver);
     }
 
     @Test

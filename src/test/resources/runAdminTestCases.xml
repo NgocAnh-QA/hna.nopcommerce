@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Nop Commerce - User" parallel="false">
+<suite name="Nop Commerce - Admin" parallel="false">
 
 
     <listeners>
@@ -12,12 +12,7 @@
     <test name="Run on CHROME UI">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="nopcommerce.user.RegisterToSystem"/>
-            <class name="nopcommerce.user.Login"/>
-            <class name="nopcommerce.user.Search"/>
-            <class name="nopcommerce.user.Sort_Display_Paging"/>
-            <class name="nopcommerce.user.Wishlist_Compare_RecentView"/>
-            <class name="nopcommerce.user.MyAccount"/>
+            <class name="nopcommerce.admin.Search"/>
         </classes>
     </test>
 

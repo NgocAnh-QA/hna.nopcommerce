@@ -280,6 +280,9 @@ public class ProductData {
 
         @JsonProperty("quantity")
         private String quantity;
+
+        @JsonProperty("sku")
+        private String sku;
     }
 
     public String getProduct_05_name() {
@@ -292,5 +295,9 @@ public class ProductData {
 
     public String getProduct_05_quantity() {
         return product_05.quantity;
+    }
+
+    public String getProduct_05_sku() {
+        return product_05.sku;
     }
 }

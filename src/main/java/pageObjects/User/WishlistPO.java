@@ -1,7 +1,7 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
 import pageUIs.User.WishlistPageUI;
 
@@ -32,7 +32,7 @@ public class WishlistPO extends AbstractPage {
     public CartPO clickToAddToCartButton() {
         waitForElementClickable(driver, WishlistPageUI.ADD_TO_CART_BUTTON);
         clickToElement(driver, WishlistPageUI.ADD_TO_CART_BUTTON);
-        return PageGeneratorManager.getCartPage(driver);
+        return PageGeneratorManagerUser.getCartPage(driver);
     }
 
     public void clickToRemoveIcon() {

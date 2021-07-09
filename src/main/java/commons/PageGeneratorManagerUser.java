@@ -4,7 +4,7 @@ import pageObjects.User.*;
 import org.openqa.selenium.WebDriver;
 import pageUIs.User.ProductDetailPageUI;
 
-public class PageGeneratorManager {
+public class PageGeneratorManagerUser {
 
     public static HomePagePO getHomePage(WebDriver driver) {
         return new HomePagePO(driver);

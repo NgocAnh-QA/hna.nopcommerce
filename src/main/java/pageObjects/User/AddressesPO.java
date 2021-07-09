@@ -1,10 +1,8 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
 import org.openqa.selenium.WebDriver;
 import pageUIs.User.AddressesPageUI;
-import pageUIs.User.LoginPageUI;
 
 public class AddressesPO extends AbstractPage {
     WebDriver driver;

@@ -1,9 +1,8 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
-import pageUIs.User.LoginPageUI;
 import pageUIs.User.OrderHistoryPageUI;
 
 public class OrderHistoryPO extends AbstractPage {
@@ -21,7 +20,7 @@ public class OrderHistoryPO extends AbstractPage {
     public OrderInformationPO clickToDetailButton(String orderNumber) {
         waitForElementVisible(driver, OrderHistoryPageUI.DETAIL_BUTTON, orderNumber);
         clickToElement(driver, OrderHistoryPageUI.DETAIL_BUTTON, orderNumber);
-        return PageGeneratorManager.getOrderInformationPage(driver);
+        return PageGeneratorManagerUser.getOrderInformationPage(driver);
 
     }
 }

@@ -1,11 +1,9 @@
 package pageObjects.User;
 
 import commons.AbstractPage;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import org.openqa.selenium.WebDriver;
-import pageUIs.User.AbstractPageUI;
 import pageUIs.User.CartPageUI;
-import pageUIs.User.SearchPageUI;
 
 import java.util.ArrayList;
 
@@ -30,7 +28,7 @@ public class CartPO extends AbstractPage {
     public ProductDetailPO clickToEditLink() {
         waitForElementClickable(driver, CartPageUI.EDIT_LINK);
         clickToElement(driver, CartPageUI.EDIT_LINK);
-        return PageGeneratorManager.getProductDetailPage(driver);
+        return PageGeneratorManagerUser.getProductDetailPage(driver);
     }
 
     public boolean isProductExistedInCartPage(String productName, String processor, String ram, String hdd, String os, String... software) {
@@ -91,7 +89,7 @@ public class CartPO extends AbstractPage {
     public CheckoutPO clickToCheckoutButton() {
         waitForElementVisible(driver, CartPageUI.CHECKOUT_BUTTON);
         clickToElement(driver, CartPageUI.CHECKOUT_BUTTON);
-        return PageGeneratorManager.getCheckoutPage(driver);
+        return PageGeneratorManagerUser.getCheckoutPage(driver);
     }
 
     public void selectToGiftWrappingDropdown(String giftWrappingValue) {

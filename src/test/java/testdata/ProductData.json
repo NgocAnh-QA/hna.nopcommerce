@@ -42,7 +42,8 @@
   "product_05": {
     "name": "Lenovo IdeaCentre 600 All-in-One PC",
     "price": "500.00",
-    "quantity": "5"
+    "quantity": "5",
+    "sku": "LE_IC_600"
   }
 }
 

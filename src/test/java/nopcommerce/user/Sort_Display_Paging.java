@@ -3,7 +3,7 @@ package nopcommerce.user;
 
 import commons.AbstractTest;
 import commons.GlobalConstants;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +35,7 @@ public class Sort_Display_Paging extends AbstractTest {
         userData = UserData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "UserData.json");
 
         log.info("Sort_Display_Paging - Precondition - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePage(driver);
+        homePage = PageGeneratorManagerUser.getHomePage(driver);
 
         log.info("Sort_Display_Paging - Precondition - Step 02: Open sub menu Notebooks");
         productPage = homePage.openSubMenu(driver,"Computers", "Notebooks");

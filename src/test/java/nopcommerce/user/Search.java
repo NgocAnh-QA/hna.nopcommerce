@@ -3,7 +3,7 @@ package nopcommerce.user;
 
 import commons.AbstractTest;
 import commons.GlobalConstants;
-import commons.PageGeneratorManager;
+import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
@@ -39,7 +39,7 @@ public class Search extends AbstractTest {
         productData = ProductData.getFiles(GlobalConstants.ROOT_FOLDER + File.separator + "src/test/java" + File.separator + "testdata" + File.separator + "ProductData.json");
 
         log.info("Search - Precondition - Step 01: Open Home Page");
-        homePage = PageGeneratorManager.getHomePage(driver);
+        homePage = PageGeneratorManagerUser.getHomePage(driver);
 
         log.info("Search - Precondition - Step 02: Click to Login link");
         loginPage = homePage.clickToLoginLink();
