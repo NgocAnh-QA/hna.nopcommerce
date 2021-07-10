@@ -67,7 +67,7 @@ public class Register extends AbstractTest {
         log.info("Register - Step 02: Input to FirstName textbox with value: " + userData.getFirstNameValid());
         registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
 
-        log.info("Register - Step 03: Input to LastName textbox with value: " + userData.getLastNameValid());
+        log.info("Register - Step 03: Input to LastName text box with value: " + userData.getLastNameValid());
         registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 04: Select Day Dropdown with value: " + userData.getDateOfBirthValid());

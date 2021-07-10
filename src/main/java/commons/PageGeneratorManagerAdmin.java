@@ -25,4 +25,8 @@ public class PageGeneratorManagerAdmin {
         return new CustomersPO(driver);
     }
 
+    public static CustomerDetailPO getCustomerDetailPage(WebDriver driver) {
+        return new CustomerDetailPO(driver);
+    }
+
 }

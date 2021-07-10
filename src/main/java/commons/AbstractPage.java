@@ -929,8 +929,17 @@ public class AbstractPage {
         driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
     }
 
-    public List<String> getElementsText(WebDriver driver, String parentLocator) {
-        List<WebElement> items = getElements(driver, parentLocator);
+    public List<String> getElementsText(WebDriver driver, String locator) {
+        List<WebElement> items = getElements(driver, locator);
+        ArrayList<String> listItems = new ArrayList<String>();
+        for (WebElement webElement : items) {
+            listItems.add(webElement.getText().trim());
+        }
+        return listItems;
+    }
+
+    public List<String> getElementsText(WebDriver driver, String locator, String...values) {
+        List<WebElement> items = getElements(driver, castToParameter(locator, values));
         ArrayList<String> listItems = new ArrayList<String>();
         for (WebElement webElement : items) {
             listItems.add(webElement.getText().trim());
@@ -1371,6 +1380,7 @@ public class AbstractPage {
 
     public void waitAjaxLoadingInvisible(WebDriver driver){
         waitForElementInvisible(driver, AbstractPageUI.AJAX_LOADING);
-
     }
+
+
 }

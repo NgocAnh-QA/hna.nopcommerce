@@ -43,7 +43,7 @@ public class AbstractPageUI {
     public static final String MENU_AT_NAV = "//li[@class='nav-item has-treeview']/a/p[contains(.,'%s')]";
     public static final String SUB_MENU_AT_NAV = "//li[@class='nav-item has-treeview']/a/p[contains(.,'%s')]/parent::a/following-sibling::ul//p[contains(text(),'%s')]";
 
-    public static final String DASHBOARD_LINK_AT_NAV = "//a[@class='nav-link']/p[contains(.,'Dashboard')]";
+    public static final String DASHBOARD_LINK_AT_NAV = "//li[@class='nav-item']//p[contains(.,'Dashboard')]";
 
     public static final String AJAX_LOADING   ="//div[@id='ajaxBusy']/span";
 
