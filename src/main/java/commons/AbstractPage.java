@@ -1347,12 +1347,19 @@ public class AbstractPage {
     }
 
 
-    public ProductsPO openSubMenuAtNav(WebDriver driver, String menu, String subMenu) {
+    public AbstractPage openSubMenuAtNav(WebDriver driver, String menu, String subMenu) {
         waitForElementVisible(driver, AbstractPageUI.MENU_AT_NAV, menu);
         clickToElement(driver, AbstractPageUI.MENU_AT_NAV, menu);
         clickToElement(driver, AbstractPageUI.SUB_MENU_AT_NAV, menu, subMenu);
         waitAjaxLoadingInvisible(driver);
-        return PageGeneratorManagerAdmin.getProductsPage(driver);
+        switch (subMenu){
+            case "Products":
+                return PageGeneratorManagerAdmin.getProductsPage(driver);
+            case "Customers":
+                return PageGeneratorManagerAdmin.getCustomersPage(driver);
+            default:
+                return PageGeneratorManagerAdmin.getDashboardPage(driver);
+        }
     }
 
     public DashboardPO openDashboardPage(WebDriver driver) {

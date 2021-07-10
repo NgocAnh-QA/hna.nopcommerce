@@ -16,4 +16,6 @@ public class ProductsPageUI {
     public static final String NO_DATA_AT_TABLE_MESSAGE = "//td[@class='dataTables_empty']";
 
 
+    public static final String SKU_TEXT_BOX = "//input[@id='GoDirectlyToSku']";
+    public static final String GO_BUTTON_AT_SKU_FIELD = "//button[@id='go-to-product-by-sku']";
 }

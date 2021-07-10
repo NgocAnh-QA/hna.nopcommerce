@@ -1,6 +1,7 @@
 package pageObjects.Admin;
 
 import commons.AbstractPage;
+import commons.PageGeneratorManagerAdmin;
 import org.openqa.selenium.WebDriver;
 import pageUIs.Admin.ProductsPageUI;
 
@@ -69,5 +70,17 @@ public class ProductsPO extends AbstractPage {
 
     public String formatPrice(String price){
         return price.substring(0, price.lastIndexOf("."));
+    }
+
+    public void inputToSkuTexbox(String skuValue) {
+        waitForElementVisible(driver, ProductsPageUI.SKU_TEXT_BOX);
+        sendKeyToElement(driver, ProductsPageUI.SKU_TEXT_BOX, skuValue);
+    }
+
+    public ProductDetailPO clickToGoButton() {
+        waitForElementVisible(driver, ProductsPageUI.GO_BUTTON_AT_SKU_FIELD);
+        clickToElement(driver, ProductsPageUI.GO_BUTTON_AT_SKU_FIELD);
+        return PageGeneratorManagerAdmin.getProductDetailPage(driver);
+
     }
 }
