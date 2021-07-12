@@ -353,6 +353,18 @@ public class AbstractPage {
         return text;
     }
 
+    public String getFirstSelectedTextInDropdown(WebDriver driver, String locator, String...values) {
+        String text = "";
+        try {
+            element = getElement(driver, castToParameter(locator,values));
+            select = new Select(element);
+            text = select.getFirstSelectedOption().getText();
+        } catch (Exception e) {
+            log.error("Cannot get selected in dropdown: " + e.getMessage());
+        }
+        return text;
+    }
+
     public boolean isDropdownMultiple(WebDriver driver, String locator) {
         boolean checkMultiple = false;
         try {

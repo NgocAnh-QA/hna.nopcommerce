@@ -29,4 +29,8 @@ public class PageGeneratorManagerAdmin {
         return new CustomerDetailPO(driver);
     }
 
+    public static AddressesCustomerPO getAddressesCustomerPage(WebDriver driver) {
+        return new AddressesCustomerPO(driver);
+    }
+
 }

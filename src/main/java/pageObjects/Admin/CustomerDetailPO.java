@@ -87,4 +87,45 @@ public class CustomerDetailPO extends AbstractPage {
         waitForElementVisible(driver, CustomerDetailPageUI.DYNAMIC_CUSTOMER_ROLES_SELECTED, textValue);
         return isElementDisplayed(driver, CustomerDetailPageUI.DYNAMIC_CUSTOMER_ROLES_SELECTED, textValue);
     }
+
+    public CustomersPO clickToSaveButton() {
+        waitForElementVisible(driver, CustomerDetailPageUI.SAVE_BUTTON);
+        clickToElement(driver, CustomerDetailPageUI.SAVE_BUTTON);
+        return PageGeneratorManagerAdmin.getCustomersPage(driver);
+    }
+
+    public void openPanelByNameText(String panelNameText) {
+        if (!isElementUnDisplayed(driver, CustomerDetailPageUI.DYNAMIC_PANEL_NAME_TEXT_CLOSE_ICON, panelNameText)) {
+            clickToElement(driver, CustomerDetailPageUI.DYNAMIC_PANEL_NAME_TEXT_CLOSE_ICON, panelNameText);
+        }
+    }
+
+    public AddressesCustomerPO clickToAddNewAddressButton() {
+        waitForElementVisible(driver, CustomerDetailPageUI.ADD_NEW_ADDRESS_BUTTON);
+        clickToElement(driver, CustomerDetailPageUI.ADD_NEW_ADDRESS_BUTTON);
+        return PageGeneratorManagerAdmin.getAddressesCustomerPage(driver);
+    }
+
+    public boolean isAddressDetailsDisplayedAtTable(String firstName, String lastName, String email, String phone, String fax, String company, String address1, String address2, String city, String state, String zipCode, String country) {
+        waitForElementVisible(driver, CustomerDetailPageUI.ADDRESS_DETAIL_ON_TABLE_AT_ADDRESSES_PANEL, firstName, lastName, email, phone, fax, company, address1, address2, city, state, zipCode, country);
+        System.out.println(">>>>: " + getElement(driver, CustomerDetailPageUI.ADDRESS_DETAIL_ON_TABLE_AT_ADDRESSES_PANEL, firstName, lastName, email, phone, fax, company, address1, address2, city, state, zipCode, country));
+        return isElementDisplayed(driver, CustomerDetailPageUI.ADDRESS_DETAIL_ON_TABLE_AT_ADDRESSES_PANEL, firstName, lastName, email, phone, fax, company, address1, address2, city, state, zipCode, country);
+    }
+
+    public AddressesCustomerPO clickToEditButtonAtAddressesPanel(String company, String address1, String address2, String city, String state, String zipCode, String country) {
+        waitForElementVisible(driver, CustomerDetailPageUI.EDIT_AT_ADDRESS_DETAIL_ON_TABLE, company, address1, address2, city, state, zipCode, country);
+        clickToElement(driver, CustomerDetailPageUI.EDIT_AT_ADDRESS_DETAIL_ON_TABLE, company, address1, address2, city, state, zipCode, country);
+        return PageGeneratorManagerAdmin.getAddressesCustomerPage(driver);
+    }
+
+    public void clickToDeleteButtonAtAddressesPanel(String company, String address1, String address2, String city, String state, String zipCode, String country) {
+        waitForElementVisible(driver, CustomerDetailPageUI.DELETE_AT_ADDRESS_DETAIL_ON_TABLE, company, address1, address2, city, state, zipCode, country);
+        clickToElement(driver, CustomerDetailPageUI.DELETE_AT_ADDRESS_DETAIL_ON_TABLE, company, address1, address2, city, state, zipCode, country);
+    }
+
+    public boolean isNoDataInTableAtAddressesPanel() {
+        waitForElementVisible(driver, CustomerDetailPageUI.NO_DATA_IN_TABLE_AT_ADDRESSES_PANEL_MESSAGE);
+        return isElementDisplayed(driver, CustomerDetailPageUI.NO_DATA_IN_TABLE_AT_ADDRESSES_PANEL_MESSAGE);
+
+    }
 }

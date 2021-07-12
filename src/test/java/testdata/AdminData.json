@@ -12,7 +12,7 @@
     "company_name": "Apple",
     "customer_roles": "Registered",
     "date_of_birth": "4/18/1999",
-    "admin_comment": "Add new customer (Guests)",
+    "admin_comment": "Add new customer (Registered)",
     "country": "Canada",
     "state_province": "Ontario",
     "city": "Ontario",
@@ -21,6 +21,23 @@
     "zip_postal": "500000",
     "phone_number": "0987654321",
     "fax_number": "12345678"
+  },
+  "admin_03": {
+    "first_name": "Alpaca",
+    "last_name": "Animal Test",
+    "email": "alpacatest",
+    "company_name": "Oppo",
+    "customer_roles": "Registered",
+    "date_of_birth": "12/24/1999",
+    "admin_comment": "Edit customer (Registered)",
+    "country": "United States",
+    "state_province": "Guam",
+    "city": "Guam",
+    "address1": "567 Stress 01",
+    "address2": "789 Stress 02",
+    "zip_postal": "369852",
+    "phone_number": "0135792468",
+    "fax_number": "24680268"
   }
 }
 

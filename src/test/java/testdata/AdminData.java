@@ -43,7 +43,7 @@ public class AdminData {
 
     static class Admin_02 {
         @JsonProperty("first_name")
-        private String firstName;
+        private String first_name;
 
         @JsonProperty("last_name")
         private String last_name;
@@ -95,7 +95,7 @@ public class AdminData {
     }
 
     public String getFirstName_02() {
-        return admin_02.firstName;
+        return admin_02.first_name;
     }
     public String getLastName_02() {
         return admin_02.last_name;
@@ -146,5 +146,102 @@ public class AdminData {
         return admin_02.fax_number;
     }
 
+    /* ADMIN 03*/
+    @JsonProperty("admin_03")
+    private AdminData.Admin_03 admin_03;
+
+    static class Admin_03 {
+        @JsonProperty("first_name")
+        private String first_name;
+
+        @JsonProperty("last_name")
+        private String last_name;
+
+        @JsonProperty("email")
+        private String email;
+
+        @JsonProperty("company_name")
+        private String company_name;
+
+        @JsonProperty("customer_roles")
+        private String customer_roles;
+
+        @JsonProperty("date_of_birth")
+        private String date_of_birth;
+
+        @JsonProperty("admin_comment")
+        private String admin_comment;
+
+        @JsonProperty("country")
+        private String country;
+
+        @JsonProperty("state_province")
+        private String state_province;
+
+        @JsonProperty("city")
+        private String city;
+
+        @JsonProperty("address1")
+        private String address1;
+
+        @JsonProperty("address2")
+        private String address2;
+
+        @JsonProperty("zip_postal")
+        private String zip_postal;
+
+        @JsonProperty("phone_number")
+        private String phone_number;
+
+        @JsonProperty("fax_number")
+        private String fax_number;
+    }
+
+    public String getFirstName_03() {
+        return admin_03.first_name;
+    }
+    public String getLastName_03() {
+        return admin_03.last_name;
+    }
+    public String getEmail_03() {
+        return admin_03.email;
+    }
+    public String getCompanyName_03() {
+        return admin_03.company_name;
+    }
+    public String getCustomerRoles_03() {
+        return admin_03.customer_roles;
+    }
+    public String getDateOfBirth_03() {
+        return admin_03.date_of_birth;
+    }
+    public String getAdminComment_03() {
+        return admin_03.admin_comment;
+    }
+
+    public String getCountry_03() {
+        return admin_03.country;
+    }
+    public String getStateProvince_03() {
+        return admin_03.state_province;
+    }
+    public String getCity_03() {
+        return admin_03.city;
+    }
+    public String getAddress1_03() {
+        return admin_03.address1;
+    }
+    public String getAddress2_03() {
+        return admin_03.address2;
+    }
+    public String getZipPostal_03() {
+        return admin_03.zip_postal;
+    }
+    public String getPhoneNumber_03() {
+        return admin_03.phone_number;
+    }
+    public String getFaxNumber_03() {
+        return admin_03.fax_number;
+    }
 
 }

@@ -26,10 +26,9 @@ public class CustomersPO extends AbstractPage {
 
     public void openSearchPanel() {
         if (!isElementUnDisplayed(driver, CustomersPageUI.CLOSE_SEARCH_PANEL_ICON)){
-            clickToElement(driver, CustomersPageUI.OPEN_SEARCH_PANEL_ICON);
+            clickToElement(driver, CustomersPageUI.CLOSE_SEARCH_PANEL_ICON);
         }
     }
-
     public void inputToCustomerRolesTextbox(String textValue) {
         waitForElementVisible(driver, CustomersPageUI.CLOSE_DEFAULT_VALUE_DROPDOWN);
         clickToElement(driver, CustomersPageUI.CLOSE_DEFAULT_VALUE_DROPDOWN);
@@ -41,6 +40,7 @@ public class CustomersPO extends AbstractPage {
         waitForElementVisible(driver, CustomersPageUI.SEARCH_BUTTON);
         clickToElement(driver, CustomersPageUI.SEARCH_BUTTON);
         waitAjaxLoadingInvisible(driver);
+        sleepInSecond(3);
     }
 
     public boolean isCustomerDetailDataDisplayedAtTable(String email, String firstName, String lastName, String customerRoles, String companyName) {
@@ -82,5 +82,37 @@ public class CustomersPO extends AbstractPage {
     public void inputToCompanyTextbox(String textValue) {
         waitForElementVisible(driver, CustomersPageUI.COMPANY_TEXT_BOX);
         sendKeyToElement(driver, CustomersPageUI.COMPANY_TEXT_BOX, textValue);
+    }
+
+    public void selectMonthOfBirthDropdown(String textValue) {
+        waitForElementVisible(driver, CustomersPageUI.MONTH_OF_BIRTH_DROPDOWN);
+        selectItemByVisible(driver, textValue, CustomersPageUI.MONTH_OF_BIRTH_DROPDOWN);
+    }
+
+    public void selectDayOfBirthDropdown(String textValue) {
+        waitForElementVisible(driver, CustomersPageUI.DAY_OF_BIRTH_DROPDOWN);
+        selectItemByVisible(driver, textValue, CustomersPageUI.DAY_OF_BIRTH_DROPDOWN);
+    }
+
+    public String getMonthOfBirthFromData(String dateOfBirthValue){
+        String text = dateOfBirthValue.substring(0, dateOfBirthValue.lastIndexOf("/"));
+        return text.substring(0, text.lastIndexOf("/"));
+    }
+
+    public String getDayOfBirthFromData(String dateOfBirthValue){
+        String text = dateOfBirthValue.substring(0, dateOfBirthValue.lastIndexOf("/"));
+        return text.substring(text.lastIndexOf("/")+1);
+
+    }
+
+    public CustomerDetailPO clickToEditButton(String emailValue) {
+        waitForElementClickable(driver, CustomersPageUI.EDIT_BUTTON_BY_EMAIL, emailValue);
+        clickToElement(driver, CustomersPageUI.EDIT_BUTTON_BY_EMAIL, emailValue);
+        return PageGeneratorManagerAdmin.getCustomerDetailPage(driver);
+    }
+
+    public boolean isUpdatedSuccessfullyMessageDisplayed() {
+        waitForElementVisible(driver, CustomersPageUI.UDPATE_SUCCESS_MESSAGE);
+        return isElementDisplayed(driver, CustomersPageUI.UDPATE_SUCCESS_MESSAGE);
     }
 }
