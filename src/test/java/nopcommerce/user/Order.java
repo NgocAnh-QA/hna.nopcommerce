@@ -232,6 +232,7 @@ public class Order extends AbstractTest {
 
         log.info("Order - Check out order payment by cheque - Step 08: Uncheck ship to same address");
         checkoutPage.unCheckShipToSameAddress();
+        checkoutPage.selectBillingAddressFrom("New Address");
 
         log.info("Order - Check out order payment by cheque - Step 09: Input to first name on Billing address with value: " + userData.getFirstName_01());
         checkoutPage.inputToTextBoxByIdAtBillingAddress("FirstName", userData.getFirstName_01());

@@ -32,7 +32,7 @@ public class MyAccount extends AbstractTest {
     private ProductReviewPO productReview;
     private MyProductReviewPO myProductReviewPage;
     RoleAccess roleAccess;
-    private String  emailUpdate;
+    private String emailUpdate;
 
     @Parameters({"browser"})
     @BeforeClass
@@ -172,6 +172,8 @@ public class MyAccount extends AbstractTest {
 
         log.info("My Account - Add New Address - Step 17: Verify Email is added successfully");
         verifyEquals(addressPage.getTextByClass(driver, "email"), "Email: " + emailUpdate);
+        RegisterToSystem.EMAIL = emailUpdate;
+
 
         log.info("My Account - Add New Address - Step 18: Verify Phone is added successfully");
         verifyEquals(addressPage.getTextByClass(driver, "phone"), "Phone number: " + userData.getPhoneNumber_01());
@@ -189,7 +191,7 @@ public class MyAccount extends AbstractTest {
         verifyEquals(addressPage.getTextByClass(driver, "address2"), userData.getAddress2_01());
 
         log.info("My Account - Add New Address - Step 23: Verify City State Zip are added successfully");
-        verifyEquals(addressPage.getTextByClass(driver, "city-state-zip"), userData.getCity_01() + ", "  + userData.getStateProvince_01() + ", "+ userData.getZipPostal_01());
+        verifyEquals(addressPage.getTextByClass(driver, "city-state-zip"), userData.getCity_01() + ", " + userData.getStateProvince_01() + ", " + userData.getZipPostal_01());
 
         log.info("My Account - Add New Address - Step 24: Verify Country is added successfully");
         verifyEquals(addressPage.getTextByClass(driver, "country"), userData.getCountry_01());
@@ -205,10 +207,10 @@ public class MyAccount extends AbstractTest {
         changePasswordPage.inputToTextBoxByID(driver, "OldPassword", RegisterToSystem.PASSWORD);
 
         log.info("My Account - Change Password - Step 03: Input to new password with value: " + userData.getPassword_01());
-        changePasswordPage.inputToTextBoxByID(driver, "NewPassword", RegisterToSystem.PASSWORD+"1");
+        changePasswordPage.inputToTextBoxByID(driver, "NewPassword", RegisterToSystem.PASSWORD + "1");
 
         log.info("My Account - Change Password - Step 04: Input to confirm new password with value: " + userData.getConfirmPassword_01());
-        changePasswordPage.inputToTextBoxByID(driver, "ConfirmNewPassword", RegisterToSystem.PASSWORD+"1");
+        changePasswordPage.inputToTextBoxByID(driver, "ConfirmNewPassword", RegisterToSystem.PASSWORD + "1");
 
         log.info("My Account - Change Password - Step 05: Click to Save Change");
         changePasswordPage.clickToSaveChange();
