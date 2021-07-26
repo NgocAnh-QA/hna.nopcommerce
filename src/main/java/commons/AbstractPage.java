@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import io.qameta.allure.Step;
 import pageObjects.Admin.DashboardPO;
 import pageObjects.Admin.ProductsPO;
 import pageObjects.User.*;
@@ -1168,6 +1169,7 @@ public class AbstractPage {
         }
     }
 
+    @Step("Click to radio button with value: {1}")
     public void clickToRadioButtonByID(WebDriver driver, String radioButtonID) {
         try {
             waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
@@ -1177,67 +1179,77 @@ public class AbstractPage {
         }
     }
 
-    public void inputToTextboxByID(WebDriver driver, String textboxID, String value) {
+    @Step("Input to text box by ID: {1} with value: {2}")
+    public void inputToTextBoxByID(WebDriver driver, String textBoxID, String value) {
         try {
-            waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
-            sendKeyToElement(driver, value, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
+            waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
+            sendKeyToElement(driver, value, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
         } catch (Exception e) {
             log.error("Can not input to text box by ID: " + e.getMessage());
         }
     }
 
+    @Step("Select dropdown by name: {1} with value: {2}")
     public void selectDropdownByName(WebDriver driver, String selectDropdownName, String value) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName);
         selectItemByVisible(driver, value, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName);
     }
 
+    @Step("Click to Log out link")
     public HomePagePO clickToLogoutLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.LOGOUT_LINK);
         clickToElement(driver, AbstractPageUI.LOGOUT_LINK);
         return PageGeneratorManagerUser.getHomePage(driver);
     }
 
+    @Step("Click to Register link")
     public RegisterPO clickToRegisterLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.REGISTER_LINK);
         clickToElement(driver, AbstractPageUI.REGISTER_LINK);
         return PageGeneratorManagerUser.getRegisterPage(driver);
     }
 
+    @Step("Click to My Account link")
     public CustomerInfoPO clickToMyAccountLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.MY_ACCOUNT_LINK);
         clickToElement(driver, AbstractPageUI.MY_ACCOUNT_LINK);
         return PageGeneratorManagerUser.getCustomerInfoPage(driver);
     }
 
+    @Step("Click to Shopping Cart link")
     public CartPO clickToShoppingCartLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.SHOPPING_CART_LINK);
         clickToElement(driver, AbstractPageUI.SHOPPING_CART_LINK);
         return PageGeneratorManagerUser.getCartPage(driver);
     }
 
+    @Step("Hover on shopping cart icon in header")
     public void hoverOnShoppingCartIconInHeader(WebDriver driver) {
         scrollToElementByJS(driver, AbstractPageUI.SHOPPING_CART_LINK);
         waitForElementVisible(driver, AbstractPageUI.SHOPPING_CART_LINK);
         hoverMouseToElement(driver, AbstractPageUI.SHOPPING_CART_LINK);
     }
 
-    public String getAttributeTextboxByID(WebDriver driver, String textboxID, String attributeName) {
-        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textboxID);
-        return getElementAttribute(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, attributeName, textboxID);
+    @Step("Get attribute text box by ID {1}")
+    public String getAttributeTextBoxByID(WebDriver driver, String textBoxID, String attributeName) {
+        waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, textBoxID);
+        return getElementAttribute(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BY_ID, attributeName, textBoxID);
 
     }
 
+    @Step("Get item is selected in dropdown {1}")
     public String getFirstSelectedInDropdownByName(WebDriver driver, String selectDropdownName) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName);
         return getFirstSelectedTextInDropdown(driver, castToParameter(AbstractPageUI.DYNAMIC_DROPDOWN_BY_NAME, selectDropdownName));
-
     }
 
+    @Step("Verify radio button is selected by ID: {1}")
     public boolean isRadioButtonSelectedByID(WebDriver driver, String radioButtonID) {
         waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
         return isElementSelected(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON_BY_ID, radioButtonID);
     }
 
+    @Step("Open {1} page")
     public AbstractPage openLinkByPageNameAtMyAccount(WebDriver driver, String pageName) {
         waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_ASIDE, pageName);
         clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_ASIDE, pageName);
@@ -1255,23 +1267,27 @@ public class AbstractPage {
         }
     }
 
+    @Step("Get text by class name: {1}")
     public String getTextByClass(WebDriver driver, String className) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXT_BY_CLASS, className);
         return getElementText(driver, AbstractPageUI.DYNAMIC_TEXT_BY_CLASS, className);
     }
 
+    @Step("Open Home page")
     public HomePagePO openHomePage(WebDriver driver) {
         waitForElementVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
         clickToElement(driver, AbstractPageUI.HOME_PAGE_LINK);
         return PageGeneratorManagerUser.getHomePage(driver);
     }
 
+    @Step("Click to Product name: {1}")
     public ProductDetailPO clickToProductByNameOfProduct(WebDriver driver, String productName) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
         clickToElement(driver, AbstractPageUI.DYNAMIC_PRODUCT_DETAIL_LINK, productName);
         return PageGeneratorManagerUser.getProductDetailPage(driver);
     }
 
+    @Step("Open link {1} ay footer")
     public AbstractPage openLinkByTextAtFooter(WebDriver driver, String linkText) {
         waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK_TEXT_AT_FOOTER, linkText);
         clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_TEXT_AT_FOOTER, linkText);
@@ -1289,6 +1305,7 @@ public class AbstractPage {
         }
     }
 
+    @Step("Open menu {1} and then open {2}")
     public ProductPO openSubMenu(WebDriver driver, String menu, String subMenu) {
         waitForElementVisible(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
         hoverMouseToElement(driver, AbstractPageUI.DYNAMIC_MENU_NAVIGATION, menu);
@@ -1296,6 +1313,7 @@ public class AbstractPage {
         return PageGeneratorManagerUser.getProductPage(driver);
     }
 
+    @Step("Click to Wishlist link")
     public WishlistPO clickToWishlistLink(WebDriver driver) {
         waitForElementClickable(driver, AbstractPageUI.WISHLIST_LINK);
         clickToElement(driver, AbstractPageUI.WISHLIST_LINK);

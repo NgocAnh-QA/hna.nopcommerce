@@ -5,6 +5,8 @@ import commons.AbstractTest;
 import commons.GlobalConstants;
 import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -16,6 +18,7 @@ import testdata.ProductData;
 
 import java.io.File;
 
+@Feature("Wishlist/Compare/Recent Vew Test")
 public class Wishlist_Compare_RecentView extends AbstractTest {
     private WebDriver driver;
     private ProductData productData;
@@ -43,8 +46,8 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
 
         log.info("Wishlist_Compare_RecentView - Precondition - Step 02: Login to system");
         loginPage = homePage.clickToLoginLink();
-        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
-        loginPage.inputToPasswordTextbox(RegisterToSystem.PASSWORD);
+        loginPage.inputToEmailTextBox(RegisterToSystem.EMAIL);
+        loginPage.inputToPasswordTextBox(RegisterToSystem.PASSWORD);
 
         log.info("Wishlist_Compare_RecentView - Precondition - Step 01: Open Home Page");
         homePage = loginPage.clickToLoginButton();
@@ -54,6 +57,7 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
 
     }
 
+    @Story("Add to wishlist")
     @Test
     public void TC_01_Add_To_WishList() {
         log.info("Wishlist_Compare_RecentView - Add to wishlist - Step 01: Click to Add to wishlist button");
@@ -78,7 +82,7 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
         verifyEquals(wishlistPage.getTextProductNameInWishlistPage(), "Apple MacBook Pro 13-inch");
     }
 
-
+    @Story("Add product to cart from wishlist")
     @Test
     public void TC_02_Add_Product_To_Cart_From_Wishlist() {
         log.info("Wishlist_Compare_RecentView - Add product to cart from wishlist - Step 01: Open wishlist page");
@@ -109,6 +113,7 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
         homePage = cartPage.openHomePage(driver);
     }
 
+    @Story("Remove product from wishlist")
     @Test
     public void TC_03_Remove_Product_In_Wishlist() {
         log.info("Wishlist_Compare_RecentView - Remove product in wishlist - Step 01: Click to Product with value: HTC One M8 Android L 5.0 Lollipop");
@@ -142,7 +147,7 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
         homePage = wishlistPage.openHomePage(driver);
     }
 
-
+    @Story("Add to compare 2 products")
     @Test
     public void TC_04_Add_To_Compare_2_Products() {
         log.info("Wishlist_Compare_RecentView - Add 2 products to compare - Step 01: Click add to compare product with value: " + productData.getProduct_02_name());
@@ -191,13 +196,13 @@ public class Wishlist_Compare_RecentView extends AbstractTest {
         verifyEquals(compareProductPage.getTextNoItemsComparePageMessage(), "You have no items to compare.");
 
         log.info("Wishlist_Compare_RecentView - Add 2 products to compare - Step 16: Verify table undisplayed");
-        verifyTrue(compareProductPage.isNoProductInComparePage());
+        verifyTrue(compareProductPage.isNoProductInComparePageDisplayed());
 
         log.info("Wishlist_Compare_RecentView - Add 2 products to compare - Step 17: Open home page");
         homePage = compareProductPage.openHomePage(driver);
     }
 
-
+    @Story("Recently viewed products")
     @Test
     public void TC_05_Recently_Viewed_Products() {
         log.info("Wishlist_Compare_RecentView - Recently Viewed Products - Step 01: Hover Menu: Computers and then click on submenu: Notebooks");

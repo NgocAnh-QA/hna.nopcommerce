@@ -1,6 +1,8 @@
 package nopcommerce.user;
 
 import commons.*;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
@@ -10,6 +12,7 @@ import testdata.UserData;
 
 import java.io.File;
 
+@Feature("Register Test")
 public class Register extends AbstractTest {
     private WebDriver driver;
     private int randomNumber = getRandomNumber();
@@ -35,40 +38,42 @@ public class Register extends AbstractTest {
         registerPage = homePage.clickToRegisterLink();
     }
 
+    @Story("Register with empty data")
     @Test
     private void TC_01_Register_Empty_Data() {
         log.info("Register - Step 01: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
 
         log.info("Register - Step 02: Verify error message displayed at FirstName textbox");
-        verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("FirstName"));
+        verifyTrue(registerPage.isMandatoryFieldErrorDisplayed("FirstName"));
 
         log.info("Register - Step 03: Verify error message displayed at LastName textbox");
-        verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("LastName"));
+        verifyTrue(registerPage.isMandatoryFieldErrorDisplayed("LastName"));
 
         log.info("Register - Step 04: Verify error message displayed at Email textbox");
-        verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("Email"));
+        verifyTrue(registerPage.isMandatoryFieldErrorDisplayed("Email"));
 
         log.info("Register - Step 05: Verify error message displayed at Password textbox");
-        verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("Password"));
+        verifyTrue(registerPage.isMandatoryFieldErrorDisplayed("Password"));
 
         log.info("Register - Step 06: Verify error message displayed at ConfirmPassword textbox");
-        verifyTrue(registerPage.isMandantoryFieldErrorDisplayed("ConfirmPassword"));
+        verifyTrue(registerPage.isMandatoryFieldErrorDisplayed("ConfirmPassword"));
 
         log.info("Register - Step 07: Refresh Register Page");
         registerPage.refreshCurrentPage(driver);
     }
 
+    @Story("Register with invalid email")
     @Test
     private void TC_02_Register_Invalid_Email() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
         log.info("Register - Step 02: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
+        registerPage.inputToTextBoxByID(driver, "FirstName", userData.getFirstNameValid());
 
         log.info("Register - Step 03: Input to LastName text box with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
+        registerPage.inputToTextBoxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 04: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
@@ -80,21 +85,21 @@ public class Register extends AbstractTest {
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
         log.info("Register - Step 07: Input to Email textbox with value: " + userData.getEmailAddressInvalid());
-        registerPage.inputToTextboxByID(driver, "Email", userData.getEmailAddressInvalid());
+        registerPage.inputToTextBoxByID(driver, "Email", userData.getEmailAddressInvalid());
 
         log.info("Register - Step 08: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
+        registerPage.inputToTextBoxByID(driver, "Company", userData.getCompanyNameValid());
 
         log.info("Register - Step 10: Input to Password textbox with value: " + userData.getPasswordValid());
-        registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "Password", userData.getPasswordValid());
 
         log.info("Register - Step 11: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
 
         log.info("Register - Step 12: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
 
-        log.info("Register - Step 13: Verify error messsage displayed");
+        log.info("Register - Step 13: Verify error message displayed");
         registerPage.sleepInSecond(5);
         verifyEquals(registerPage.getValidationErrorMessage(), "Wrong email");
 
@@ -102,16 +107,17 @@ public class Register extends AbstractTest {
         registerPage.refreshCurrentPage(driver);
     }
 
+    @Story("Register with account exists")
     @Test
     private void TC_03_Register_Account_Exists() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
-        log.info("Register - Step 02: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
+        log.info("Register - Step 02: Input to FirstName text box with value: " + userData.getFirstNameValid());
+        registerPage.inputToTextBoxByID(driver, "FirstName", userData.getFirstNameValid());
 
-        log.info("Register - Step 03: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
+        log.info("Register - Step 03: Input to LastName text box with value: " + userData.getLastNameValid());
+        registerPage.inputToTextBoxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 04: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
@@ -123,17 +129,17 @@ public class Register extends AbstractTest {
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
         String email = userData.getEmailAddressValid() + randomNumber + "@edu.vn.com";
-        log.info("Register - Step 07: Input to Email textbox with value: " + email);
-        registerPage.inputToTextboxByID(driver, "Email", email);
+        log.info("Register - Step 07: Input to Email text box with value: " + email);
+        registerPage.inputToTextBoxByID(driver, "Email", email);
 
-        log.info("Register - Step 08: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
+        log.info("Register - Step 08: Input to Company text box with value: " + userData.getCompanyNameValid());
+        registerPage.inputToTextBoxByID(driver, "Company", userData.getCompanyNameValid());
 
-        log.info("Register - Step 10: Input to Password textbox with value: " + userData.getPasswordValid());
-        registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordValid());
+        log.info("Register - Step 10: Input to Password text box with value: " + userData.getPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "Password", userData.getPasswordValid());
 
-        log.info("Register - Step 11: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
+        log.info("Register - Step 11: Input to Confirm Password text box with value: " + userData.getConfirmPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
 
         log.info("Register - Step 12: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
@@ -150,11 +156,11 @@ public class Register extends AbstractTest {
         log.info("Register - Step 16: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
-        log.info("Register - Step 17: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
+        log.info("Register - Step 17: Input to FirstName text box with value: " + userData.getFirstNameValid());
+        registerPage.inputToTextBoxByID(driver, "FirstName", userData.getFirstNameValid());
 
-        log.info("Register - Step 18: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
+        log.info("Register - Step 18: Input to LastName text box with value: " + userData.getLastNameValid());
+        registerPage.inputToTextBoxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 19: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
@@ -165,17 +171,17 @@ public class Register extends AbstractTest {
         log.info("Register - Step 21: Select Year Dropdown with value: " + userData.getYearOfYearValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
-        log.info("Register - Step 22: Input to Email textbox with value: " + email);
-        registerPage.inputToTextboxByID(driver, "Email", email);
+        log.info("Register - Step 22: Input to Email text box with value: " + email);
+        registerPage.inputToTextBoxByID(driver, "Email", email);
 
-        log.info("Register - Step 23: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
+        log.info("Register - Step 23: Input to Company text box with value: " + userData.getCompanyNameValid());
+        registerPage.inputToTextBoxByID(driver, "Company", userData.getCompanyNameValid());
 
-        log.info("Register - Step 24: Input to Password textbox with value: " + userData.getPasswordValid());
-        registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordValid());
+        log.info("Register - Step 24: Input to Password text box with value: " + userData.getPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "Password", userData.getPasswordValid());
 
-        log.info("Register - Step 25: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
+        log.info("Register - Step 25: Input to Confirm Password text box with value: " + userData.getConfirmPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
 
         log.info("Register - Step 26: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
@@ -187,16 +193,17 @@ public class Register extends AbstractTest {
         registerPage.clickToRegisterLink(driver);
     }
 
+    @Story("Register with password less 6 characters")
     @Test
     private void TC_04_Register_Password_Less_6_Characters() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
         log.info("Register - Step 02: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
+        registerPage.inputToTextBoxByID(driver, "FirstName", userData.getFirstNameValid());
 
         log.info("Register - Step 03: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
+        registerPage.inputToTextBoxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 04: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
@@ -208,13 +215,13 @@ public class Register extends AbstractTest {
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
         log.info("Register - Step 07: Input to Email textbox with value: " + userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
-        registerPage.inputToTextboxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
+        registerPage.inputToTextBoxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
 
         log.info("Register - Step 08: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
+        registerPage.inputToTextBoxByID(driver, "Company", userData.getCompanyNameValid());
 
         log.info("Register - Step 10: Input to Password textbox with value: " + userData.getPasswordInvalid());
-        registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordInvalid());
+        registerPage.inputToTextBoxByID(driver, "Password", userData.getPasswordInvalid());
 
         log.info("Register - Step 11: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
@@ -226,16 +233,17 @@ public class Register extends AbstractTest {
         registerPage.refreshCurrentPage(driver);
     }
 
+    @Story("Register password not match")
     @Test
     private void TC_05_Register_Password_Not_Match() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
         log.info("Register - Step 02: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
+        registerPage.inputToTextBoxByID(driver, "FirstName", userData.getFirstNameValid());
 
         log.info("Register - Step 03: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
+        registerPage.inputToTextBoxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 04: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
@@ -247,16 +255,16 @@ public class Register extends AbstractTest {
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
         log.info("Register - Step 07: Input to Email textbox with value: " + userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
-        registerPage.inputToTextboxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
+        registerPage.inputToTextBoxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber + "@edu.vn.com");
 
         log.info("Register - Step 08: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
+        registerPage.inputToTextBoxByID(driver, "Company", userData.getCompanyNameValid());
 
         log.info("Register - Step 10: Input to Password textbox with value: " + userData.getPasswordValid());
-        registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "Password", userData.getPasswordValid());
 
         log.info("Register - Step 11: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordInvalid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordInvalid());
+        registerPage.inputToTextBoxByID(driver, "ConfirmPassword", userData.getConfirmPasswordInvalid());
 
         log.info("Register - Step 12: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();
@@ -269,16 +277,17 @@ public class Register extends AbstractTest {
         registerPage.refreshCurrentPage(driver);
     }
 
+    @Story("Register valid data")
     @Test
     private void TC_06_Register_Valid_Data() {
         log.info("Register - Step 01: Click to Gender radio button with value: Male");
         registerPage.clickToRadioButtonByID(driver, "gender-male");
 
         log.info("Register - Step 02: Input to FirstName textbox with value: " + userData.getFirstNameValid());
-        registerPage.inputToTextboxByID(driver, "FirstName", userData.getFirstNameValid());
+        registerPage.inputToTextBoxByID(driver, "FirstName", userData.getFirstNameValid());
 
         log.info("Register - Step 03: Input to LastName textbox with value: " + userData.getLastNameValid());
-        registerPage.inputToTextboxByID(driver, "LastName", userData.getLastNameValid());
+        registerPage.inputToTextBoxByID(driver, "LastName", userData.getLastNameValid());
 
         log.info("Register - Step 04: Select Day Dropdown with value: " + userData.getDateOfBirthValid());
         registerPage.selectDropdownByName(driver, "DateOfBirthDay", userData.getDateOfBirthValid());
@@ -290,16 +299,16 @@ public class Register extends AbstractTest {
         registerPage.selectDropdownByName(driver, "DateOfBirthYear", userData.getYearOfYearValid());
 
         log.info("Register - Step 07: Input to Email textbox with value: " + userData.getEmailAddressValid() + randomNumber+1 + "@edu.vn.com");
-        registerPage.inputToTextboxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber+1 + "@edu.vn.com");
+        registerPage.inputToTextBoxByID(driver, "Email", userData.getEmailAddressValid() + randomNumber+1 + "@edu.vn.com");
 
         log.info("Register - Step 08: Input to Company textbox with value: " + userData.getCompanyNameValid());
-        registerPage.inputToTextboxByID(driver, "Company", userData.getCompanyNameValid());
+        registerPage.inputToTextBoxByID(driver, "Company", userData.getCompanyNameValid());
 
         log.info("Register - Step 10: Input to Password textbox with value: " + userData.getPasswordValid());
-        registerPage.inputToTextboxByID(driver, "Password", userData.getPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "Password", userData.getPasswordValid());
 
         log.info("Register - Step 11: Input to Confirm Password textbox with value: " + userData.getConfirmPasswordValid());
-        registerPage.inputToTextboxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
+        registerPage.inputToTextBoxByID(driver, "ConfirmPassword", userData.getConfirmPasswordValid());
 
         log.info("Register - Step 12: Click to Register button at Register Page");
         registerPage.clickToRegisterButton();

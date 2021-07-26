@@ -5,6 +5,9 @@ import commons.AbstractTest;
 import commons.GlobalConstants;
 import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -17,6 +20,7 @@ import testdata.UserData;
 
 import java.io.File;
 
+@Feature("Search Test")
 public class Search extends AbstractTest {
     private WebDriver driver;
     private int randomNumber = getRandomNumber();
@@ -45,10 +49,10 @@ public class Search extends AbstractTest {
         loginPage = homePage.clickToLoginLink();
 
         log.info("Search - Precondition - Step 03: Input to Email with value: " + RegisterToSystem.EMAIL);
-        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextBox(RegisterToSystem.EMAIL);
 
         log.info("Search - Precondition - Step 04: Input to Password with value: " + RegisterToSystem.PASSWORD);
-        loginPage.inputToPasswordTextbox(RegisterToSystem.PASSWORD);
+        loginPage.inputToPasswordTextBox(RegisterToSystem.PASSWORD);
 
         log.info("Search - Precondition - Step 05: Click to Login button");
         homePage = loginPage.clickToLoginButton();
@@ -57,6 +61,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) homePage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with empty data")
     @Test
     public void TC_01_Search_Empty_Data() {
         log.info("Search - Search Empty Data - Step 01: Click to Search button");
@@ -69,6 +74,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with data not exist")
     @Test
     public void TC_02_Search_Data_Not_Exist() {
         log.info("Search - Search Data Not Exist - Step 01: Input to Search textbox with value: " + productData.getProduct_01_incorrect_name());
@@ -84,6 +90,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with relative product name")
     @Test
     public void TC_03_Search_Product_Name_Relative() {
         log.info("Search - Search Product Relative Name - Step 01: Input to Search textbox with value: " + productData.getProduct_01_relative_name());
@@ -99,6 +106,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with absolute product name")
     @Test
     public void TC_04_Search_Product_Name_Absolute() {
         log.info("Search - Search Product Absolute Name - Step 01: Input to Search textbox with value: " + productData.getProduct_01_name());
@@ -114,6 +122,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with parent categories")
     @Test
     public void TC_05_Search_Parent_Categories() {
         log.info("Search - Search Parent Categories - Step 01: Input to Search textbox with value: " + productData.getProduct_01_search_keyword());
@@ -135,6 +144,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with sub categories")
     @Test
     public void TC_06_Search_Sub_Categories() {
         log.info("Search - Search Sub Categories - Step 01: Input to Search textbox with value: " + productData.getProduct_01_search_keyword());
@@ -159,6 +169,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with incorrect manufacturer")
     @Test
     public void TC_07_Search_Incorrect_Manufacturer() {
         log.info("Search - Search Incorrect Manufacturer - Step 01: Input to Search textbox with value: " + productData.getProduct_01_search_keyword());
@@ -186,6 +197,7 @@ public class Search extends AbstractTest {
         searchPage = (SearchPO) searchPage.openLinkByTextAtFooter(driver, "Search");
     }
 
+    @Story("Search with correct manufacturer")
     @Test
     public void TC_08_Search_Correct_Manufacturer() {
         log.info("Search - Search Correct Manufacturer - Step 01: Input to Search textbox with value: " + productData.getProduct_01_search_keyword());

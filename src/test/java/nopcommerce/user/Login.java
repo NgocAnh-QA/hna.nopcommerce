@@ -5,6 +5,8 @@ import commons.AbstractTest;
 import commons.GlobalConstants;
 import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -17,7 +19,7 @@ import testdata.UserData;
 
 import java.io.File;
 
-
+@Feature("Login Test")
 public class Login extends AbstractTest {
     private WebDriver driver;
     private int randomNumber = getRandomNumber();
@@ -39,16 +41,17 @@ public class Login extends AbstractTest {
         homePage = PageGeneratorManagerUser.getHomePage(driver);
     }
 
+    @Story("Login with empty data")
     @Test
     public void TC_01_Login_Empty_Data() {
         log.info("Login - Step 01: Click to Login link at Home Page");
         loginPage = homePage.clickToLoginLink();
 
         log.info("Login - Step 02: Input to Email without data");
-        loginPage.inputToEmailTextbox("");
+        loginPage.inputToEmailTextBox("");
 
         log.info("Login - Step 03: Input to Password without data");
-        loginPage.inputToPasswordTextbox("");
+        loginPage.inputToPasswordTextBox("");
 
         log.info("Login - Step 04: Click to Login button");
         loginPage.clickToLoginButton();
@@ -60,10 +63,11 @@ public class Login extends AbstractTest {
         loginPage.refreshCurrentPage(driver);
     }
 
+    @Story("Login with invalid email")
     @Test
     public void TC_02_Login_Invalid_Email() {
         log.info("Login - Step 01: Input to Email with value: " + userData.getEmailAddressInvalid());
-        loginPage.inputToEmailTextbox(userData.getEmailAddressInvalid());
+        loginPage.inputToEmailTextBox(userData.getEmailAddressInvalid());
 
         log.info("Login - Step 02: Click to Login button");
         loginPage.clickToLoginButton();
@@ -75,13 +79,14 @@ public class Login extends AbstractTest {
         loginPage.refreshCurrentPage(driver);
     }
 
+    @Story("Login with unregistered account")
     @Test
     public void TC_03_Login_Unregister() {
         log.info("Login - Step 01: Input to Email with value: " + userData.getEmailAddressValid() + "@hotmail.com");
-        loginPage.inputToEmailTextbox(userData.getEmailAddressValid() + "@hotmail.com");
+        loginPage.inputToEmailTextBox(userData.getEmailAddressValid() + "@hotmail.com");
 
         log.info("Login - Step 02: Input to Password with value: " + userData.getPasswordValid());
-        loginPage.inputToPasswordTextbox(userData.getPasswordValid());
+        loginPage.inputToPasswordTextBox(userData.getPasswordValid());
 
         log.info("Login - Step 03: Click to Login button");
         loginPage.clickToLoginButton();
@@ -93,13 +98,14 @@ public class Login extends AbstractTest {
         loginPage.refreshCurrentPage(driver);
     }
 
+    @Story("Login with registered account but leave empty password")
     @Test
     public void TC_04_Registered_Login_Empty_Password() {
         log.info("Login - Step 01: Input to Email with value: " + RegisterToSystem.EMAIL);
-        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextBox(RegisterToSystem.EMAIL);
 
         log.info("Login - Step 02: Leave empty password");
-        loginPage.inputToPasswordTextbox("");
+        loginPage.inputToPasswordTextBox("");
 
         log.info("Login - Step 03: Click to login button");
         loginPage.clickToLoginButton();
@@ -111,13 +117,14 @@ public class Login extends AbstractTest {
         loginPage.refreshCurrentPage(driver);
     }
 
+    @Story("Login with registered account but incorrect password")
     @Test
     public void TC_05_Registered_Login_Incorrect_Password() {
         log.info("Login - Step 01: Input to Email with value: " + RegisterToSystem.EMAIL);
-        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextBox(RegisterToSystem.EMAIL);
 
         log.info("Login - Step 02: Input to password with value: " + userData.getConfirmPasswordInvalid());
-        loginPage.inputToPasswordTextbox(userData.getConfirmPasswordInvalid());
+        loginPage.inputToPasswordTextBox(userData.getConfirmPasswordInvalid());
 
         log.info("Login - Step 03: Click to Login button");
         loginPage.clickToLoginButton();
@@ -129,13 +136,14 @@ public class Login extends AbstractTest {
         loginPage.refreshCurrentPage(driver);
     }
 
+    @Story("Login with registered account")
     @Test
     public void TC_06_Registered_Login_Correct_Password() {
         log.info("Login - Step 01: Input to Email with value: " + RegisterToSystem.EMAIL);
-        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextBox(RegisterToSystem.EMAIL);
 
         log.info("Login - Step 02: Input to Password with value: " + RegisterToSystem.PASSWORD);
-        loginPage.inputToPasswordTextbox(RegisterToSystem.PASSWORD);
+        loginPage.inputToPasswordTextBox(RegisterToSystem.PASSWORD);
 
         log.info("Login - Step 03: Click to Login button");
         homePage = loginPage.clickToLoginButton();

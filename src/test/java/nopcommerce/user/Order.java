@@ -5,6 +5,7 @@ import commons.AbstractTest;
 import commons.GlobalConstants;
 import commons.PageGeneratorManagerUser;
 import commons.RoleAccess;
+import io.qameta.allure.Feature;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
@@ -17,6 +18,7 @@ import testdata.UserData;
 
 import java.io.File;
 
+@Feature("Order Test")
 public class Order extends AbstractTest {
     private WebDriver driver;
     private int randomNumber = getRandomNumber();
@@ -55,10 +57,10 @@ public class Order extends AbstractTest {
         loginPage = homePage.clickToLoginLink();
 
         log.info("Order - Precondition - Step 03: Input to Email with value: " + RegisterToSystem.EMAIL);
-        loginPage.inputToEmailTextbox(RegisterToSystem.EMAIL);
+        loginPage.inputToEmailTextBox(RegisterToSystem.EMAIL);
 
         log.info("Order - Precondition - Step 04: Input to Password with value: " + RegisterToSystem.PASSWORD);
-        loginPage.inputToPasswordTextbox(RegisterToSystem.PASSWORD);
+        loginPage.inputToPasswordTextBox(RegisterToSystem.PASSWORD+"1");
 
         log.info("Order - Precondition - Step 05: Click to Login button");
         homePage = loginPage.clickToLoginButton();
@@ -134,7 +136,7 @@ public class Order extends AbstractTest {
         productDetailPage.clickToCheckboxSoftwareOption(productData.getProduct_04_software_ms_office());
 
         log.info("Order - Edit Product In Cart - Step 08: Input to quantity with value: " + productData.getProduct_04_quantity());
-        productDetailPage.inputToQuantityTextbox(productData.getProduct_04_quantity());
+        productDetailPage.inputToQuantityTextBox(productData.getProduct_04_quantity());
 
         log.info("Order - Edit Product In Cart - Step 09: Click to Update cart button ");
         productDetailPage.clickToUpdateCartButton();
@@ -223,7 +225,7 @@ public class Order extends AbstractTest {
         cartPage.selectToGiftWrappingDropdown("No");
 
         log.info("Order - Check out order payment by cheque - Step 06: Click to check box the terms of service");
-        cartPage.checktoTermOfService();
+        cartPage.checkToTermOfService();
 
         log.info("Order - Check out order payment by cheque - Step 07: Click to Check out button");
         checkoutPage = cartPage.clickToCheckoutButton();
@@ -232,13 +234,13 @@ public class Order extends AbstractTest {
         checkoutPage.unCheckShipToSameAddress();
 
         log.info("Order - Check out order payment by cheque - Step 09: Input to first name on Billing address with value: " + userData.getFirstName_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("FirstName", userData.getFirstName_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("FirstName", userData.getFirstName_01());
 
         log.info("Order - Check out order payment by cheque - Step 10: Input to last name on Billing address with value: " + userData.getLastName_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("LastName", userData.getLastName_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("LastName", userData.getLastName_01());
 
         log.info("Order - Check out order payment by cheque - Step 11: Input to email on Billing address with value: " + userData.getEmailAddress_01() + randomNumber + "@hotmail.com.vn");
-        checkoutPage.inputToTextboxByIdAtBillingAddress("Email", userData.getEmailAddress_01() + randomNumber + "@hotmail.com.vn");
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("Email", userData.getEmailAddress_01() + randomNumber + "@hotmail.com.vn");
 
         log.info("Order - Check out order payment by cheque - Step 12: Select to country on Billing address with value: " + userData.getCountry_01());
         checkoutPage.selectDropdownByIdAtBillingAddress("CountryId", userData.getCountry_01());
@@ -247,19 +249,19 @@ public class Order extends AbstractTest {
         checkoutPage.selectDropdownByIdAtBillingAddress("StateProvinceId", userData.getStateProvince_01());
 
         log.info("Order - Check out order payment by cheque - Step 14: Input to city on Billing address with value: " + userData.getCity_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("City", userData.getCity_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("City", userData.getCity_01());
 
         log.info("Order - Check out order payment by cheque - Step 15: Input to address1 on Billing address with value: " + userData.getAddress1_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("Address1", userData.getAddress1_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("Address1", userData.getAddress1_01());
 
         log.info("Order - Check out order payment by cheque - Step 16: Input to zip code on Billing address with value: " + userData.getZipPostal_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("ZipPostalCode", userData.getZipPostal_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("ZipPostalCode", userData.getZipPostal_01());
 
         log.info("Order - Check out order payment by cheque - Step 17: Input to phone number on Billing address with value: " + userData.getPhoneNumber_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("PhoneNumber", userData.getPhoneNumber_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("PhoneNumber", userData.getPhoneNumber_01());
 
         log.info("Order - Check out order payment by cheque - Step 18: Input to phone number on Billing address with value: " + userData.getFaxNumber_02());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("FaxNumber", userData.getFaxNumber_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("FaxNumber", userData.getFaxNumber_01());
 
         log.info("Order - Check out order payment by cheque - Step 19: Click to Continue button on Billing address");
         checkoutPage.clickToContinueButtonAtBillingAddress();
@@ -268,13 +270,13 @@ public class Order extends AbstractTest {
         checkoutPage.selectShippingAddressDropdown("New Address");
 
         log.info("Order - Check out order payment by cheque - Step 21: Input to first name on Shipping address with value: " + userData.getFirstName_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("FirstName", userData.getFirstName_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("FirstName", userData.getFirstName_02());
 
         log.info("Order - Check out order payment by cheque - Step 22: Input to last name on Shipping address with value: " + userData.getLastName_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("LastName", userData.getLastName_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("LastName", userData.getLastName_02());
 
         log.info("Order - Check out order payment by cheque - Step 23: Input to email on Shipping address with value: " + userData.getEmailAddress_02() + randomNumber + 1 + "@hotmail.com.vn");
-        checkoutPage.inputToTextboxByIdAtShippingAddress("Email", userData.getEmailAddress_02() + randomNumber + 1 + "@hotmail.com.vn");
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("Email", userData.getEmailAddress_02() + randomNumber + 1 + "@hotmail.com.vn");
 
         log.info("Order - Check out order payment by cheque - Step 24: Select to country on Shipping address with value: " + userData.getCountry_02());
         checkoutPage.selectByIdAtShippingAddress("CountryId", userData.getCountry_02());
@@ -283,19 +285,19 @@ public class Order extends AbstractTest {
         checkoutPage.selectByIdAtShippingAddress("StateProvinceId", userData.getStateProvince_02());
 
         log.info("Order - Check out order payment by cheque - Step 26: Input to city on Shipping address with value: " + userData.getCity_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("City", userData.getCity_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("City", userData.getCity_02());
 
         log.info("Order - Check out order payment by cheque - Step 27: Input to address1 on Shipping address with value: " + userData.getAddress1_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("Address1", userData.getAddress1_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("Address1", userData.getAddress1_02());
 
         log.info("Order - Check out order payment by cheque - Step 28: Input to zip code on Shipping address with value: " + userData.getZipPostal_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("ZipPostalCode", userData.getZipPostal_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("ZipPostalCode", userData.getZipPostal_02());
 
         log.info("Order - Check out order payment by cheque - Step 29: Input to phone number on Shipping address with value: " + userData.getPhoneNumber_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("PhoneNumber", userData.getPhoneNumber_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("PhoneNumber", userData.getPhoneNumber_02());
 
         log.info("Order - Check out order payment by cheque - Step 30: Input to phone number on Shipping address with value: " + userData.getFaxNumber_02());
-        checkoutPage.inputToTextboxByIdAtShippingAddress("FaxNumber", userData.getFaxNumber_02());
+        checkoutPage.inputToTextBoxByIdAtShippingAddress("FaxNumber", userData.getFaxNumber_02());
 
         log.info("Order - Check out order payment by cheque - Step 31: Click to Continue button on Shipping address");
         checkoutPage.clickToContinueButtonAtShippingAddress();
@@ -375,7 +377,7 @@ public class Order extends AbstractTest {
         verifyTrue(checkoutPage.isOrderSuccessMessageDisplayed());
 
         log.info("Order - Check out order payment by cheque - Step 53: Verify Order number displays");
-        verifyTrue(checkoutPage.isOrderNumberisplayed());
+        verifyTrue(checkoutPage.isOrderNumberDisplayed());
         orderNumber = checkoutPage.getOrderNumberAtOrder(driver);
 
         log.info("Order - Check out order payment by cheque - Step 54: Click to My Account link in header");
@@ -465,7 +467,7 @@ public class Order extends AbstractTest {
         cartPage.clickToUpdateShoppingCart();
 
         log.info("Order - Re Order: Step 04: Check to agree the term of services");
-        cartPage.checktoTermOfService();
+        cartPage.checkToTermOfService();
 
         log.info("Order - Re Order: Step 05: Click to Check out button");
         checkoutPage = cartPage.clickToCheckoutButton();
@@ -474,13 +476,13 @@ public class Order extends AbstractTest {
         checkoutPage.selectBillingAddressFrom("New Address");
 
         log.info("Order - Re Order - Step 07: Input to first name on Billing address with value: " + userData.getFirstName_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("FirstName", userData.getFirstName_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("FirstName", userData.getFirstName_01());
 
         log.info("Order - Re order - Step 08: Input to last name on Billing address with value: " + userData.getLastName_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("LastName", userData.getLastName_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("LastName", userData.getLastName_01());
 
         log.info("Order - Re order - Step 09: Input to email on Billing address with value: " + userData.getEmailAddress_01() + randomNumber + 3 + "@hotmail.com.vn");
-        checkoutPage.inputToTextboxByIdAtBillingAddress("Email", userData.getEmailAddress_01() + randomNumber + 3 + "@hotmail.com.vn");
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("Email", userData.getEmailAddress_01() + randomNumber + 3 + "@hotmail.com.vn");
 
         log.info("Order - Re order - Step 10: Select to country on Billing address with value: " + userData.getCountry_01());
         checkoutPage.selectDropdownByIdAtBillingAddress("CountryId", userData.getCountry_01());
@@ -489,19 +491,19 @@ public class Order extends AbstractTest {
         checkoutPage.selectDropdownByIdAtBillingAddress("StateProvinceId", userData.getStateProvince_01());
 
         log.info("Order - Re order - Step 12: Input to city on Billing address with value: " + userData.getCity_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("City", userData.getCity_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("City", userData.getCity_01());
 
         log.info("Order - Re order - Step 13: Input to address1 on Billing address with value: " + userData.getAddress1_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("Address1", userData.getAddress1_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("Address1", userData.getAddress1_01());
 
         log.info("Order - Re order - Step 14: Input to zip code on Billing address with value: " + userData.getZipPostal_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("ZipPostalCode", userData.getZipPostal_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("ZipPostalCode", userData.getZipPostal_01());
 
         log.info("Order - Re order - Step 15: Input to phone number on Billing address with value: " + userData.getPhoneNumber_01());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("PhoneNumber", userData.getPhoneNumber_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("PhoneNumber", userData.getPhoneNumber_01());
 
         log.info("Order - Re order - Step 16: Input to phone number on Billing address with value: " + userData.getFaxNumber_02());
-        checkoutPage.inputToTextboxByIdAtBillingAddress("FaxNumber", userData.getFaxNumber_01());
+        checkoutPage.inputToTextBoxByIdAtBillingAddress("FaxNumber", userData.getFaxNumber_01());
 
         log.info("Order - Re order - Step 17: Click to Continue button on Shipping address");
         checkoutPage.clickToContinueButtonOfNewAddressAtShippingAddress();
@@ -522,10 +524,10 @@ public class Order extends AbstractTest {
         checkoutPage.selectDropdownByIdAtCardPayment("CreditCardType", "Master card");
 
         log.info("Order - Re order - Step 23: Input to card holder name text box at payment method with value Testing Automation");
-        checkoutPage.inputToTextboxByIdAtCardPayment("CardholderName", "Testing Automation");
+        checkoutPage.inputToTextBoxByIdAtCardPayment("CardholderName", "Testing Automation");
 
         log.info("Order - Re order - Step 24: Input to card number text box at payment method with value 372301601726625");
-        checkoutPage.inputToTextboxByIdAtCardPayment("CardNumber", "372301601726625");
+        checkoutPage.inputToTextBoxByIdAtCardPayment("CardNumber", "372301601726625");
 
         log.info("Order - Re order - Step 25: Select expire month dropdown at payment method with value 08");
         checkoutPage.selectDropdownByIdAtCardPayment("ExpireMonth", "08");
@@ -534,7 +536,7 @@ public class Order extends AbstractTest {
         checkoutPage.selectDropdownByIdAtCardPayment("ExpireYear", "2021");
 
         log.info("Order - Re order - Step 27: Input to card code text box at payment method with value 2468");
-        checkoutPage.inputToTextboxByIdAtCardPayment("CardCode", "2468");
+        checkoutPage.inputToTextBoxByIdAtCardPayment("CardCode", "2468");
 
         log.info("Order - Re order - Step 28: Click to continue button at card payment");
         checkoutPage.clickToContinueButtonAtCardPayment();
@@ -599,7 +601,7 @@ public class Order extends AbstractTest {
         verifyTrue(checkoutPage.isOrderSuccessMessageDisplayed());
 
         log.info("Order - Re order - Step 44: Verify Order number displays");
-        verifyTrue(checkoutPage.isOrderNumberisplayed());
+        verifyTrue(checkoutPage.isOrderNumberDisplayed());
         orderNumber = checkoutPage.getOrderNumberAtOrder(driver);
 
         log.info("Order - Re order - Step 45: Click to My Account link in header");

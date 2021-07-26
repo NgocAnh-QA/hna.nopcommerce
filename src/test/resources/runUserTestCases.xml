@@ -5,19 +5,21 @@
     <listeners>
         <listener class-name="commons.MethodListener"/>
         <listener class-name="reportConfig.AllureTestListener"/>
-        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+<!--        <listener class-name="org.uncommons.reportng.HTMLReporter"/>-->
+<!--        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>-->
     </listeners>
 
     <test name="Run on CHROME UI">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="nopcommerce.user.RegisterToSystem"/>
+            <class name="nopcommerce.user.Register"/>
             <class name="nopcommerce.user.Login"/>
             <class name="nopcommerce.user.Search"/>
             <class name="nopcommerce.user.Sort_Display_Paging"/>
             <class name="nopcommerce.user.Wishlist_Compare_RecentView"/>
             <class name="nopcommerce.user.MyAccount"/>
+            <class name="nopcommerce.user.Order"/>
         </classes>
     </test>
 

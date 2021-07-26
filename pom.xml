@@ -157,7 +157,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <file>src/test/resources/runAdminTestCases.xml</file>
+                        <file>src/test/resources/runUserTestCases.xml</file>
                     </suiteXmlFiles>
 
                     <argLine>
